@@ -232,6 +232,7 @@ namespace Bend.Util
 		TcpListener listener;
 		bool is_active = true;
 
+
 		public HttpServer(int port)
 		{
 			this.port = port;
