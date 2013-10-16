@@ -1,0 +1,1 @@
+httpTestis töötav esmane http query ja request
