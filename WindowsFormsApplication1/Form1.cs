@@ -31,5 +31,12 @@ namespace WindowsFormsApplication1
             var thread = new Thread(TcpListenerServer.test);
             thread.Start();
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Console.WriteLine(FilterQuery.getAllParametersFromGetRequest("GET /?searchfile?var1=test1&var2=test2 HTTP/1.1"));
+            Console.WriteLine(FilterQuery.getOperationFromGetRequest("GET /?searchfile?var1=test1&var2=test2 HTTP/1.1"));
+            Console.WriteLine(FilterQuery.getUrlParameterValues("GET /?searchfile?var1=test1&var2=test2 HTTP/1.1"));
+        }
     }
 }

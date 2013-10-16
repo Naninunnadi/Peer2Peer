@@ -55,6 +55,7 @@ namespace WindowsFormsApplication1
 
                         //todo siit saadame filtrisse
                         //Console.WriteLine(FilterQuery.getOperationFromGetRequest(data));
+                        //FilterQuery.getAllParametersFromGetRequest(data);
                         // Process the data sent by the client.
                         data = "HTTP/1.1 200 OK\nContent-Type: text/plain\n\ndata=answer";
                         
