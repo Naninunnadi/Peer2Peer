@@ -16,7 +16,10 @@ namespace WindowsFormsApplication1
                 //We can get a page without any of these vars too though.
                 String getVars = "?var1=test1&var2=test2";
                 String operation = "searchfile";
-                String IP = "http://127.0.0.1/?";
+                String IP = "http://192.168.5.143/?";
+
+                //IP = @IO.readFile("IP.txt");
+
                 //Initialization, we use localhost, change if applicable
                 HttpWebRequest WebReq = (HttpWebRequest)WebRequest.Create
                     (String.Format("{2}"+"{0}"+"{1}",operation, getVars, IP));

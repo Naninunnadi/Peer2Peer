@@ -15,11 +15,14 @@ namespace WindowsFormsApplication1
             
             url = getAllParametersFromGetRequest(url);
             Console.WriteLine("VAATAN URI" + url);
+            
             var query = HttpUtility.ParseQueryString(url);
-            var var2 = query.Get("var1");
+            var var2 = query.Get("var2");
+            var var1 = query.Get("var1");
             StringBuilder sr = new StringBuilder();
-            sr.Append(var2);
-
+            sr.AppendLine(var2);
+            sr.AppendLine(var1);
+            //TODO dynaamiliseks
             //List<string> list = new List<string>();
             //foreach (String item in query.AllKeys)
             //{

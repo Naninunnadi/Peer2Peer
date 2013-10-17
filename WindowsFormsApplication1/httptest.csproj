@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IO.cs" />
     <Compile Include="TcpListenerServer.cs" />
     <Compile Include="FilterQuery.cs" />
     <Compile Include="Request.cs" />

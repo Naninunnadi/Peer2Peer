@@ -5,26 +5,29 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace WindowsFormsApplication1
 {
-    class TcpListenerServer
+    class TcpListenerServer 
     {
         public static void test()
         {
+            
             TcpListener server = null;
+
             try
             {
                 // Set the TcpListener on port 13000.
                 Int32 port = 80;
-                IPAddress localAddr = IPAddress.Parse("127.0.0.1");
-
+                IPAddress localAddr = IPAddress.Parse("127.0.0.1"); //192.168.5.143
+                
                 // TcpListener server = new TcpListener(port);
                 server = new TcpListener(localAddr, port);
-
+                
                 // Start listening for client requests.
                 server.Start();
-
+                
                 // Buffer for reading data
                 Byte[] bytes = new Byte[10000];
                 String data = null;
@@ -33,6 +36,7 @@ namespace WindowsFormsApplication1
                 while (true)
                 {
                     Console.Write("Waiting for a connection... ");
+                    
 
                     // Perform a blocking call to accept requests. 
                     // You could also user server.AcceptSocket() here.
@@ -81,6 +85,9 @@ namespace WindowsFormsApplication1
                 server.Stop();
             }
         }
+
+
+        
     }
 }
 
