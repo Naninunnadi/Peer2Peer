@@ -20,7 +20,7 @@ namespace P2P
             host = Dns.GetHostEntry(Dns.GetHostName());
             foreach (IPAddress ip in host.AddressList)
             {
-                if (ip.AddressFamily == AddressFamily.InterNetwork)
+                if (ip.AddressFamily == AddressFamily.InterNetwork && ip.ToString().Contains("wireless"))
                 {
                     localIP = ip.ToString();
                     break;
@@ -40,14 +40,25 @@ namespace P2P
             return File.Exists(curFile);
         }
 
-        public static void ParseRequest(string request)
+        public static void ParseRequest(string user)
         {
-            var name = HttpUtility.ParseQueryString(request.Substring(new[] { 0, request.IndexOf('?') }.Max())).Get("name");
-            var sendip = HttpUtility.ParseQueryString(request.Substring(new[] { 0, request.IndexOf('?') }.Max())).Get("sendip");
-            var sendport = HttpUtility.ParseQueryString(request.Substring(new[] { 0, request.IndexOf('?') }.Max())).Get("sendport");
-            var ttl = HttpUtility.ParseQueryString(request.Substring(new[] { 0, request.IndexOf('?') }.Max())).Get("ttl");
-            var id = HttpUtility.ParseQueryString(request.Substring(new[] { 0, request.IndexOf('?') }.Max())).Get("id");
-            var noask = HttpUtility.ParseQueryString(request.Substring(new[] { 0, request.IndexOf('?') }.Max())).Get("noask");
+            var request = new Request();
+            request.Type =  new Uri(user).Segments.LastOrDefault();
+            request.Name = HttpUtility.ParseQueryString(user.Substring(new[] { 0, user.IndexOf('?') }.Max())).Get("name");
+            request.Sendip = HttpUtility.ParseQueryString(user.Substring(new[] { 0, user.IndexOf('?') }.Max())).Get("sendip");
+            request.Sendport = HttpUtility.ParseQueryString(user.Substring(new[] { 0, user.IndexOf('?') }.Max())).Get("sendport");
+            request.TimeToLive = (string)HttpUtility.ParseQueryString(user.Substring(new[] { 0, user.IndexOf('?') }.Max())).Get("ttl");
+            request.Id = HttpUtility.ParseQueryString(user.Substring(new[] { 0, user.IndexOf('?') }.Max())).Get("id");
+            request.Noask = HttpUtility.ParseQueryString(user.Substring(new[] { 0, user.IndexOf('?') }.Max())).Get("noask").Split(new char[] { '_' }).ToList();
+
+        }
+
+        public static string SendRequest(Request request, string sendIp, string sendPort)
+        {
+            var url= "";
+        //
+        //    url = "http://"+sendIp+":"+sendPort+"/searchfile?"+request.Name+""
+            return url;
         }
     }
 }
