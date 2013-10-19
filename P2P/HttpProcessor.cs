@@ -95,8 +95,8 @@ namespace Bend.Util
 
 		public void readHeaders()
 		{
-			Console.WriteLine("readHeaders()");
 			String line;
+			Console.WriteLine("readHeaders()");
 			while ((line = streamReadLine(inputStream)) != null)
 			{
 				if (line.Equals(""))

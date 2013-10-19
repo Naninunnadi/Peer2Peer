@@ -20,7 +20,7 @@ namespace WindowsFormsApplication1
             {
                 // Set the TcpListener on port 13000.
                 Int32 port = 80;
-                IPAddress localAddr = IPAddress.Parse("127.0.0.1"); //192.168.5.143
+                IPAddress localAddr = IPAddress.Parse("192.168.1.66"); //192.168.5.143
                 
                 // TcpListener server = new TcpListener(port);
                 server = new TcpListener(localAddr, port);

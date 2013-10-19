@@ -36,7 +36,7 @@ namespace P2P
 				HttpServer httpServer;
 			if (args.GetLength(0) > 0)
 			{
-				httpServer = new MyHttpServer(Convert.ToInt16(args[0]));
+                httpServer = new MyHttpServer(Convert.ToInt16(args[0]));
 			}
 			else
 			{
@@ -52,6 +52,7 @@ namespace P2P
 		{
 			List<KeyValuePair<IPAddress, int>> clientList = new List<KeyValuePair<IPAddress, int>>();
 			string[] clients = System.IO.File.ReadAllLines("IP&Port.txt");
+		   
 			foreach (var client in clients)
 			{
 				IPAddress iP = null;
@@ -69,9 +70,12 @@ namespace P2P
 
 		private void SearchButton_Click(object sender, EventArgs e)
 		{
+            var myIp = Utilities.LocalIPAddress();
+            var myPort = Utilities.LocalPort();
 			foreach (var user in getIpsAndPorts())
 			{
-				HttpProcessor.Connect(user.Key.ToString(), SearchBox.Text, user.Value);
+
+                HttpProcessor.Connect(user.Key.ToString(), "http://" + user.Key + ":" + user.Value + "/searchfile?name=" + SearchBox.Text + "&sendip=" + myIp + "&sendport=" + myPort + "&ttl=5&id=wqeqwe23&noask=" + myIp, user.Value);
 			}
 			
 		}
