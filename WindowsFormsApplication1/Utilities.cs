@@ -94,7 +94,7 @@ namespace WindowsFormsApplication1
 
         public static void dosomething(string data)
         {
-            var startParsing = Utilities.ParseRequest(data);
+            var startParsing = Utilities.ParseRequest(FilterQuery.getAllParametersFromGetRequest(data));
             var ttl = Int32.Parse(startParsing.TimeToLive)-1;
             if (!ServerUtilitiesOnly.FindFile(startParsing.Name) && ttl>0)
             {
