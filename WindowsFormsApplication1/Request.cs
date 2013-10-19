@@ -50,7 +50,7 @@ namespace WindowsFormsApplication1
             catch (Exception e)
             {
                 
-                Console.WriteLine("Client: Request failed"+ e);
+                Console.WriteLine("Client: Request failed");
             }
             
             Console.WriteLine("Request: I will quit.");
