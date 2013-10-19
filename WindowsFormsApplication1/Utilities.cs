@@ -99,6 +99,8 @@ namespace WindowsFormsApplication1
                 var places = Utilities.getIpsAndPorts();
                 foreach (var keyValuePair in places)
                 {
+                    if (startParsing.Noask.Contains(keyValuePair.Key.ToString()))
+                        return;
                     var requestModel = Utilities.ParseRequest(keyValuePair.Key.ToString(), keyValuePair.Value.ToString(), "/searchfile?name=" + startParsing.Name + "&sendip=" + startParsing.Sendip + "&sendport=" + startParsing.Sendport + "&ttl=" + ttl + "&id=wqeqwe23&noask=" +LocalIPAddress()+ "_" + String.Join("_", startParsing.Noask) );
                     var request = new Request(requestModel);
                     Thread worker = new Thread(request.doRequest);
