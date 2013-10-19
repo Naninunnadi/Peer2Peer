@@ -32,7 +32,7 @@ namespace WindowsFormsApplication1
             var places = Utilities.getIpsAndPorts();
             foreach (var keyValuePair in places)
             {
-                var requestModel = Utilities.ParseRequest("http://" + keyValuePair.Key + ":" + keyValuePair.Value + "/searchfile?name=" + textBox1.Text + "&sendip=" + Utilities.LocalIPAddress() + "&sendport=" + Utilities.LocalPort() + "&ttl="+ttl+"&id=wqeqwe23&noask=" + Utilities.LocalIPAddress());
+                var requestModel = Utilities.ParseRequest(keyValuePair.Key ,keyValuePair.Value + "/searchfile?name=" + textBox1.Text + "&sendip=" + Utilities.LocalIPAddress() + "&sendport=" + Utilities.LocalPort() + "&ttl="+ttl+"&id=wqeqwe23&noask=" + Utilities.LocalIPAddress());
                 var request = new Request(requestModel);
                 Thread worker = new Thread(request.doRequest);
                 worker.IsBackground = true;

@@ -46,15 +46,14 @@ namespace WindowsFormsApplication1
 
         }
 
-        public static RequestModel ParseRequest(string reuquestString)
+        public static RequestModel ParseRequest(string ip, string port, string reuquestString)
         {
             var request = new RequestModel();
-            Uri url = new Uri(reuquestString);
             request.Name =
                 HttpUtility.ParseQueryString(reuquestString.Substring(new[] { 0, reuquestString.IndexOf('?') }.Max()))
                     .Get("name");
-            request.Sendip = url.Host;
-            request.Sendport = url.Port.ToString();
+            request.Sendip = ip;
+            request.Sendport = port;
             request.TimeToLive =
                 HttpUtility.ParseQueryString(reuquestString.Substring(new[] { 0, reuquestString.IndexOf('?') }.Max()))
                     .Get("ttl");
