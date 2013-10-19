@@ -25,7 +25,7 @@ namespace WindowsFormsApplication1
                 IPAddress localAddr = IPAddress.Parse(getip); //192.168.5.143
                 
                 // TcpListener server = new TcpListener(port);
-                Console.WriteLine("Server: listeningto: "+getip+":"+getport);
+                Console.WriteLine("Server: listening now to: "+getip+":"+getport);
                 server = new TcpListener(localAddr, port);
                 
                 // Start listening for client requests.
@@ -38,13 +38,13 @@ namespace WindowsFormsApplication1
                 // Enter the listening loop. 
                 while (true)
                 {
-                    Console.Write("Waiting for a connection... ");
+                    Console.Write("Server: Waiting for a connection... ");
                     
 
                     // Perform a blocking call to accept requests. 
                     // You could also user server.AcceptSocket() here.
                     TcpClient client = server.AcceptTcpClient();
-                    Console.WriteLine("Connected!");
+                    Console.WriteLine("Server: Connected!");
 
                     data = null;
 
@@ -64,25 +64,25 @@ namespace WindowsFormsApplication1
                         //Console.WriteLine(FilterQuery.getOperationFromGetRequest(data));
                         //FilterQuery.getAllParametersFromGetRequest(data);
                         // Process the data sent by the client.
-                        data = "HTTP/1.1 200 OK\nContent-Type: text/plain\n\ndata=answer";
+                        data = "HTTP/1.1 200 OK\nContent-Type: text/plain\n\nstatus=gotit";
                         
                         byte[] msg = System.Text.Encoding.ASCII.GetBytes(data);
 
                         // Send back a response.
                         stream.Write(msg, 0, msg.Length);
 
-                        Console.WriteLine("Sent: {0}", data);
+                        Console.WriteLine("Serevr has Sent: {0}", data);
                         break;
 
                     }
-                    Console.WriteLine("Shutdown and end connection");
+                    Console.WriteLine("Server: Shutdown and end connection");
                     client.Close();
                     goto ListeningLoop;
                 }
             }
             catch (SocketException e)
             {
-                Console.WriteLine("SocketException: {0}", e);
+                Console.WriteLine("Server: SocketException: {0}", e);
             }
             finally
             {
