@@ -33,20 +33,34 @@ namespace WindowsFormsApplication1
             return port;
         }
 
-        public static bool FindFile(string fileName)
+        public static List<string> FindFile(string fileName)
         {
-
-
+            var stringList = new List<string>();
             string curFile = string.Empty;
             if (Directory.Exists(@"C:\wazaa"))
             {
-                curFile = @"C:\wazaa\" + fileName;
-                return File.Exists(curFile);
+                DirectoryInfo hdDirectoryInWhichToSearch = new DirectoryInfo(@"c:\wazaa\");
+                FileInfo[] filesInDir = hdDirectoryInWhichToSearch.GetFiles("*" + fileName + "*.*");
+
+                foreach (FileInfo foundFile in filesInDir)
+                {
+                    string fullName = foundFile.FullName;
+                    stringList.Add(fullName);
+                }
+            }
+            else if (Directory.Exists(@"D:\wazaa"))
+            {
+                DirectoryInfo hdDirectoryInWhichToSearch = new DirectoryInfo(@"D:\wazaa\");
+                FileInfo[] filesInDir = hdDirectoryInWhichToSearch.GetFiles("*" + fileName + "*.*");
+
+                foreach (FileInfo foundFile in filesInDir)
+                {
+                    string fullName = foundFile.FullName;
+                    stringList.Add(fullName);
+                }
             }
 
-
-            curFile = @"D:\wazaa\" + fileName;
-            return File.Exists(curFile);
+            return stringList;
 
         }
 
@@ -97,8 +111,8 @@ namespace WindowsFormsApplication1
         public static void dosomething(string data)
         {
             var startParsing = Utilities.ParseRequest(FilterQuery.getAllParametersFromGetRequest(data));
-            var ttl = Int32.Parse(startParsing.TimeToLive)-1;
-            if (!ServerUtilitiesOnly.FindFile(startParsing.Name) && ttl>0)
+            var ttl = Int32.Parse(startParsing.TimeToLive) - 1;
+            if (!Utilities.FindFile(startParsing.Name).Any() && ttl > 0)
             {
                 var places = Utilities.getIpsAndPorts();
                 foreach (var keyValuePair in places)
