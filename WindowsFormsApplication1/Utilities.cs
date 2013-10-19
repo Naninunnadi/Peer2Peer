@@ -32,8 +32,18 @@ namespace WindowsFormsApplication1
 
         public static bool FindFile(string fileName)
         {
-            string curFile = @"c:\wazaa\" + fileName;
-            return File.Exists(curFile);
+
+            string curFile = string.Empty;
+            if (Directory.Exists(@"C:\wazaa"))
+            {
+                curFile = @"C:\wazaa\" + fileName;
+                return File.Exists(curFile);
+            }
+           
+            
+                curFile = @"D:\wazaa\" + fileName;
+                return File.Exists(curFile);
+
         }
 
         public static RequestModel ParseRequest(string reuquestString)
