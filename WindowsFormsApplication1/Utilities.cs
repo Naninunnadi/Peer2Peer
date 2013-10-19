@@ -90,7 +90,7 @@ namespace WindowsFormsApplication1
             return clientList;
         }
 
-        public void dosomething(string data)
+        public static void dosomething(string data)
         {
             var startParsing = Utilities.ParseRequest(string.Empty, string.Empty, data);
             var ttl = Int32.Parse(startParsing.TimeToLive)-1;
