@@ -29,7 +29,8 @@ namespace WindowsFormsApplication1
 
         public void StartRequest()
         {
-            var request = new Request(textBox1.Text);
+            var requestModel = Utilities.ParseRequest("http://192.168.1.77:2234/searchfile?name=" + textBox1.Text + "&sendip=" + Utilities.LocalIPAddress() + "&sendport=" + Utilities.LocalPort());
+            var request = new Request(requestModel);
             Thread worker = new Thread(request.doRequest);
 		    worker.IsBackground = true;
 		    worker.SetApartmentState(System.Threading.ApartmentState.STA);
