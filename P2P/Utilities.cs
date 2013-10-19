@@ -37,16 +37,16 @@ namespace P2P
             return File.Exists(curFile);
         }
 
-        public static void ParseRequest(string user)
+        public static Request ParseRequest(string reuquestString)
         {
             var request = new Request();
-            request.Name = HttpUtility.ParseQueryString(user.Substring(new[] { 0, user.IndexOf('?') }.Max())).Get("name");
-            request.Sendip = HttpUtility.ParseQueryString(user.Substring(new[] { 0, user.IndexOf('?') }.Max())).Get("sendip");
-            request.Sendport = HttpUtility.ParseQueryString(user.Substring(new[] { 0, user.IndexOf('?') }.Max())).Get("sendport");
-            request.TimeToLive = HttpUtility.ParseQueryString(user.Substring(new[] { 0, user.IndexOf('?') }.Max())).Get("ttl");
-            request.Id = HttpUtility.ParseQueryString(user.Substring(new[] { 0, user.IndexOf('?') }.Max())).Get("id");
-            request.Noask = HttpUtility.ParseQueryString(user.Substring(new[] { 0, user.IndexOf('?') }.Max())).Get("noask").Split(new char[] { '_' }).ToList();
-
+            request.Name = HttpUtility.ParseQueryString(reuquestString.Substring(new[] { 0, reuquestString.IndexOf('?') }.Max())).Get("name");
+            request.Sendip = HttpUtility.ParseQueryString(reuquestString.Substring(new[] { 0, reuquestString.IndexOf('?') }.Max())).Get("sendip");
+            request.Sendport = HttpUtility.ParseQueryString(reuquestString.Substring(new[] { 0, reuquestString.IndexOf('?') }.Max())).Get("sendport");
+            request.TimeToLive = HttpUtility.ParseQueryString(reuquestString.Substring(new[] { 0, reuquestString.IndexOf('?') }.Max())).Get("ttl");
+            request.Id = HttpUtility.ParseQueryString(reuquestString.Substring(new[] { 0, reuquestString.IndexOf('?') }.Max())).Get("id");
+            request.Noask = HttpUtility.ParseQueryString(reuquestString.Substring(new[] { 0, reuquestString.IndexOf('?') }.Max())).Get("noask").Split(new char[] { '_' }).ToList();
+            return request;
         }
 
         public static string SendRequest(Request request, string sendIp, string sendPort)
