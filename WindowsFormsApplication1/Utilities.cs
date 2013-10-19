@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
+using Newtonsoft.Json.Linq;
 
 namespace WindowsFormsApplication1
 {
@@ -34,6 +35,7 @@ namespace WindowsFormsApplication1
 
         public static bool FindFile(string fileName)
         {
+
 
             string curFile = string.Empty;
             if (Directory.Exists(@"C:\wazaa"))
@@ -72,22 +74,22 @@ namespace WindowsFormsApplication1
             return request;
         }
 
-        public static List<KeyValuePair<IPAddress, int>> getIpsAndPorts()
+        public static List<KeyValuePair<IPAddress, string>> getIpsAndPorts()
         {
-            List<KeyValuePair<IPAddress, int>> clientList = new List<KeyValuePair<IPAddress, int>>();
+            List<KeyValuePair<IPAddress, string>> clientList = new List<KeyValuePair<IPAddress, string>>();
             string[] clients = System.IO.File.ReadAllLines("IP&Port.txt");
+            var sth = JArray.Parse(File.ReadAllText("IP&Port.txt"));
 
-            foreach (var client in clients)
+            foreach (var client in sth.ToList())
             {
-                IPAddress iP = null;
-                int port = 0;
-                string[] pieces = client.Split(null);
-                if (pieces.FirstOrDefault() != null)
-                    iP = IPAddress.Parse(pieces.FirstOrDefault());
-                if (pieces.LastOrDefault() != null)
-                    int.TryParse(pieces.LastOrDefault(), out port);
-                if (iP != null && port != 0)
-                    clientList.Add(new KeyValuePair<IPAddress, int>(iP, port));
+                IPAddress Ip = null;
+                string port = "";
+                if (!string.IsNullOrEmpty(client.First.Value<string>()))
+                    Ip = IPAddress.Parse(client.First.Value<string>());
+                if (!string.IsNullOrEmpty(client.Last.Value<string>()))
+                    port = client.Last.Value<string>();
+                if (Ip != null && !string.IsNullOrEmpty(port))
+                    clientList.Add(new KeyValuePair<IPAddress, string>(Ip, port));
             }
             return clientList;
         }
