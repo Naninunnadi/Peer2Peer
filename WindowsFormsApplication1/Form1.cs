@@ -27,6 +27,7 @@ namespace WindowsFormsApplication1
         private void button1_Click(object sender, EventArgs e)
         {
             StartRequest();
+ 
         }
 
         public static void StartRequest()
@@ -37,10 +38,18 @@ namespace WindowsFormsApplication1
             worker.Start();
 	    }
 
+        public static void StartRequest2()
+        {
+            Thread worker = new Thread(TcpListenerServer.test);
+            worker.IsBackground = true;
+            worker.SetApartmentState(System.Threading.ApartmentState.STA);
+            
+            worker.Start();
+        }
+
         private void button2_Click(object sender, EventArgs e)
         {
-            var thread = new Thread(TcpListenerServer.test);
-            thread.Start();
+            StartRequest2();
         }
         //testime funktsioone
         private void button3_Click(object sender, EventArgs e)

@@ -19,7 +19,7 @@ namespace WindowsFormsApplication1
             try
             {
                 // Set the TcpListener on port 13000.
-                Int32 port = 80;
+                Int32 port = 2234;
                 IPAddress localAddr = IPAddress.Parse("127.0.0.1"); //192.168.5.143
                 
                 // TcpListener server = new TcpListener(port);
@@ -69,10 +69,12 @@ namespace WindowsFormsApplication1
                         stream.Write(msg, 0, msg.Length);
 
                         Console.WriteLine("Sent: {0}", data);
+                        break;
 
                     }
-                    // Shutdown and end connection
+                    Console.WriteLine("Shutdown and end connection");
                     client.Close();
+                    break;
                 }
             }
             catch (SocketException e)
