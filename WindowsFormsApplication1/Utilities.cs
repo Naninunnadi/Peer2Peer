@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Runtime.InteropServices;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
 
@@ -87,6 +89,27 @@ namespace WindowsFormsApplication1
             }
             return clientList;
         }
+
+        public void dosomething(string data)
+        {
+            var startParsing = Utilities.ParseRequest(string.Empty, string.Empty, data);
+            var ttl = Int32.Parse(startParsing.TimeToLive)-1;
+            if (!ServerUtilitiesOnly.FindFile(startParsing.Name) && ttl>0)
+            {
+                var places = Utilities.getIpsAndPorts();
+                foreach (var keyValuePair in places)
+                {
+                    var requestModel = Utilities.ParseRequest(keyValuePair.Key.ToString(), keyValuePair.Value.ToString(), "/searchfile?name=" + startParsing.Name + "&sendip=" + Utilities.LocalIPAddress() + "&sendport=" + Utilities.LocalPort() + "&ttl=" + ttl + "&id=wqeqwe23&noask="+String.Join("_",startParsing.Noask) +"_"+ Utilities.LocalIPAddress());
+                    var request = new Request(requestModel);
+                    Thread worker = new Thread(request.doRequest);
+                    worker.IsBackground = true;
+                    worker.SetApartmentState(System.Threading.ApartmentState.STA);
+                    worker.Start();
+                }
+            }
+        }
+
+
 
     }
 }
