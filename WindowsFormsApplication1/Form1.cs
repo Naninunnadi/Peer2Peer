@@ -16,6 +16,8 @@ namespace WindowsFormsApplication1
     {
         public static List<string> statusList = new List<string>();
 
+        public static String str= "http://11.22.33.44:2345/searchfile?name=filename&sendip=55.66.77.88&sendport=6788&ttl=5&id=wqeqwe23&noask=11.22.33.44_111.222.333.444";
+
         public Form1()
         {
             InitializeComponent();
@@ -24,12 +26,16 @@ namespace WindowsFormsApplication1
 
         private void button1_Click(object sender, EventArgs e)
         {
-            
-            var thread = new Thread(Request.doRequest);
-            thread.Start();
-            //Request.doRequest();
-            
+            StartRequest();
         }
+
+        public static void StartRequest()
+	    {
+		    Thread worker = new Thread(Request.doRequest);
+		    worker.IsBackground = true;
+		    worker.SetApartmentState(System.Threading.ApartmentState.STA);
+            worker.Start();
+	    }
 
         private void button2_Click(object sender, EventArgs e)
         {
