@@ -48,6 +48,7 @@
     <Compile Include="Response.cs" />
     <Compile Include="IO.cs" />
     <Compile Include="RequestModel.cs" />
+    <Compile Include="ServerUtilitiesOnly.cs" />
     <Compile Include="TcpListenerServer.cs" />
     <Compile Include="FilterQuery.cs" />
     <Compile Include="Request.cs" />

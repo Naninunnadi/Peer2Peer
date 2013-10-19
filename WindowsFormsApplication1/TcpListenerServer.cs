@@ -15,6 +15,7 @@ namespace WindowsFormsApplication1
         {
             
             TcpListener server = null;
+            StringBuilder stringBuilder = new StringBuilder(1024*8);
 
             try
             {
@@ -88,6 +89,7 @@ namespace WindowsFormsApplication1
             {
                 // Stop listening for new clients.
                 server.Stop();
+                Console.WriteLine("server: FINAL SERVER S>Top");
             }
         }
 
