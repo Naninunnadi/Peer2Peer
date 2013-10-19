@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -23,6 +24,7 @@ namespace WindowsFormsApplication1
 
         private void button1_Click(object sender, EventArgs e)
         {
+            
             var thread = new Thread(Request.doRequest);
             thread.Start();
             //Request.doRequest();
@@ -42,5 +44,41 @@ namespace WindowsFormsApplication1
             Console.WriteLine(FilterQuery.getUrlParameterValues("GET /?searchfile?var1=test1&var2=test2 HTTP/1.1"));
         }
 
+
+        public List<KeyValuePair<IPAddress, int>> getIpsAndPorts()
+        {
+            List<KeyValuePair<IPAddress, int>> clientList = new List<KeyValuePair<IPAddress, int>>();
+            string[] clients = System.IO.File.ReadAllLines("IP&Port.txt");
+
+            foreach (var client in clients)
+            {
+                IPAddress iP = null;
+                int port = 0;
+                string[] pieces = client.Split(null);
+                if (pieces.FirstOrDefault() != null)
+                    iP = IPAddress.Parse(pieces.FirstOrDefault());
+                if (pieces.LastOrDefault() != null)
+                    int.TryParse(pieces.LastOrDefault(), out port);
+                if (iP != null && port != 0)
+                    clientList.Add(new KeyValuePair<IPAddress, int>(iP, port));
+            }
+            return clientList;
+        }
+
+        private void SearchButton_Click(object sender, EventArgs e)
+        {
+            var myIp = Utilities.LocalIPAddress();
+            var myPort = Utilities.LocalPort();
+            //foreach (var user in getIpsAndPorts())
+            //{
+            //    HttpProcessor.Connect(user.Key.ToString(), "http://" + user.Key + ":" + user.Value + "/searchfile?name=" + SearchBox.Text + "&sendip=" + myIp + "&sendport=" + myPort + "&ttl=5&id=wqeqwe23&noask=" + myIp, user.Value);
+
+            //}
+
+        }
+        public string getTextBoxValue()
+        {
+            return textBox1.Text;
+        }
     }
 }

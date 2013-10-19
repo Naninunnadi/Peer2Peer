@@ -10,13 +10,13 @@ namespace WindowsFormsApplication1
 {
     class Request
     {
-            public static void doRequest()
+            public static void doRequest( RequestModel requestModel)
             {
                 //Our getVars, to test the get of our php. 
                 //We can get a page without any of these vars too though.
-                String getVars = "?var1=test1&var2=test2";
+                String getVars = "?name=" + requestModel.Name + "&sendip=" + requestModel.Sendip + "&sendport=" + requestModel.Sendport + "&ttl=5&id=wqeqwe23&noask=" + string.Join("_",requestModel.Noask);
                 String operation = "searchfile";
-                String IP = "http://127.0.0.1/?";
+                String IP = "http://"+Utilities.LocalIPAddress()+"/?";
 
                 //IP = @IO.readFile("IP.txt");
 
@@ -26,40 +26,12 @@ namespace WindowsFormsApplication1
                 //This time, our method is GET.
                 WebReq.Method = "GET";
                 //From here on, it's all the same as above.
-                HttpWebResponse WebResp = (HttpWebResponse)WebReq.GetResponse();
-                //Let's show some information about the response
-                Console.WriteLine(WebResp.StatusCode);
-                Console.WriteLine(WebResp.Server);
-                Console.WriteLine(WebResp.ResponseUri);
-
-                //Now, we read the response (the string), and output it.
-                Stream Answer = WebResp.GetResponseStream();
-                StreamReader readStream = new StreamReader(Answer);
-
-                Console.WriteLine("\nResponse stream received");
-                Char[] read = new Char[256];
-
-                // Read 256 charcters at a time.     
-                int count = readStream.Read(read, 0, 256);
-                Console.WriteLine("HTML...\r\n");
-
-                while (count > 0)
-                {
-                    // Dump the 256 characters on a string and display the string onto the console.
-                    String str = new String(read, 0, count);
-                    Console.Write(str);
-                    count = readStream.Read(read, 0, 256);
-                }
-
-                Console.WriteLine("");
-                // Release the resources of stream object.
-                readStream.Close();
-                //Console.WriteLine(_Answer.ReadToEnd());
-
-                //Congratulations, with these two functions in basic form, you just learned
-                //the two basic forms of web surfing
-                //This proves how easy it can be.
+                
             }
-        
+       
     }
+     public abstract class doSomething()
+
+{
+}
 }
