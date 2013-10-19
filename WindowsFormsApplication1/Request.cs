@@ -22,7 +22,7 @@ namespace WindowsFormsApplication1
                 //String IP = @"192.168.1.77:2234/?";
                 //IP = @IO.readFile("IP.txt");
                 //Initialization, we use localhost, change if applicable
-                Uri targetUri = new Uri("http://127.0.0.1:2234/test?q=yolo");
+                Uri targetUri = new Uri("http://192.168.1.77:2234/test?q=yolo");
                 HttpWebRequest WebReq = (HttpWebRequest)WebRequest.Create(targetUri);
                 //This time, our method is GET.
                 WebReq.Method = "GET";

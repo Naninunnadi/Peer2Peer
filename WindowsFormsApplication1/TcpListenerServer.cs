@@ -19,10 +19,13 @@ namespace WindowsFormsApplication1
             try
             {
                 // Set the TcpListener on port 13000.
-                Int32 port = 2234;
-                IPAddress localAddr = IPAddress.Parse("127.0.0.1"); //192.168.5.143
+                String getip = Utilities.LocalIPAddress();
+                String getport = Utilities.LocalPort();
+                Int32 port = Int32.Parse(getport);
+                IPAddress localAddr = IPAddress.Parse(getip); //192.168.5.143
                 
                 // TcpListener server = new TcpListener(port);
+                Console.WriteLine("Server: listeningto: "+getip+":"+getport);
                 server = new TcpListener(localAddr, port);
                 
                 // Start listening for client requests.
@@ -31,7 +34,7 @@ namespace WindowsFormsApplication1
                 // Buffer for reading data
                 Byte[] bytes = new Byte[10000];
                 String data = null;
-
+                ListeningLoop:
                 // Enter the listening loop. 
                 while (true)
                 {
@@ -74,7 +77,7 @@ namespace WindowsFormsApplication1
                     }
                     Console.WriteLine("Shutdown and end connection");
                     client.Close();
-                    break;
+                    goto ListeningLoop;
                 }
             }
             catch (SocketException e)
