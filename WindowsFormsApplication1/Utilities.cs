@@ -44,8 +44,8 @@ namespace WindowsFormsApplication1
 
                 foreach (FileInfo foundFile in filesInDir)
                 {
-                    string fullName = foundFile.FullName;
-                    stringList.Add(fullName);
+                   
+                    stringList.Add(foundFile.Name);
                 }
             }
             else if (Directory.Exists(@"D:\wazaa"))
@@ -55,8 +55,8 @@ namespace WindowsFormsApplication1
 
                 foreach (FileInfo foundFile in filesInDir)
                 {
-                    string fullName = foundFile.FullName;
-                    stringList.Add(fullName);
+                    string fullName = string.Format(foundFile.Directory + @"\" + foundFile.Name);
+                    stringList.Add(foundFile.Name);
                 }
             }
 
