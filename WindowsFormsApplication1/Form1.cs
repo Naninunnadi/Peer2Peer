@@ -14,9 +14,6 @@ namespace WindowsFormsApplication1
 {
     public partial class Form1 : Form
     {
-        public static List<string> statusList = new List<string>();
-
-        public static String str= "http://11.22.33.44:2345/searchfile?name=filename&sendip=55.66.77.88&sendport=6788&ttl=5&id=wqeqwe23&noask=11.22.33.44_111.222.333.444";
 
         public Form1()
         {
@@ -39,7 +36,7 @@ namespace WindowsFormsApplication1
             worker.Start();
 	    }
 
-        public static void StartRequest2()
+        public void StartRequest2()
         {
             Thread worker = new Thread(TcpListenerServer.test);
             worker.IsBackground = true;
