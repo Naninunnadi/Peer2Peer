@@ -78,7 +78,7 @@ namespace WindowsFormsApplication1
                         stream.Write(msg, 0, msg.Length);
 
                         Console.WriteLine("Server with IP: {1}:{2} - has Sent this: {0}", data, getip,getport);
-                        Utilities.dosomething(data);
+                        Utilities.dosomething(data2);
                         break;
 
                     }
