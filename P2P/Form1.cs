@@ -74,7 +74,6 @@ namespace P2P
             var myPort = Utilities.LocalPort();
 			foreach (var user in getIpsAndPorts())
 			{
-			    Utilities.ParseRequest("http://11.22.33.44:2345/searchfile?name=filename&sendip=55.66.77.88&sendport=6788&ttl=5&id=wqeqwe23&noask=11.22.33.44_111.222.333.444");
                 HttpProcessor.Connect(user.Key.ToString(), "http://" + user.Key + ":" + user.Value + "/searchfile?name=" + SearchBox.Text + "&sendip=" + myIp + "&sendport=" + myPort + "&ttl=5&id=wqeqwe23&noask=" + myIp, user.Value);
 			    
             }

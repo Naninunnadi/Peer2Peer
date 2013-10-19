@@ -13,7 +13,6 @@ namespace P2P
         public string Sendip { get; set; }
         public string Sendport { get; set; }
         public string TimeToLive { get; set; }
-        public string Type { get; set; }
         public List<string> Noask { get; set; }   
     }         
 }              

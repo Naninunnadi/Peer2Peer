@@ -15,23 +15,20 @@ namespace P2P
 
         public static string LocalIPAddress()
         {
-            IPHostEntry host;
-            string localIP = "";
-            host = Dns.GetHostEntry(Dns.GetHostName());
-            foreach (IPAddress ip in host.AddressList)
-            {
-                if (ip.AddressFamily == AddressFamily.InterNetwork && ip.ToString().Contains("wireless"))
-                {
-                    localIP = ip.ToString();
-                    break;
-                }
-            }
-            return localIP;
+            var ip = string.Empty;
+            var re = System.IO.File.ReadLines("Config.txt").FirstOrDefault();
+            if (re != null)
+                ip = re.Split(null).FirstOrDefault();
+            return ip;
         }
 
-        public static int LocalPort()
+        public static string LocalPort()
         {
-            return 1234;
+            var port = string.Empty;
+            var re = System.IO.File.ReadLines("Config.txt").FirstOrDefault();
+            if (re != null)
+                port = re.Split(null).LastOrDefault();
+            return port;
         }
 
         public static bool FindFile(string fileName)
@@ -43,11 +40,10 @@ namespace P2P
         public static void ParseRequest(string user)
         {
             var request = new Request();
-            request.Type =  new Uri(user).Segments.LastOrDefault();
             request.Name = HttpUtility.ParseQueryString(user.Substring(new[] { 0, user.IndexOf('?') }.Max())).Get("name");
             request.Sendip = HttpUtility.ParseQueryString(user.Substring(new[] { 0, user.IndexOf('?') }.Max())).Get("sendip");
             request.Sendport = HttpUtility.ParseQueryString(user.Substring(new[] { 0, user.IndexOf('?') }.Max())).Get("sendport");
-            request.TimeToLive = (string)HttpUtility.ParseQueryString(user.Substring(new[] { 0, user.IndexOf('?') }.Max())).Get("ttl");
+            request.TimeToLive = HttpUtility.ParseQueryString(user.Substring(new[] { 0, user.IndexOf('?') }.Max())).Get("ttl");
             request.Id = HttpUtility.ParseQueryString(user.Substring(new[] { 0, user.IndexOf('?') }.Max())).Get("id");
             request.Noask = HttpUtility.ParseQueryString(user.Substring(new[] { 0, user.IndexOf('?') }.Max())).Get("noask").Split(new char[] { '_' }).ToList();
 
