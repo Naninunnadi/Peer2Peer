@@ -65,15 +65,11 @@ namespace WindowsFormsApplication1
                         data = System.Text.Encoding.ASCII.GetString(bytes, 0, i);
                         Console.WriteLine("Received: {0}", data);
 
-                        var startParsing = Utilities.ParseRequest(string.Empty, string.Empty, data);
-                        //if (!ServerUtilitiesOnly.FindFile(startParsing.Name))
-                       // {
-                        //    Form1.StartRequest(Int32.Parse(startParsing.TimeToLive));
-                      //  }
                         //todo siit saadame filtrisse
                         //Console.WriteLine(FilterQuery.getOperationFromGetRequest(data));
                         //FilterQuery.getAllParametersFromGetRequest(data);
                         // Process the data sent by the client.
+                        String data2 = data;
                         data = "HTTP/1.1 200 OK\nContent-Type: text/plain\n\nstatus=gotit";
                         
                         byte[] msg = System.Text.Encoding.ASCII.GetBytes(data);
@@ -81,7 +77,8 @@ namespace WindowsFormsApplication1
                         // Send back a response.
                         stream.Write(msg, 0, msg.Length);
 
-                        Console.WriteLine("Server with IP: {1} - has Sent this: {0}", data, getip);
+                        Console.WriteLine("Server with IP: {1}:{2} - has Sent this: {0}", data, getip,getport);
+                        Utilities.dosomething(data);
                         break;
 
                     }
