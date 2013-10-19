@@ -51,10 +51,9 @@ namespace WindowsFormsApplication1
 
                     // Get a stream object for reading and writing
                     NetworkStream stream = client.GetStream();
-                   Console.WriteLine("A connection from: ");
-                   Console.WriteLine(client.Client.RemoteEndPoint.ToString());
-                    Console.WriteLine("Has been establisehd to this server: ");
-                   Console.WriteLine(client.Client.LocalEndPoint.ToString());
+                    Console.WriteLine("A connection from: {0} - Port: {1}", client.Client.RemoteEndPoint.ToString(), ((IPEndPoint)client.Client.RemoteEndPoint).Port.ToString());
+                    Console.WriteLine("Has been establisehd to this server: {0} - Port: {1} ", client.Client.LocalEndPoint.ToString(), ((IPEndPoint)client.Client.LocalEndPoint).Port.ToString());
+                   //Console.WriteLine(client.Client.LocalEndPoint.ToString());
 
                     int i;
 
