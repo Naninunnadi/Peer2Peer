@@ -35,12 +35,21 @@ namespace WindowsFormsApplication1
             WebReq.Method = "GET";
 
             Console.WriteLine("Client : Request DONE");
-            HttpWebResponse WebResp = (HttpWebResponse)WebReq.GetResponse();
-            //Let's show some information about the response
-            Console.WriteLine("Client : Response from server");
-            Console.WriteLine(WebResp.StatusCode);
-            Console.WriteLine(WebResp.Server);
-            Console.WriteLine(WebResp.ResponseUri);
+            try
+            {
+                HttpWebResponse WebResp = (HttpWebResponse)WebReq.GetResponse();
+                //Let's show some information about the response
+                Console.WriteLine("Client : Response from server");
+                Console.WriteLine(WebResp.StatusCode);
+                Console.WriteLine(WebResp.Server);
+                Console.WriteLine(WebResp.ResponseUri);
+            }
+            catch (Exception e)
+            {
+                
+                Console.WriteLine("Client: Request failed"+ e);
+            }
+            
 
             //Now, we read the response (the string), and output it.
 
