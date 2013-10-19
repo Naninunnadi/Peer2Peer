@@ -23,7 +23,7 @@ namespace WindowsFormsApplication1
 
             //Our getVars, to test the get of our php. 
             //We can get a page without any of these vars too though.
-            var getVars = "http://"+Utilities.getIpsAndPorts().FirstOrDefault().Key+":"+Utilities.getIpsAndPorts().FirstOrDefault().Value+"/searchfile?name=" + RequestModel.Name + "&sendip=" + RequestModel.Sendip + "&sendport=" + RequestModel.Sendport + "&ttl=5&id=wqeqwe23&noask=" + string.Join("_", RequestModel.Noask);
+            var getVars = "http://" + Utilities.getIpsAndPorts().FirstOrDefault().Key + ":" + Utilities.getIpsAndPorts().FirstOrDefault().Value + "/searchfile?name=" + RequestModel.Name + "&sendip=" + RequestModel.Sendip + "&sendport=" + RequestModel.Sendport + "&ttl=" + RequestModel.TimeToLive + "&id=wqeqwe23&noask=" + string.Join("_", RequestModel.Noask);
             //String operation = "searchfile";
             //String IP = @"192.168.1.77:2234/?";
             //IP = @IO.readFile("IP.txt");

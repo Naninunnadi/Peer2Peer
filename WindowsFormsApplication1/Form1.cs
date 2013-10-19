@@ -23,16 +23,16 @@ namespace WindowsFormsApplication1
 
         private void button1_Click(object sender, EventArgs e)
         {
-            StartRequest();
+            StartRequest(4);
  
         }
 
-        public void StartRequest()
+        public void StartRequest(int ttl)
         {
             var places = Utilities.getIpsAndPorts();
             foreach (var keyValuePair in places)
             {
-                var requestModel = Utilities.ParseRequest("http://" + keyValuePair.Key + ":" + keyValuePair.Value + "/searchfile?name=" + textBox1.Text + "&sendip=" + Utilities.LocalIPAddress() + "&sendport=" + Utilities.LocalPort() + "&ttl=5&id=wqeqwe23&noask=" + Utilities.LocalIPAddress());
+                var requestModel = Utilities.ParseRequest("http://" + keyValuePair.Key + ":" + keyValuePair.Value + "/searchfile?name=" + textBox1.Text + "&sendip=" + Utilities.LocalIPAddress() + "&sendport=" + Utilities.LocalPort() + "&ttl="+ttl+"&id=wqeqwe23&noask=" + Utilities.LocalIPAddress());
                 var request = new Request(requestModel);
                 Thread worker = new Thread(request.doRequest);
                 worker.IsBackground = true;
