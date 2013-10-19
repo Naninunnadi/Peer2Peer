@@ -11,7 +11,7 @@ namespace WindowsFormsApplication1
 {
     class TcpListenerServer 
     {
-        public void test()
+        public static void test()
         {
             
             TcpListener server = null;
@@ -51,9 +51,10 @@ namespace WindowsFormsApplication1
 
                     // Get a stream object for reading and writing
                     NetworkStream stream = client.GetStream();
-
-                   // Console.WriteLine(client.Client.RemoteEndPoint.ToString());
-                   // Console.WriteLine(client.Client.LocalEndPoint.ToString());
+                   Console.WriteLine("A connection from: ");
+                   Console.WriteLine(client.Client.RemoteEndPoint.ToString());
+                    Console.WriteLine("Has been establisehd to this server: ");
+                   Console.WriteLine(client.Client.LocalEndPoint.ToString());
 
                     int i;
 

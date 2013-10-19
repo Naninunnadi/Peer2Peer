@@ -42,7 +42,7 @@ namespace WindowsFormsApplication1
             
 	    }
 
-        public static void StartRequest2()
+        public void StartRequest2()
         {
             Thread worker = new Thread(TcpListenerServer.test);
             worker.IsBackground = true;
