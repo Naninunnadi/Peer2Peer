@@ -38,9 +38,12 @@ namespace WindowsFormsApplication1
                 curFile = @"C:\wazaa\" + fileName;
                 return File.Exists(curFile);
             }
+            if (Directory.Exists(@"D:\wazaa"))
+            {
+                curFile = @"D:\wazaa\" + fileName;
+                return File.Exists(curFile);
+            }
 
-
-            curFile = @"D:\wazaa\" + fileName;
             return File.Exists(curFile);
 
         }
