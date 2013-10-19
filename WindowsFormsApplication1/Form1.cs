@@ -32,8 +32,8 @@ namespace WindowsFormsApplication1
             var places = Utilities.getIpsAndPorts();
             foreach (var keyValuePair in places)
             {
-                var requestModel = Utilities.ParseRequest(keyValuePair.Key.ToString() ,keyValuePair.Value.ToString() , "/searchfile?name=" + textBox1.Text + "&sendip=" + Utilities.LocalIPAddress() + "&sendport=" + Utilities.LocalPort() + "&ttl="+ttl+"&id=wqeqwe23&noask=" + Utilities.LocalIPAddress());
-                var request = new Request(requestModel);
+                var requestModel = Utilities.ParseRequest("/searchfile?name=" + textBox1.Text + "&sendip=" + Utilities.LocalIPAddress() + "&sendport=" + Utilities.LocalPort() + "&ttl="+ttl+"&id=wqeqwe23&noask=" + Utilities.LocalIPAddress());
+                var request = new Request(requestModel, keyValuePair.Key.ToString(), keyValuePair.Value.ToString());
                 Thread worker = new Thread(request.doRequest);
                 worker.IsBackground = true;
                 worker.SetApartmentState(System.Threading.ApartmentState.STA);

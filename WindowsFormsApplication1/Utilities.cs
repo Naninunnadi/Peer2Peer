@@ -106,7 +106,7 @@ namespace WindowsFormsApplication1
                     var requestModel = startParsing;
                     requestModel.TimeToLive = ttl.ToString();
                     requestModel.Noask.Add(LocalIPAddress());
-                    var request = new Request(requestModel);
+                    var request = new Request(requestModel, keyValuePair.Key.ToString(), keyValuePair.Value.ToString());
                     Thread worker = new Thread(request.doRequest);
                     worker.IsBackground = true;
                     worker.SetApartmentState(System.Threading.ApartmentState.STA);
