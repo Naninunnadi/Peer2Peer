@@ -69,7 +69,7 @@ namespace WindowsFormsApplication1
                         //FilterQuery.getAllParametersFromGetRequest(data);
                         // Process the data sent by the client.
                         String data2 = data;
-                        data = "HTTP/1.1 200 OK\nContent-Type: text/plain\n\n";
+                        data = "HTTP/1.1 200 OK\nContent-Type: text/plain\n\n0";
                         
                         byte[] msg = System.Text.Encoding.ASCII.GetBytes(data);
 
