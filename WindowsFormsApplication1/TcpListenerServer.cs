@@ -11,7 +11,7 @@ namespace WindowsFormsApplication1
 {
     class TcpListenerServer 
     {
-        public static void test()
+        public void test()
         {
             
             TcpListener server = null;
@@ -52,6 +52,9 @@ namespace WindowsFormsApplication1
                     // Get a stream object for reading and writing
                     NetworkStream stream = client.GetStream();
 
+                   // Console.WriteLine(client.Client.RemoteEndPoint.ToString());
+                   // Console.WriteLine(client.Client.LocalEndPoint.ToString());
+
                     int i;
 
                     // Loop to receive all the data sent by the client. 
@@ -61,8 +64,11 @@ namespace WindowsFormsApplication1
                         data = System.Text.Encoding.ASCII.GetString(bytes, 0, i);
                         Console.WriteLine("Received: {0}", data);
 
-                        
-
+                        var startParsing = Utilities.ParseRequest(string.Empty, string.Empty, data);
+                        //if (!ServerUtilitiesOnly.FindFile(startParsing.Name))
+                       // {
+                        //    Form1.StartRequest(Int32.Parse(startParsing.TimeToLive));
+                      //  }
                         //todo siit saadame filtrisse
                         //Console.WriteLine(FilterQuery.getOperationFromGetRequest(data));
                         //FilterQuery.getAllParametersFromGetRequest(data);
