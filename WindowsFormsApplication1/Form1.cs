@@ -30,9 +30,10 @@ namespace WindowsFormsApplication1
  
         }
 
-        public static void StartRequest()
-	    {
-		    Thread worker = new Thread(Request.doRequest);
+        public void StartRequest()
+        {
+            var request = new Request(textBox1.Text);
+            Thread worker = new Thread(request.doRequest);
 		    worker.IsBackground = true;
 		    worker.SetApartmentState(System.Threading.ApartmentState.STA);
             worker.Start();

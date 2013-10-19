@@ -11,8 +11,14 @@ namespace WindowsFormsApplication1
 {
     class Request
     {
+        public string RequestString { get; set; }
 
-        public static void doRequest()
+        public Request(string request)
+        {
+            this.RequestString = request;
+        }
+
+        public void doRequest()
         {
            var requestModel =  Utilities.ParseRequest("http://192.168.1.77:2234/searchfile?name=filename&sendip=55.66.77.88&sendport=6788&ttl=5&id=wqeqwe23&noask=11.22.33.44_111.222.333.444");
                 //Our getVars, to test the get of our php. 
