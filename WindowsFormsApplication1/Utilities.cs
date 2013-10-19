@@ -39,22 +39,33 @@ namespace WindowsFormsApplication1
                 curFile = @"C:\wazaa\" + fileName;
                 return File.Exists(curFile);
             }
-           
-            
-                curFile = @"D:\wazaa\" + fileName;
-                return File.Exists(curFile);
+
+
+            curFile = @"D:\wazaa\" + fileName;
+            return File.Exists(curFile);
 
         }
 
         public static RequestModel ParseRequest(string reuquestString)
         {
             var request = new RequestModel();
-            request.Name = HttpUtility.ParseQueryString(reuquestString.Substring(new[] { 0, reuquestString.IndexOf('?') }.Max())).Get("name");
-            request.Sendip = HttpUtility.ParseQueryString(reuquestString.Substring(new[] { 0, reuquestString.IndexOf('?') }.Max())).Get("sendip");
-            request.Sendport = HttpUtility.ParseQueryString(reuquestString.Substring(new[] { 0, reuquestString.IndexOf('?') }.Max())).Get("sendport");
-            request.TimeToLive = HttpUtility.ParseQueryString(reuquestString.Substring(new[] { 0, reuquestString.IndexOf('?') }.Max())).Get("ttl");
-            request.Id = HttpUtility.ParseQueryString(reuquestString.Substring(new[] { 0, reuquestString.IndexOf('?') }.Max())).Get("id");
-            request.Noask = HttpUtility.ParseQueryString(reuquestString.Substring(new[] { 0, reuquestString.IndexOf('?') }.Max())).Get("noask").Split(new char[] { '_' }).ToList();
+            Uri url = new Uri(reuquestString);
+            request.Name =
+                HttpUtility.ParseQueryString(reuquestString.Substring(new[] { 0, reuquestString.IndexOf('?') }.Max()))
+                    .Get("name");
+            request.Sendip = url.Host;
+            request.Sendport = url.Port.ToString();
+            request.TimeToLive =
+                HttpUtility.ParseQueryString(reuquestString.Substring(new[] { 0, reuquestString.IndexOf('?') }.Max()))
+                    .Get("ttl");
+            request.Id =
+                HttpUtility.ParseQueryString(reuquestString.Substring(new[] { 0, reuquestString.IndexOf('?') }.Max()))
+                    .Get("id");
+            request.Noask =
+                HttpUtility.ParseQueryString(reuquestString.Substring(new[] { 0, reuquestString.IndexOf('?') }.Max()))
+                    .Get("noask")
+                    .Split(new char[] { '_' })
+                    .ToList();
             return request;
         }
 
@@ -77,6 +88,6 @@ namespace WindowsFormsApplication1
             }
             return clientList;
         }
-       
+
     }
 }

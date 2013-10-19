@@ -29,12 +29,17 @@ namespace WindowsFormsApplication1
 
         public void StartRequest()
         {
-            var requestModel = Utilities.ParseRequest("http://192.168.1.77:2234/searchfile?name=" + textBox1.Text + "&sendip=" + Utilities.LocalIPAddress() + "&sendport=" + Utilities.LocalPort() + "&ttl=5&id=wqeqwe23&noask=" + Utilities.LocalIPAddress());
-            var request = new Request(requestModel);
-            Thread worker = new Thread(request.doRequest);
-		    worker.IsBackground = true;
-		    worker.SetApartmentState(System.Threading.ApartmentState.STA);
-            worker.Start();
+            var places = Utilities.getIpsAndPorts();
+            foreach (var keyValuePair in places)
+            {
+                var requestModel = Utilities.ParseRequest("http://" + keyValuePair.Key + ":" + keyValuePair.Value + "/searchfile?name=" + textBox1.Text + "&sendip=" + Utilities.LocalIPAddress() + "&sendport=" + Utilities.LocalPort() + "&ttl=5&id=wqeqwe23&noask=" + Utilities.LocalIPAddress());
+                var request = new Request(requestModel);
+                Thread worker = new Thread(request.doRequest);
+                worker.IsBackground = true;
+                worker.SetApartmentState(System.Threading.ApartmentState.STA);
+                worker.Start();
+            }
+            
 	    }
 
         public void StartRequest2()
