@@ -48,14 +48,16 @@ namespace WindowsFormsApplication1
 
         }
 
-        public static RequestModel ParseRequest(string ip, string port, string reuquestString)
+        public static RequestModel ParseRequest(string reuquestString)
         {
             var request = new RequestModel();
             request.Name =
                 HttpUtility.ParseQueryString(reuquestString.Substring(new[] { 0, reuquestString.IndexOf('?') }.Max()))
                     .Get("name");
-            request.Sendip = ip;
-            request.Sendport = port;
+            request.Sendip = HttpUtility.ParseQueryString(reuquestString.Substring(new[] { 0, reuquestString.IndexOf('?') }.Max()))
+                    .Get("sendip");
+            request.Sendport = HttpUtility.ParseQueryString(reuquestString.Substring(new[] { 0, reuquestString.IndexOf('?') }.Max()))
+                    .Get("sendport");
             request.TimeToLive =
                 HttpUtility.ParseQueryString(reuquestString.Substring(new[] { 0, reuquestString.IndexOf('?') }.Max()))
                     .Get("ttl");
@@ -92,7 +94,7 @@ namespace WindowsFormsApplication1
 
         public static void dosomething(string data)
         {
-            var startParsing = Utilities.ParseRequest(string.Empty, string.Empty, data);
+            var startParsing = Utilities.ParseRequest(data);
             var ttl = Int32.Parse(startParsing.TimeToLive)-1;
             if (!ServerUtilitiesOnly.FindFile(startParsing.Name) && ttl>0)
             {
@@ -101,7 +103,9 @@ namespace WindowsFormsApplication1
                 {
                     if (startParsing.Noask.Contains(keyValuePair.Key.ToString()))
                         return;
-                    var requestModel = Utilities.ParseRequest(keyValuePair.Key.ToString(), keyValuePair.Value.ToString(), "/searchfile?name=" + startParsing.Name + "&sendip=" + startParsing.Sendip + "&sendport=" + startParsing.Sendport + "&ttl=" + ttl + "&id=wqeqwe23&noask=" +LocalIPAddress()+ "_" + String.Join("_", startParsing.Noask) );
+                    var requestModel = startParsing;
+                    requestModel.TimeToLive = ttl.ToString();
+                    requestModel.Noask.Add(LocalIPAddress());
                     var request = new Request(requestModel);
                     Thread worker = new Thread(request.doRequest);
                     worker.IsBackground = true;
