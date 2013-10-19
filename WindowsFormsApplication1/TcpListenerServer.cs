@@ -26,7 +26,7 @@ namespace WindowsFormsApplication1
                 IPAddress localAddr = IPAddress.Parse(getip); //192.168.5.143
                 
                 // TcpListener server = new TcpListener(port);
-                Console.WriteLine("Server: listening now to: "+getip+":"+getport);
+                Console.WriteLine("Server: Starting now to listen to: "+getip+":"+getport);
                 server = new TcpListener(localAddr, port);
                 
                 // Start listening for client requests.
