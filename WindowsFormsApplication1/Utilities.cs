@@ -126,6 +126,7 @@ namespace WindowsFormsApplication1
                     Thread worker = new Thread(request.doRequest);
                     worker.IsBackground = true;
                     worker.SetApartmentState(System.Threading.ApartmentState.STA);
+                    worker.Name = "ParseRequestsAndSendRequestsTTL";
                     worker.Start();
                 }
             }

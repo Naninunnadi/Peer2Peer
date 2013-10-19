@@ -37,6 +37,7 @@ namespace WindowsFormsApplication1
                 Thread worker = new Thread(request.doRequest);
                 worker.IsBackground = true;
                 worker.SetApartmentState(System.Threading.ApartmentState.STA);
+                worker.Name = "STARTERParseRequestsAndSendRequestsTTL";
                 worker.Start();
             }
             
@@ -47,7 +48,7 @@ namespace WindowsFormsApplication1
             Thread worker = new Thread(TcpListenerServer.test);
             worker.IsBackground = true;
             worker.SetApartmentState(System.Threading.ApartmentState.STA);
-            
+            worker.Name = "TCPLISTENERTHREAD";
             worker.Start();
         }
 
