@@ -61,6 +61,8 @@ namespace WindowsFormsApplication1
                         data = System.Text.Encoding.ASCII.GetString(bytes, 0, i);
                         Console.WriteLine("Received: {0}", data);
 
+                        
+
                         //todo siit saadame filtrisse
                         //Console.WriteLine(FilterQuery.getOperationFromGetRequest(data));
                         //FilterQuery.getAllParametersFromGetRequest(data);
@@ -72,7 +74,7 @@ namespace WindowsFormsApplication1
                         // Send back a response.
                         stream.Write(msg, 0, msg.Length);
 
-                        Console.WriteLine("Serevr has Sent: {0}", data);
+                        Console.WriteLine("Server with IP: {1} - has Sent this: {0}", data, getip);
                         break;
 
                     }
