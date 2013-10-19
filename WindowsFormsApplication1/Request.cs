@@ -35,6 +35,7 @@ namespace WindowsFormsApplication1
             Uri targetUri = new Uri(getVars);
             Console.WriteLine("Client : " +targetUri.ToString());
             HttpWebRequest WebReq = (HttpWebRequest)WebRequest.Create(targetUri);
+            WebReq.Timeout = 6000;
             //This time, our method is GET.
             WebReq.Method = "GET";
 
@@ -42,6 +43,7 @@ namespace WindowsFormsApplication1
             try
             {
                 HttpWebResponse WebResp = (HttpWebResponse)WebReq.GetResponse();
+                
                 //Let's show some information about the response
                 Console.WriteLine("Client : Response from server");
                 Console.WriteLine("From Server: "+WebResp.StatusCode);
@@ -50,7 +52,7 @@ namespace WindowsFormsApplication1
             catch (Exception e)
             {
                 
-                Console.WriteLine("Client: Request failed");
+                Console.WriteLine("Client: Request failed (Time-Out > Peer appears to be offline)");
             }
             
             Console.WriteLine("Request: I will quit.");
