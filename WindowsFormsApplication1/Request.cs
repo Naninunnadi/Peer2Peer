@@ -23,20 +23,21 @@ namespace WindowsFormsApplication1
 
             //Our getVars, to test the get of our php. 
             //We can get a page without any of these vars too though.
-            var getVars = "?name=" + RequestModel.Name + "&sendip=" + RequestModel.Sendip + "&sendport=" + RequestModel.Sendport + "&ttl=5&id=wqeqwe23&noask=" + string.Join("_", RequestModel.Noask);
+            var getVars = "http://"+Utilities.getIpsAndPorts().FirstOrDefault().Key+":"+Utilities.getIpsAndPorts().FirstOrDefault().Value+"/searchfile?name=" + RequestModel.Name + "&sendip=" + RequestModel.Sendip + "&sendport=" + RequestModel.Sendport + "&ttl=5&id=wqeqwe23&noask=" + string.Join("_", RequestModel.Noask);
             //String operation = "searchfile";
             //String IP = @"192.168.1.77:2234/?";
             //IP = @IO.readFile("IP.txt");
             //Initialization, we use localhost, change if applicable
             Uri targetUri = new Uri(getVars);
-            Console.WriteLine(targetUri.ToString());
+            Console.WriteLine("Client : " +targetUri.ToString());
             HttpWebRequest WebReq = (HttpWebRequest)WebRequest.Create(targetUri);
             //This time, our method is GET.
             WebReq.Method = "GET";
 
-            Console.WriteLine("RQ DONE");
+            Console.WriteLine("Client : Request DONE");
             HttpWebResponse WebResp = (HttpWebResponse)WebReq.GetResponse();
             //Let's show some information about the response
+            Console.WriteLine("Client : Response from server");
             Console.WriteLine(WebResp.StatusCode);
             Console.WriteLine(WebResp.Server);
             Console.WriteLine(WebResp.ResponseUri);

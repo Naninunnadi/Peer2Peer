@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
@@ -47,13 +48,25 @@ namespace WindowsFormsApplication1
             return request;
         }
 
-        //public static string SendRequest(Request request, string sendIp, string sendPort)
-        //{
-        //    var url = "";
-        //    //
-        //    //    url = "http://"+sendIp+":"+sendPort+"/searchfile?"+request.Name+""
-        //    return url;
-        //}
+        public static List<KeyValuePair<IPAddress, int>> getIpsAndPorts()
+        {
+            List<KeyValuePair<IPAddress, int>> clientList = new List<KeyValuePair<IPAddress, int>>();
+            string[] clients = System.IO.File.ReadAllLines("IP&Port.txt");
+
+            foreach (var client in clients)
+            {
+                IPAddress iP = null;
+                int port = 0;
+                string[] pieces = client.Split(null);
+                if (pieces.FirstOrDefault() != null)
+                    iP = IPAddress.Parse(pieces.FirstOrDefault());
+                if (pieces.LastOrDefault() != null)
+                    int.TryParse(pieces.LastOrDefault(), out port);
+                if (iP != null && port != 0)
+                    clientList.Add(new KeyValuePair<IPAddress, int>(iP, port));
+            }
+            return clientList;
+        }
        
     }
 }
