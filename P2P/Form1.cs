@@ -74,9 +74,12 @@ namespace P2P
             var myPort = Utilities.LocalPort();
 			foreach (var user in getIpsAndPorts())
 			{
-
+			    Utilities.ParseRequest(
+			        "http://" + user.Key + ":" + user.Value + "/searchfile?name=" + SearchBox.Text + "&sendip=" + myIp +
+			        "&sendport=" + myPort + "&ttl=5&id=wqeqwe23&noask=" + myIp);
                 HttpProcessor.Connect(user.Key.ToString(), "http://" + user.Key + ":" + user.Value + "/searchfile?name=" + SearchBox.Text + "&sendip=" + myIp + "&sendport=" + myPort + "&ttl=5&id=wqeqwe23&noask=" + myIp, user.Value);
-			}
+			    
+            }
 			
 		}
 
