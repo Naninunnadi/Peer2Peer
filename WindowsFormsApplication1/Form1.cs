@@ -49,13 +49,6 @@ namespace WindowsFormsApplication1
         {
             StartRequest2();
         }
-        //testime funktsioone
-        private void button3_Click(object sender, EventArgs e)
-        {
-            Console.WriteLine(FilterQuery.getAllParametersFromGetRequest("GET /?searchfile?var1=test1&var2=test2 HTTP/1.1"));
-            Console.WriteLine(FilterQuery.getOperationFromGetRequest("GET /?searchfile?var1=test1&var2=test2 HTTP/1.1"));
-            Console.WriteLine(FilterQuery.getUrlParameterValues("GET /?searchfile?var1=test1&var2=test2 HTTP/1.1"));
-        }
 
 
         public List<KeyValuePair<IPAddress, int>> getIpsAndPorts()
