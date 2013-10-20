@@ -11,11 +11,20 @@ namespace WindowsFormsApplication1
 {
     class TcpListenerServer 
     {
-        public static void test()
+        public TextBox TextBox { get; set; }
+        public TcpListenerServer(TextBox textBox)
+        {
+            this.TextBox = textBox;
+
+
+        }
+
+        public void test()
         {
             
             TcpListener server = null;
             StringBuilder stringBuilder = new StringBuilder(1024*8);
+
 
             try
             {
@@ -67,7 +76,7 @@ namespace WindowsFormsApplication1
                         // Process the data sent by the client.
                         String data2 = data;
                         data = "HTTP/1.1 200 OK\nContent-Type: text/plain\n\n0";
-                        
+                        TextBox.Text = data;
                         byte[] msg = System.Text.Encoding.ASCII.GetBytes(data);
 
                         // Send back a response.

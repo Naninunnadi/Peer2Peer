@@ -45,7 +45,8 @@ namespace WindowsFormsApplication1
 
         public void StartTcpListenerThread()
         {
-            Thread worker = new Thread(TcpListenerServer.test);
+
+            Thread worker = new Thread(new TcpListenerServer(textBox2).test);
             worker.IsBackground = true;
             worker.SetApartmentState(System.Threading.ApartmentState.STA);
             worker.Name = "TCPLISTENERTHREAD";

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace WindowsFormsApplication1
 {
@@ -13,6 +14,7 @@ namespace WindowsFormsApplication1
         public string Jsonlist { get; set; }
         public string SendIp { get; set; }
         public string SendPort { get; set; }
+
 
         public PostRequestHandler(string jsonlist, string sendIp, string sendPort)
         {
