@@ -4,10 +4,12 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Runtime.InteropServices;
+using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace WindowsFormsApplication1
@@ -112,7 +114,9 @@ namespace WindowsFormsApplication1
         {
             var startParsing = Utilities.ParseRequest(FilterQuery.getAllParametersFromGetRequest(data));
             var ttl = Int32.Parse(startParsing.TimeToLive) - 1;
-            if (!Utilities.FindFile(startParsing.Name).Any() && ttl > 0)
+            var foundFiles = Utilities.FindFile(startParsing.Name);
+            var fileList = new List<FileModel>();
+            if (!foundFiles.Any() && ttl > 0)
             {
                 var places = Utilities.getIpsAndPorts();
                 foreach (var keyValuePair in places)
@@ -130,6 +134,19 @@ namespace WindowsFormsApplication1
                     worker.Start();
                 }
             }
+            else
+            {
+                foreach (var file in foundFiles)
+                {
+                    fileList.Add(new FileModel{Ip = LocalIPAddress(), Port = LocalPort(), Name = file});
+                }
+                var json = JsonConvert.SerializeObject(fileList);
+            }
+        }
+
+        public bool IsThisGetOrPost(string data)
+        {
+           return !data.Contains("GET");
         }
 
 

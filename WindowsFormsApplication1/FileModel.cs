@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WindowsFormsApplication1
 {
-    class FileModel
+    public class FileModel
     {
         public string Ip { get; set; }
         public string Port { get; set; }
