@@ -140,7 +140,8 @@ namespace WindowsFormsApplication1
                 {
                     fileList.Add(new FileModel{Ip = LocalIPAddress(), Port = LocalPort(), Name = file});
                 }
-                var json = JsonConvert.SerializeObject(fileList);
+
+                var json = JsonConvert.SerializeObject(new PostObject { Id = String.Empty, Files = fileList });
             }
         }
 
