@@ -83,12 +83,12 @@ namespace WindowsFormsApplication1
                         stream.Write(msg, 0, msg.Length);
 
                         Console.WriteLine("Server with IP: {1}:{2} - has Sent this: {0}", data, getip,getport);
-                        if (data.ToUpper().Contains("POST"))
+                        if (data2.ToUpper().Contains("POST"))
                         {
                             SetText1(data);
 
                         }
-                        else if(data.ToUpper().Contains("GET"))
+                        else if(data2.ToUpper().Contains("GET"))
                         {
                             Utilities.filterAndDistributeQuery(data2, RichTextBox);
                         }
