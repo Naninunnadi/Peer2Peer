@@ -10,6 +10,18 @@ namespace WindowsFormsApplication1
 {
     class PostRequestHandler
     {
+        public string Jsonlist { get; set; }
+        public string SendIp { get; set; }
+        public string SendPort { get; set; }
+
+        public PostRequestHandler(string jsonlist, string sendIp, string sendPort)
+        {
+            this.Jsonlist = jsonlist;
+            this.SendIp = sendIp;
+            this.SendPort = sendPort;
+
+        }
+
        
         public static void runRequest()
         {
@@ -17,14 +29,13 @@ namespace WindowsFormsApplication1
         }
         
         
-        public static void postRequest()
+        public void postRequest()
         {
 
             while (true)
             {
-
                 // this is where we will send it
-                string uri = "http://192.168.5.185:2234/foundfile?";
+                string uri = "http://" + SendIp + ":"+SendPort+"/foundfile?";
 
                 // create a request
                 HttpWebRequest request = (HttpWebRequest)
@@ -34,8 +45,7 @@ namespace WindowsFormsApplication1
                 request.Method = "POST";
 
                 // turn our request string into a byte stream
-                String json = "s=siiiiiiiiiiiiiiiiaaaaaaaaaaaaaa";
-                byte[] postBytes = Encoding.ASCII.GetBytes(json);
+                byte[] postBytes = Encoding.ASCII.GetBytes(Jsonlist);
 
                 // this is important - make sure you specify type this way
                 request.ContentType = "application/json"; //pm yolo application/json voib ka
@@ -47,7 +57,7 @@ namespace WindowsFormsApplication1
                     // now send it
                     requestStream.Write(postBytes, 0, postBytes.Length);
                     requestStream.Close();
-                    Console.WriteLine("Client: Sending to server: " + json);
+                    Console.WriteLine("Client: Sending to server: " + Jsonlist);
 
                 }
                 catch (Exception e)

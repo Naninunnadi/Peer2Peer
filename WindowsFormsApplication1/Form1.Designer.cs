@@ -34,6 +34,7 @@
             this.statusBox = new System.Windows.Forms.RichTextBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.button3 = new System.Windows.Forms.Button();
+            this.textBox2 = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // button1
@@ -79,7 +80,13 @@
             this.button3.TabIndex = 5;
             this.button3.Text = "TEST POST Q";
             this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(329, 140);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(100, 20);
+            this.textBox2.TabIndex = 6;
             // 
             // Form1
             // 
@@ -87,6 +94,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Silver;
             this.ClientSize = new System.Drawing.Size(842, 467);
+            this.Controls.Add(this.textBox2);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.statusBox);
@@ -108,6 +116,7 @@
         public System.Windows.Forms.RichTextBox statusBox;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button button3;
+        public System.Windows.Forms.TextBox textBox2;
 
     }
 }

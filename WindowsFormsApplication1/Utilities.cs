@@ -16,6 +16,7 @@ namespace WindowsFormsApplication1
 {
     public class Utilities
     {
+        public string PostJson { get; set; }
 
         public static string LocalIPAddress()
         {
@@ -134,14 +135,24 @@ namespace WindowsFormsApplication1
                     worker.Start();
                 }
             }
-            else
+            else if (foundFiles.Any() && ttl > 0)
             {
                 foreach (var file in foundFiles)
                 {
-                    fileList.Add(new FileModel{Ip = LocalIPAddress(), Port = LocalPort(), Name = file});
+                    fileList.Add(new FileModel {Ip = LocalIPAddress(), Port = LocalPort(), Name = file});
                 }
+                var json = JsonConvert.SerializeObject(new PostObject {Id = String.Empty, Files = fileList});
+                var postreq = new PostRequestHandler(json, startParsing.Sendip, startParsing.Sendport);
+                Thread worker = new Thread(postreq.postRequest);
+                worker.IsBackground = true;
+                worker.SetApartmentState(System.Threading.ApartmentState.STA);
+                worker.Name = "PostRequestThreadHE";
+                worker.Start();
 
-                var json = JsonConvert.SerializeObject(new PostObject { Id = String.Empty, Files = fileList });
+            }
+            else
+            {
+                //TODO:send error sest ttl on l'bi
             }
         }
 
