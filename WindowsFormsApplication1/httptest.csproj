@@ -51,6 +51,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DownloadManager.cs" />
     <Compile Include="FileModel.cs" />
     <Compile Include="PostObject.cs" />
     <Compile Include="PostRequestHandler.cs" />
