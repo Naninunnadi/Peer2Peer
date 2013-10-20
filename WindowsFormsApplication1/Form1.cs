@@ -99,9 +99,18 @@ namespace WindowsFormsApplication1
 
         }
 
-        private void label1_Click(object sender, EventArgs e)
+        public void StartRequest3()
         {
+            Thread worker = new Thread(PostRequestHandler.postRequest);
+            worker.IsBackground = true;
+            worker.SetApartmentState(System.Threading.ApartmentState.STA);
+            worker.Name = "PostRequestThreadHE";
+            worker.Start();
+        }
 
+        private void button3_Click(object sender, EventArgs e)
+        {
+            StartRequest3();
         }
     }
 }

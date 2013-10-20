@@ -64,9 +64,9 @@ namespace WindowsFormsApplication1
                         data = System.Text.Encoding.ASCII.GetString(bytes, 0, i);
                         Console.WriteLine("Received: {0}", data);
 
-                        //todo siit saadame filtrisse
-                        //Console.WriteLine(FilterQuery.getOperationFromGetRequest(data));
-                        //FilterQuery.getAllParametersFromGetRequest(data);
+                        
+                        
+                        
                         // Process the data sent by the client.
                         String data2 = data;
                         data = "HTTP/1.1 200 OK\nContent-Type: text/plain\n\n0";
