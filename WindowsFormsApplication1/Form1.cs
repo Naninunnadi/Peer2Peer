@@ -101,6 +101,7 @@ namespace WindowsFormsApplication1
             //button2.Enabled = false;
             //StartTcpListenerThread();
             //button2.Enabled = true;
+            
         }
 
         private void timer1_Tick(object sender, EventArgs e)

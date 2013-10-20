@@ -11,6 +11,9 @@ namespace WindowsFormsApplication1
 {
     class ServerUtilitiesOnly
     {
+
+        public static Boolean dlManagerUp = true;
+
         public static string LocalIPAddress()
         {
             var ip = string.Empty;

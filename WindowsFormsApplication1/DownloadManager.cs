@@ -14,7 +14,7 @@ namespace WindowsFormsApplication1
 
 
         //1095 jääb igal pool Download ja Upload static pordiks
-        public void SendFile(string path, string IP)
+        public static void SendFile(string path, string IP)
         {
             TcpClient client = new TcpClient();
             try
@@ -39,9 +39,11 @@ namespace WindowsFormsApplication1
         }
 
 
-       public void ListenForFile(string pathAndFname)
+       public static void ListenForFile(string pathAndFname)
         {
-            TcpListener listener = new TcpListener(IPAddress.Any, 1095);
+            
+           
+           TcpListener listener = new TcpListener(IPAddress.Any, 1095);
             listener.Start();
            Console.WriteLine("DLMGR: Listening....");
             while (true)
@@ -64,6 +66,7 @@ namespace WindowsFormsApplication1
             }
             listener.Stop();
             Console.WriteLine("DLMGR: Download mngr stopped listening for incoming connections");
+           
         }
     }
 }
