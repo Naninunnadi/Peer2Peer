@@ -17,16 +17,23 @@ namespace WindowsFormsApplication1
         public void SendFile(string path, string IP)
         {
             TcpClient client = new TcpClient();
-            client.Connect(IP, 1095);
-
-            using (NetworkStream networkStream = client.GetStream())
-            using (FileStream fileStream = File.OpenRead(path))
+            try
             {
-                ASCIIEncoding asci = new ASCIIEncoding();
-                byte[] b = asci.GetBytes(path);
-                networkStream.Write(b, 0, b.Length);
-                networkStream.Flush();
-                fileStream.CopyTo(networkStream);
+                client.Connect(IP, 1095);
+
+                using (NetworkStream networkStream = client.GetStream())
+                using (FileStream fileStream = File.OpenRead(path))
+                {
+                    ASCIIEncoding asci = new ASCIIEncoding();
+                    byte[] b = asci.GetBytes(path);
+                    networkStream.Write(b, 0, b.Length);
+                    networkStream.Flush();
+                    fileStream.CopyTo(networkStream);
+                }
+            }
+            catch(Exception)
+            {
+                Console.WriteLine("DLMGR: Error sending file");
             }
             client.Close();
         }
