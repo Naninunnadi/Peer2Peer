@@ -10,14 +10,17 @@ namespace WindowsFormsApplication1
 {
     static class Program
     {
-       
+        /// <summary>
+        /// The main entry point for the application.
+        /// </summary>
+        [STAThread]
 
-        public static readonly Form1 Form1;
+
 
 
         private static void Main()
         {
-            Application.EnableVisualStyles();
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());

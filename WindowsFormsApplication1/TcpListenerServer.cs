@@ -76,8 +76,7 @@ namespace WindowsFormsApplication1
                         Console.WriteLine("Server with IP: {1}:{2} - has Sent this: {0}", data, getip,getport);
                         if (data.ToUpper().Contains("POST"))
                         {
-                            //TODO
-                            Form1.IncomingMessage(data);
+                          
 
                         }
                         else if(data.ToUpper().Contains("GET"))

@@ -102,15 +102,5 @@ namespace WindowsFormsApplication1
             //button2.Enabled = true;
         }
 
-
-        public static void IncomingMessage(string message)
-        {
-            Program.Form1.RecieveMSG(message);
-        }
-        public void RecieveMSG(string message) // NB: No static
-        {
-            textBox2.Text = message; // Or whatever.
-        }
-
     }
 }
