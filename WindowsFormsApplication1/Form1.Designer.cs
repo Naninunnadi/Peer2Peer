@@ -28,6 +28,7 @@
         /// </summary>
         public void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.statusBox = new System.Windows.Forms.RichTextBox();
@@ -36,7 +37,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(12, 51);
+            this.button1.Location = new System.Drawing.Point(197, 10);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 0;
@@ -46,7 +47,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(93, 38);
+            this.button2.Location = new System.Drawing.Point(755, 12);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 49);
             this.button2.TabIndex = 1;
@@ -56,30 +57,33 @@
             // 
             // statusBox
             // 
-            this.statusBox.Location = new System.Drawing.Point(12, 110);
+            this.statusBox.Location = new System.Drawing.Point(12, 55);
             this.statusBox.Name = "statusBox";
-            this.statusBox.Size = new System.Drawing.Size(260, 327);
+            this.statusBox.Size = new System.Drawing.Size(260, 382);
             this.statusBox.TabIndex = 3;
             this.statusBox.Text = "";
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(290, 54);
+            this.textBox1.Location = new System.Drawing.Point(12, 12);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
+            this.textBox1.Size = new System.Drawing.Size(154, 20);
             this.textBox1.TabIndex = 4;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(466, 464);
+            this.BackColor = System.Drawing.Color.Silver;
+            this.ClientSize = new System.Drawing.Size(842, 467);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.statusBox);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "P2P";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

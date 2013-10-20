@@ -93,5 +93,10 @@ namespace WindowsFormsApplication1
         {
             return textBox1.Text;
         }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

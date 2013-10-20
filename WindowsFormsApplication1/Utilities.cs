@@ -108,7 +108,7 @@ namespace WindowsFormsApplication1
             return clientList;
         }
 
-        public static void dosomething(string data)
+        public static void filterAndDistributeQuery(string data)
         {
             var startParsing = Utilities.ParseRequest(FilterQuery.getAllParametersFromGetRequest(data));
             var ttl = Int32.Parse(startParsing.TimeToLive) - 1;

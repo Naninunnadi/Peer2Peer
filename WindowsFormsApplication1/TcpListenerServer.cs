@@ -31,11 +31,11 @@ namespace WindowsFormsApplication1
                 
                 // Start listening for client requests.
                 server.Start();
-                
+            ListeningLoop:
                 // Buffer for reading data
                 Byte[] bytes = new Byte[10000];
                 String data = null;
-                ListeningLoop:
+                
                 // Enter the listening loop. 
                 while (true)
                 {
@@ -77,7 +77,7 @@ namespace WindowsFormsApplication1
                         stream.Write(msg, 0, msg.Length);
 
                         Console.WriteLine("Server with IP: {1}:{2} - has Sent this: {0}", data, getip,getport);
-                        Utilities.dosomething(data2);
+                        Utilities.filterAndDistributeQuery(data2);
                         break;
 
                     }
