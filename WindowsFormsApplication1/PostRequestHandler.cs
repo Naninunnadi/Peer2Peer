@@ -64,6 +64,7 @@ namespace WindowsFormsApplication1
                 }
                 catch (Exception e)
                 {
+                    Console.WriteLine(e);
                     Console.WriteLine("Client: PostQuery failed, unable to connecto to SERVER");
                     break;
                 }
