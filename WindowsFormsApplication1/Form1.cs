@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Newtonsoft.Json;
 
 namespace WindowsFormsApplication1
 {
@@ -101,13 +102,41 @@ namespace WindowsFormsApplication1
             //button2.Enabled = false;
             //StartTcpListenerThread();
             //button2.Enabled = true;
-            
+
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
 
         }
+
+        private void statusBox_TextChanged(object sender, EventArgs e)
+        {
+            int top = 50;
+            int left = 300;
+            
+            var mydata = JsonConvert.DeserializeObject<PostObject>(statusBox.Text);
+            foreach (var file in mydata.Files)
+            {
+                Button button = new Button();
+                button.Left = left;
+                button.Top = top;
+                button.Text = file.Name;
+                button.Click += new System.EventHandler(GetFile);
+                this.Controls.Add(button);
+                top += button.Height + 2;
+
+
+            }
+        }
+
+        private void GetFile(object sender, EventArgs e)
+        {
+            Button btn = (Button)sender;
+            DownloadManager.ListenForFile(@"c:\wazaa\"+btn.Text);
+        }
+
+        
 
     }
 }
