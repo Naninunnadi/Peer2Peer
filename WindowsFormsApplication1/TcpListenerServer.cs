@@ -11,10 +11,10 @@ namespace WindowsFormsApplication1
 {
     class TcpListenerServer 
     {
-        public TextBox TextBox { get; set; }
-        public TcpListenerServer(TextBox textBox)
+        public RichTextBox RichTextBox { get; set; }
+        public TcpListenerServer(RichTextBox textBox)
         {
-            this.TextBox = textBox;
+            this.RichTextBox = textBox;
 
 
         }
@@ -76,7 +76,7 @@ namespace WindowsFormsApplication1
                         // Process the data sent by the client.
                         String data2 = data;
                         data = "HTTP/1.1 200 OK\nContent-Type: text/plain\n\n0";
-                        TextBox.Text = data;
+
                         byte[] msg = System.Text.Encoding.ASCII.GetBytes(data);
 
                         // Send back a response.
@@ -85,12 +85,12 @@ namespace WindowsFormsApplication1
                         Console.WriteLine("Server with IP: {1}:{2} - has Sent this: {0}", data, getip,getport);
                         if (data.ToUpper().Contains("POST"))
                         {
-                          
+                            SetText1(data);
 
                         }
                         else if(data.ToUpper().Contains("GET"))
                         {
-                            Utilities.filterAndDistributeQuery(data2);
+                            Utilities.filterAndDistributeQuery(data2, RichTextBox);
                         }
                         break;
 
@@ -112,10 +112,23 @@ namespace WindowsFormsApplication1
                 Console.WriteLine("server: FINAL SERVER S>Top");
                 
             }
+
+
         }
 
-
-        
+        delegate void SetTextCallback(string text);
+        private void SetText1(string text)
+        {
+            if (this.RichTextBox.InvokeRequired)
+            {
+                SetTextCallback d = new SetTextCallback(SetText1);
+                RichTextBox.Invoke(d, new object[] { text });
+            }
+            else
+            {
+                this.RichTextBox.Text = text;
+            }
+        }
     }
 }
 

@@ -6,6 +6,7 @@ using System.Net;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace WindowsFormsApplication1
 {
@@ -14,17 +15,19 @@ namespace WindowsFormsApplication1
         public RequestModel RequestModel { get; set; }
         public string SendIp  { get; set; }
         public string SendPort { get; set; }
+        public RichTextBox RichTextBox { get; set; }
 
-        public Request(RequestModel request, string ip, string port)
+        public Request(RequestModel request, string ip, string port, RichTextBox textBox)
         {
             this.RequestModel = request;
             this.SendIp = ip;
             this.SendPort = port;
+            this.RichTextBox = textBox;
         }
 
         public void doRequest()
         {
-
+           
             //Our getVars, to test the get of our php. 
             //We can get a page without any of these vars too though.
             var getVars = "http://" + SendIp + ":" + SendPort + "/searchfile?name=" + RequestModel.Name + "&sendip=" + RequestModel.Sendip + "&sendport=" + RequestModel.Sendport + "&ttl=" + RequestModel.TimeToLive + "&id=wqeqwe23&noask=" + string.Join("_", RequestModel.Noask);
@@ -59,6 +62,19 @@ namespace WindowsFormsApplication1
 
             //Now, we read the response (the string), and output it.
 
+        }
+        delegate void SetTextCallback(string text);
+        private void SetText1(string text)
+        {
+            if (this.RichTextBox.InvokeRequired)
+            {
+                SetTextCallback d = new SetTextCallback(SetText1);
+                RichTextBox.Invoke(d, new object[] { text });
+            }
+            else
+            {
+                this.RichTextBox.Text = text;
+            }
         }
 
     }

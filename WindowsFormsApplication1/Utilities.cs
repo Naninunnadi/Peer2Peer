@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
+using System.Windows.Forms;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -111,7 +112,7 @@ namespace WindowsFormsApplication1
             return clientList;
         }
 
-        public static void filterAndDistributeQuery(string data)
+        public static void filterAndDistributeQuery(string data, RichTextBox textbox)
         {
             var startParsing = Utilities.ParseRequest(FilterQuery.getAllParametersFromGetRequest(data));
             var ttl = Int32.Parse(startParsing.TimeToLive) - 1;
@@ -127,7 +128,7 @@ namespace WindowsFormsApplication1
                     var requestModel = startParsing;
                     requestModel.TimeToLive = ttl.ToString();
                     requestModel.Noask.Add(LocalIPAddress());
-                    var request = new Request(requestModel, keyValuePair.Key.ToString(), keyValuePair.Value.ToString());
+                    var request = new Request(requestModel, keyValuePair.Key.ToString(), keyValuePair.Value.ToString(), textbox);
                     Thread worker = new Thread(request.doRequest);
                     worker.IsBackground = true;
                     worker.SetApartmentState(System.Threading.ApartmentState.STA);

@@ -33,7 +33,7 @@ namespace WindowsFormsApplication1
             foreach (var keyValuePair in places)
             {
                 var requestModel = Utilities.ParseRequest("/searchfile?name=" + textBox1.Text + "&sendip=" + Utilities.LocalIPAddress() + "&sendport=" + Utilities.LocalPort() + "&ttl=" + ttl + "&id=wqeqwe23&noask=" + Utilities.LocalIPAddress());
-                var request = new Request(requestModel, keyValuePair.Key.ToString(), keyValuePair.Value.ToString());
+                var request = new Request(requestModel, keyValuePair.Key.ToString(), keyValuePair.Value.ToString(), statusBox);
                 Thread worker = new Thread(request.doRequest);
                 worker.IsBackground = true;
                 worker.SetApartmentState(System.Threading.ApartmentState.STA);
@@ -46,7 +46,7 @@ namespace WindowsFormsApplication1
         public void StartTcpListenerThread()
         {
 
-            Thread worker = new Thread(new TcpListenerServer(textBox2).test);
+            Thread worker = new Thread(new TcpListenerServer(statusBox).test);
             worker.IsBackground = true;
             worker.SetApartmentState(System.Threading.ApartmentState.STA);
             worker.Name = "TCPLISTENERTHREAD";
