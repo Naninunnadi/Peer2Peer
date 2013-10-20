@@ -13,41 +13,64 @@ namespace WindowsFormsApplication1
        
         public static void runRequest()
         {
-            
+            //fthis
         }
         
         
         public static void postRequest()
         {
-            HttpWebRequest httpWReq =
-            (HttpWebRequest)WebRequest.Create("http://192.168.5.185:2234/");
 
-            ASCIIEncoding encoding = new ASCIIEncoding();
-            string postData = "username=user";
-            postData += "&password=pass";
-            byte[] data = encoding.GetBytes(postData);
-
-            httpWReq.Method = "POST";
-            httpWReq.ContentType = "application/x-www-form-urlencoded";
-            httpWReq.ContentLength = data.Length;
-
-            try
+            while (true)
             {
 
-                using (Stream stream = httpWReq.GetRequestStream())
+                // this is where we will send it
+                string uri = "http://192.168.5.185:2234/foundfile?";
+
+                // create a request
+                HttpWebRequest request = (HttpWebRequest)
+                                         WebRequest.Create(uri);
+                request.KeepAlive = false;
+                request.ProtocolVersion = HttpVersion.Version10;
+                request.Method = "POST";
+
+                // turn our request string into a byte stream
+                String json = "s=siiiiiiiiiiiiiiiiaaaaaaaaaaaaaa";
+                byte[] postBytes = Encoding.ASCII.GetBytes(json);
+
+                // this is important - make sure you specify type this way
+                request.ContentType = "application/json"; //pm yolo application/json voib ka
+                request.ContentLength = postBytes.Length;
+                try
                 {
-                    stream.Write(data, 0, data.Length);
+                    Stream requestStream = request.GetRequestStream();
+
+                    // now send it
+                    requestStream.Write(postBytes, 0, postBytes.Length);
+                    requestStream.Close();
+                    Console.WriteLine("Client: Sending to server: " + json);
+
                 }
-                HttpWebResponse response = (HttpWebResponse)httpWReq.GetResponse();
+                catch (Exception e)
+                {
+                    Console.WriteLine("Client: PostQuery failed, unable to connecto to SERVER");
+                    break;
+                }
+                // grab te response and print it out to the console along with the status code
+                try
+                {
+                    HttpWebResponse response = (HttpWebResponse) request.GetResponse();
+                    Console.WriteLine(new StreamReader(response.GetResponseStream()).ReadToEnd());
+                    Console.Write("Server Sent Statuscode: ");
+                    Console.WriteLine(response.StatusCode);
 
-                string responseString = new StreamReader(response.GetResponseStream()).ReadToEnd();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("Client: Request sent, but NO OK RESPONSE FROM SERVER");
+                    
+                }
+                break;
             }
-            catch(Exception e)
-            {
-                Console.WriteLine("SERVER: GOT no response for POST call");
-            }
-
-
         }
     }
 }

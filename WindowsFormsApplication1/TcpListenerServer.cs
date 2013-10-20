@@ -64,9 +64,6 @@ namespace WindowsFormsApplication1
                         data = System.Text.Encoding.ASCII.GetString(bytes, 0, i);
                         Console.WriteLine("Received: {0}", data);
 
-                        
-                        
-                        
                         // Process the data sent by the client.
                         String data2 = data;
                         data = "HTTP/1.1 200 OK\nContent-Type: text/plain\n\n0";
@@ -77,12 +74,21 @@ namespace WindowsFormsApplication1
                         stream.Write(msg, 0, msg.Length);
 
                         Console.WriteLine("Server with IP: {1}:{2} - has Sent this: {0}", data, getip,getport);
-                        Utilities.filterAndDistributeQuery(data2);
+                        if (data.ToUpper().Contains("POST"))
+                        {
+                            //TODO
+
+                        }
+                        else if(data.ToUpper().Contains("GET"))
+                        {
+                            Utilities.filterAndDistributeQuery(data2);
+                        }
                         break;
 
                     }
                     Console.WriteLine("Server: Shutdown and end connection");
                     client.Close();
+                    Console.WriteLine("Server: Initalizing for new incomming requests........");
                     goto ListeningLoop;
                 }
             }

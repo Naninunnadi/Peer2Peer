@@ -45,9 +45,9 @@ namespace WindowsFormsApplication1
                 HttpWebResponse WebResp = (HttpWebResponse)WebReq.GetResponse();
                 
                 //Let's show some information about the response
-                Console.WriteLine("Client : Response from server");
-                Console.WriteLine("From Server: "+WebResp.StatusCode);
-                Console.WriteLine("From Server: "+WebResp.ResponseUri);
+                Console.WriteLine("Client : Response from server >>> ");
+                Console.WriteLine("Client: From Server: "+WebResp.StatusCode+" >GOT IT< ");
+                Console.WriteLine("Client: From Server(what i sent to server (for debugging)): "+WebResp.ResponseUri);
             }
             catch (Exception e)
             {
@@ -55,7 +55,7 @@ namespace WindowsFormsApplication1
                 Console.WriteLine("Client: Request failed (Time-Out > Peer appears to be offline)");
             }
             
-            Console.WriteLine("Request: I will quit.");
+            Console.WriteLine("Request: I will quit. (QUERY SUCCEEDED");
 
             //Now, we read the response (the string), and output it.
 
