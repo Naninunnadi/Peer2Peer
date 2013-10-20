@@ -60,11 +60,13 @@
             // 
             // statusBox
             // 
+            this.statusBox.Enabled = false;
             this.statusBox.Location = new System.Drawing.Point(12, 55);
             this.statusBox.Name = "statusBox";
             this.statusBox.Size = new System.Drawing.Size(260, 382);
             this.statusBox.TabIndex = 3;
             this.statusBox.Text = "";
+            this.statusBox.TextChanged += new System.EventHandler(this.statusBox_TextChanged);
             // 
             // textBox1
             // 
