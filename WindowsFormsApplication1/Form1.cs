@@ -43,7 +43,7 @@ namespace WindowsFormsApplication1
             
 	    }
 
-        public void StartRequest2()
+        public void StartTcpListenerThread()
         {
             Thread worker = new Thread(TcpListenerServer.test);
             worker.IsBackground = true;
@@ -54,7 +54,7 @@ namespace WindowsFormsApplication1
 
         private void button2_Click(object sender, EventArgs e)
         {
-            StartRequest2();
+            StartTcpListenerThread();
         }
 
 
@@ -96,8 +96,12 @@ namespace WindowsFormsApplication1
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            //LOAD
+            //button2.Enabled = false;
+            //StartTcpListenerThread();
+            //button2.Enabled = true;
         }
+
 
       
     }
