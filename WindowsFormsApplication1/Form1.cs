@@ -24,7 +24,7 @@ namespace WindowsFormsApplication1
         private void button1_Click(object sender, EventArgs e)
         {
             StartRequest(4);
- 
+
         }
 
         public void StartRequest(int ttl)
@@ -32,7 +32,7 @@ namespace WindowsFormsApplication1
             var places = Utilities.getIpsAndPorts();
             foreach (var keyValuePair in places)
             {
-                var requestModel = Utilities.ParseRequest("/searchfile?name=" + textBox1.Text + "&sendip=" + Utilities.LocalIPAddress() + "&sendport=" + Utilities.LocalPort() + "&ttl="+ttl+"&id=wqeqwe23&noask=" + Utilities.LocalIPAddress());
+                var requestModel = Utilities.ParseRequest("/searchfile?name=" + textBox1.Text + "&sendip=" + Utilities.LocalIPAddress() + "&sendport=" + Utilities.LocalPort() + "&ttl=" + ttl + "&id=wqeqwe23&noask=" + Utilities.LocalIPAddress());
                 var request = new Request(requestModel, keyValuePair.Key.ToString(), keyValuePair.Value.ToString());
                 Thread worker = new Thread(request.doRequest);
                 worker.IsBackground = true;
@@ -40,8 +40,8 @@ namespace WindowsFormsApplication1
                 worker.Name = "STARTERParseRequestsAndSendRequestsTTL";
                 worker.Start();
             }
-            
-	    }
+
+        }
 
         public void StartTcpListenerThread()
         {
@@ -103,6 +103,14 @@ namespace WindowsFormsApplication1
         }
 
 
-      
+        public static void IncomingMessage(string message)
+        {
+            Program.Form1.RecieveMSG(message);
+        }
+        public void RecieveMSG(string message) // NB: No static
+        {
+            textBox2.Text = message; // Or whatever.
+        }
+
     }
 }

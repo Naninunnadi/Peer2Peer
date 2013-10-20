@@ -77,6 +77,7 @@ namespace WindowsFormsApplication1
                         if (data.ToUpper().Contains("POST"))
                         {
                             //TODO
+                            Form1.IncomingMessage(data);
 
                         }
                         else if(data.ToUpper().Contains("GET"))
