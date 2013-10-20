@@ -146,7 +146,7 @@ namespace WindowsFormsApplication1
 
         public bool IsThisGetOrPost(string data)
         {
-           return !data.Contains("GET");
+            return !FilterQuery.getAllParametersFromGetRequest(data).Contains("GET");
         }
 
 
