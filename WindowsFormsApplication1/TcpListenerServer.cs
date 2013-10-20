@@ -83,9 +83,12 @@ namespace WindowsFormsApplication1
                         stream.Write(msg, 0, msg.Length);
 
                         Console.WriteLine("Server with IP: {1}:{2} - has Sent this: {0}", data, getip,getport);
+
+                        //data2 ON SEE KUS oige p2ring veel sees
+
                         if (data2.ToUpper().Contains("POST"))
                         {
-                            SetText1(data);
+                            SetText1(data2);
 
                         }
                         else if(data2.ToUpper().Contains("GET"))
