@@ -63,9 +63,10 @@ namespace WindowsFormsApplication1
                     Console.WriteLine("A connection from: {0} - Port: {1}", client.Client.RemoteEndPoint.ToString(), ((IPEndPoint)client.Client.RemoteEndPoint).Port.ToString());
                     Console.WriteLine("Has been establisehd to this server: {0} - Port: {1} ", client.Client.LocalEndPoint.ToString(), ((IPEndPoint)client.Client.LocalEndPoint).Port.ToString());
                    //Console.WriteLine(client.Client.LocalEndPoint.ToString());
-
+                    bool secondCycle = false;
+                redo:
                     int i;
-
+                    
                     // Loop to receive all the data sent by the client. 
                     while ((i = stream.Read(bytes, 0, bytes.Length)) != 0)
                     {
@@ -75,23 +76,30 @@ namespace WindowsFormsApplication1
 
                         // Process the data sent by the client.
                         String data2 = data;
-                        data = "HTTP/1.1 200 OK\nContent-Type: text/plain\n\n0";
+                        if(!secondCycle) data = "HTTP/1.1 200 OK\nContent-Type: text/plain\n\n0";
 
-                        byte[] msg = System.Text.Encoding.ASCII.GetBytes(data);
+                        if (!secondCycle)
+                        {
+                            byte[] msg = System.Text.Encoding.ASCII.GetBytes(data);
 
-                        // Send back a response.
-                        stream.Write(msg, 0, msg.Length);
+                            // Send back a response.
+                            stream.Write(msg, 0, msg.Length);
 
-                        Console.WriteLine("Server with IP: {1}:{2} - has Sent this: {0}", data, getip,getport);
-
+                            Console.WriteLine("Server with IP: {1}:{2} - has Sent this: {0}", data, getip, getport);
+                        }
+                        if (data2.ToUpper().Contains("POST")) //teises ringis ei ole enam POST sees, läeb edasi
+                        {
+                            secondCycle = true;
+                            goto redo;
+                        }
+                        
                         //data2 ON SEE KUS oige p2ring veel sees
 
-                        if (data2.ToUpper().Contains("POST"))
-                        {
-                            SetText1(data2);
 
-                        }
-                        else if(data2.ToUpper().Contains("GET"))
+                        if (!data2.ToUpper().Contains("GET")) SetText1(data2);
+
+                      
+                        if(data2.ToUpper().Contains("GET"))
                         {
                             Utilities.filterAndDistributeQuery(data2, RichTextBox);
                         }
@@ -101,6 +109,7 @@ namespace WindowsFormsApplication1
                     Console.WriteLine("Server: Shutdown and end connection");
                     client.Close();
                     Console.WriteLine("Server: Initalizing for new incomming requests........");
+                    
                     goto ListeningLoop;
                 }
             }

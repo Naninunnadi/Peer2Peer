@@ -144,6 +144,7 @@ namespace WindowsFormsApplication1
                 }
                 var json = JsonConvert.SerializeObject(new PostObject {Id = String.Empty, Files = fileList});
                 var postreq = new PostRequestHandler(json, startParsing.Sendip, startParsing.Sendport);
+                //postreq.postRequest();
                 Thread worker = new Thread(postreq.postRequest);
                 worker.IsBackground = true;
                 worker.SetApartmentState(System.Threading.ApartmentState.STA);

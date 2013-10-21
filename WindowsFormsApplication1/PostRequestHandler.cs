@@ -34,10 +34,13 @@ namespace WindowsFormsApplication1
         public void postRequest()
         {
 
+
             while (true)
             {
+                //int testPort = Int32.Parse(SendPort)+1;
+                //string replace = testPort.ToString();
                 // this is where we will send it
-                string uri = "http://" + SendIp + ":"+SendPort+"/foundfile?";
+                string uri = "http://" + SendIp + ":" + SendPort + "/foundfile?";
 
                 // create a request
                 HttpWebRequest request = (HttpWebRequest)
@@ -52,6 +55,7 @@ namespace WindowsFormsApplication1
                 // this is important - make sure you specify type this way
                 request.ContentType = "application/json"; //pm yolo application/json voib ka
                 request.ContentLength = postBytes.Length;
+                request.Timeout = 7500;
                 try
                 {
                     Stream requestStream = request.GetRequestStream();
@@ -60,6 +64,7 @@ namespace WindowsFormsApplication1
                     requestStream.Write(postBytes, 0, postBytes.Length);
                     requestStream.Close();
                     Console.WriteLine("Client: Sending to server: " + Jsonlist);
+
 
                 }
                 catch (Exception e)
@@ -71,7 +76,7 @@ namespace WindowsFormsApplication1
                 // grab te response and print it out to the console along with the status code
                 try
                 {
-                    HttpWebResponse response = (HttpWebResponse) request.GetResponse();
+                    HttpWebResponse response = (HttpWebResponse)request.GetResponse();
                     Console.WriteLine(new StreamReader(response.GetResponseStream()).ReadToEnd());
                     Console.Write("Server Sent Statuscode: ");
                     Console.WriteLine(response.StatusCode);
@@ -79,8 +84,9 @@ namespace WindowsFormsApplication1
                 }
                 catch (Exception e)
                 {
+                    Console.WriteLine(e);
                     Console.WriteLine("Client: Request sent, but NO OK RESPONSE FROM SERVER");
-                    
+
                 }
                 break;
             }

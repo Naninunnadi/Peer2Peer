@@ -54,9 +54,19 @@ namespace WindowsFormsApplication1
             worker.Start();
         }
 
+        //public void StartTcpListenerThread2()
+        //{
+
+        //    Thread worker = new Thread(new tcpListenerTwoPost(statusBox).test);
+        //    worker.IsBackground = true;
+        //    worker.SetApartmentState(System.Threading.ApartmentState.STA);
+        //    worker.Name = "%%%%2TCPLISTENERTHREAD%%%%%%%%%%%2";
+        //    worker.Start();
+        //}
+
         private void button2_Click(object sender, EventArgs e)
         {
-            StartTcpListenerThread();
+            //StartTcpListenerThread();
         }
 
 
@@ -99,9 +109,12 @@ namespace WindowsFormsApplication1
         private void Form1_Load(object sender, EventArgs e)
         {
             //LOAD
-            //button2.Enabled = false;
-            //StartTcpListenerThread();
+
+
+            button2.Enabled = false;
+            StartTcpListenerThread();
             //button2.Enabled = true;
+            //StartTcpListenerThread2();
 
         }
 
@@ -114,19 +127,25 @@ namespace WindowsFormsApplication1
         {
             int top = 50;
             int left = 300;
-            
-            var mydata = JsonConvert.DeserializeObject<PostObject>(statusBox.Text);
-            foreach (var file in mydata.Files)
+
+            try //Panin try muidu ikka närvidele käis see fail
             {
-                Button button = new Button();
-                button.Left = left;
-                button.Top = top;
-                button.Text = file.Name;
-                button.Click += new System.EventHandler(GetFile);
-                this.Controls.Add(button);
-                top += button.Height + 2;
+                var mydata = JsonConvert.DeserializeObject<PostObject>(statusBox.Text);
+                foreach (var file in mydata.Files)
+                {
+                    Button button = new Button();
+                    button.Left = left;
+                    button.Top = top;
+                    button.Text = file.Name;
+                    button.Click += new System.EventHandler(GetFile);
+                    this.Controls.Add(button);
+                    top += button.Height + 2;
 
 
+                }
+            }
+            catch
+            {
             }
         }
 
