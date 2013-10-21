@@ -103,7 +103,7 @@ namespace WindowsFormsApplication1
                         {
                             if (Directory.Exists(@"C:\"))
                             {
-                                DownloadManager.SendFile("");
+                                //DownloadManager.SendFile(@"C:\wazaa\");
                             }
                             else if (Directory.Exists(@"D:\"))
                             {

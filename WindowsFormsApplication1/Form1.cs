@@ -143,6 +143,7 @@ namespace WindowsFormsApplication1
                         button.Left = left;
                         button.Top = top; 
                         button.Text = item.Name;
+                        button.Tag = item.Ip + ":" + item.Port;
                         button.Click += new System.EventHandler(GetFile);
                         this.Controls.Add(button);
                         top += button.Height + 2;
@@ -158,7 +159,9 @@ namespace WindowsFormsApplication1
         private void GetFile(object sender, EventArgs e)
         {
             Button btn = (Button)sender;
+            var ipandPort = btn.Tag.ToString().Split(':');
             DownloadManager.ListenForFile(@"c:\wazaa\"+btn.Text);
+            DownloadManager.doRequestForGetFile(ipandPort[0], ipandPort[1], btn.Text);
         }
 
         

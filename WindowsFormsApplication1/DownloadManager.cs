@@ -69,11 +69,10 @@ namespace WindowsFormsApplication1
            
         }
 
-        //http://11.22.33.44:2345/getfile?fullname=fullfilename?askerip=
-       public void doRequestForGetFile()
+       public static void doRequestForGetFile(string ip, string port, string name)
        {
-           
-           var getVars = "http://" + SendIp + ":" + SendPort + "/searchfile?name=" + RequestModel.Name + "&sendip=" + RequestModel.Sendip + "&sendport=" + RequestModel.Sendport + "&ttl=" + RequestModel.TimeToLive + "&id=wqeqwe23&noask=" + string.Join("_", RequestModel.Noask);
+
+           var getVars = "http://" + ip + ":" + port + "/getfile?fullname=" + name;
            Uri targetUri = new Uri(getVars);
            Console.WriteLine("Client : " + targetUri.ToString());
            HttpWebRequest WebReq = (HttpWebRequest)WebRequest.Create(targetUri);
