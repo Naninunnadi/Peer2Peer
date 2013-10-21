@@ -80,10 +80,10 @@ namespace WindowsFormsApplication1
            
         }
 
-       public static void doRequestForGetFile(string ip, string port, string name)
+       public void doRequestForGetFile()
        {
 
-           var getVars = "http://" + ip + ":" + port + "/getfile?fullname=" + name;
+           var getVars = "http://" + Ip + ":" + Port + "/getfile?fullname=" + Filename;
            Uri targetUri = new Uri(getVars);
            Console.WriteLine("Client : " + targetUri.ToString());
            HttpWebRequest WebReq = (HttpWebRequest)WebRequest.Create(targetUri);

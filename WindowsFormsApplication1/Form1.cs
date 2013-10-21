@@ -160,7 +160,12 @@ namespace WindowsFormsApplication1
         {
             Button btn = (Button)sender;
             var ipandPort = btn.Tag.ToString().Split(':');
-            DownloadManager.doRequestForGetFile(ipandPort[0], ipandPort[1], btn.Text);
+            Thread worker = new Thread(new DownloadManager(ipandPort[0], ipandPort[1], btn.Text).doRequestForGetFile);
+            worker.IsBackground = true;
+            worker.SetApartmentState(System.Threading.ApartmentState.STA);
+            worker.Name = "TCPLISTENERTHREAD";
+            worker.Start();
+
             DownloadManager.ListenForFile(@"c:\wazaa\"+btn.Text);
 
             
