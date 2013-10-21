@@ -39,7 +39,7 @@ namespace WindowsFormsApplication1
         }
 
 
-       public static void ListenForFile(string pathAndFname)
+       public static void ListenForFile(string pathAndFname)// c:/wazaa/nimi.txt
         {
             
            
@@ -68,5 +68,38 @@ namespace WindowsFormsApplication1
             Console.WriteLine("DLMGR: Download mngr stopped listening for incoming connections");
            
         }
+
+        //http://11.22.33.44:2345/getfile?fullname=fullfilename?askerip=
+       public void doRequestForGetFile()
+       {
+           
+           var getVars = "http://" + SendIp + ":" + SendPort + "/searchfile?name=" + RequestModel.Name + "&sendip=" + RequestModel.Sendip + "&sendport=" + RequestModel.Sendport + "&ttl=" + RequestModel.TimeToLive + "&id=wqeqwe23&noask=" + string.Join("_", RequestModel.Noask);
+           Uri targetUri = new Uri(getVars);
+           Console.WriteLine("Client : " + targetUri.ToString());
+           HttpWebRequest WebReq = (HttpWebRequest)WebRequest.Create(targetUri);
+           WebReq.Timeout = 6000;
+           WebReq.Method = "GET";
+
+           Console.WriteLine("Client : Request DONE");
+           try
+           {
+               HttpWebResponse WebResp = (HttpWebResponse)WebReq.GetResponse();
+
+               //Let's show some information about the response
+               Console.WriteLine("Client : Response from server >>> ");
+               Console.WriteLine("Client: From Server: " + WebResp.StatusCode + " >GOT IT< ");
+               Console.WriteLine("Client: From Server(what i sent to server (for debugging)): " + WebResp.ResponseUri);
+           }
+           catch (Exception e)
+           {
+
+               Console.WriteLine("Client: Request failed (Time-Out > Peer appears to be offline)");
+           }
+
+           Console.WriteLine("Request: I will quit. (QUERY SUCCEEDED");
+
+           //Now, we read the response (the string), and output it.
+
+       }
     }
 }
