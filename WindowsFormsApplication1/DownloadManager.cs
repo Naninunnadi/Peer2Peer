@@ -9,9 +9,20 @@ using System.Threading.Tasks;
 
 namespace WindowsFormsApplication1
 {
-    class DownloadManager
+    public class DownloadManager
     {
+        public string Ip { get; set; }
+        public string Port { get; set; }
+        public string Filename { get; set; }
 
+        public DownloadManager(string ip, string port, string fileName)
+        {
+            this.Ip = ip;
+            this.Port = port;
+            this.Filename = fileName;
+
+
+        }
 
         //1095 jääb igal pool Download ja Upload static pordiks
         public static void SendFile(string path, string IP)
