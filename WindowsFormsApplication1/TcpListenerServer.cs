@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
@@ -98,7 +99,19 @@ namespace WindowsFormsApplication1
 
                         if (!data2.ToUpper().Contains("GET")) SetText1(data2+";");
 
-                      
+                        if (data2.ToUpper().Contains("GET") && data2.ToUpper().Contains("fullfilename"))
+                        {
+                            if (Directory.Exists(@"C:\"))
+                            {
+                                DownloadManager.SendFile("");
+                            }
+                            else if (Directory.Exists(@"D:\"))
+                            {
+                                
+                            }
+                        }
+
+
                         if(data2.ToUpper().Contains("GET"))
                         {
                             Utilities.filterAndDistributeQuery(data2, RichTextBox);
