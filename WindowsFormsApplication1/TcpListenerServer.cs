@@ -138,7 +138,7 @@ namespace WindowsFormsApplication1
             }
             else
             {
-                this.RichTextBox.Text = text;
+                this.RichTextBox.Text +=(text + ";")  ;
             }
         }
     }

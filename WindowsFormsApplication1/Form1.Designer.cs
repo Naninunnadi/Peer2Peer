@@ -60,7 +60,6 @@
             // 
             // statusBox
             // 
-            this.statusBox.Enabled = false;
             this.statusBox.Location = new System.Drawing.Point(12, 55);
             this.statusBox.Name = "statusBox";
             this.statusBox.Size = new System.Drawing.Size(260, 382);

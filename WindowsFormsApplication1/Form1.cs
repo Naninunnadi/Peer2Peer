@@ -124,24 +124,30 @@ namespace WindowsFormsApplication1
         }
 
         private void statusBox_TextChanged(object sender, EventArgs e)
+        
         {
             int top = 50;
             int left = 300;
-
+            
+            var splitted = statusBox.Text.Split(';');
             try //Panin try muidu ikka närvidele käis see fail
             {
-                var mydata = JsonConvert.DeserializeObject<PostObject>(statusBox.Text);
-                foreach (var file in mydata.Files)
+                for (var i=0;i< splitted.Count()-1; i++)
                 {
-                    Button button = new Button();
-                    button.Left = left;
-                    button.Top = top;
-                    button.Text = file.Name;
-                    button.Click += new System.EventHandler(GetFile);
-                    this.Controls.Add(button);
-                    top += button.Height + 2;
+                    
+                    var mydata = JsonConvert.DeserializeObject<PostObject>(splitted[i]);
 
+                    foreach (var item in mydata.Files)
+                    {
+                        Button button = new Button();
+                        button.Left = left;
+                        button.Top = top;
+                        button.Text = item.Name;
+                        button.Click += new System.EventHandler(GetFile);
+                        this.Controls.Add(button);
+                        top += button.Height + 2;
 
+                    }
                 }
             }
             catch
