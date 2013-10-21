@@ -104,6 +104,7 @@ namespace WindowsFormsApplication1
                             if (Directory.Exists(@"C:\"))
                             {
                                 //DownloadManager.SendFile(@"C:\wazaa\");
+                                //TCP listener saab get query ja stardib /getfile=fname ja IP kuhu saata ja saadab wazaa kaustast faili
                             }
                             else if (Directory.Exists(@"D:\"))
                             {
