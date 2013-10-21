@@ -96,7 +96,7 @@ namespace WindowsFormsApplication1
                         //data2 ON SEE KUS oige p2ring veel sees
 
 
-                        if (!data2.ToUpper().Contains("GET")) SetText1(data2);
+                        if (!data2.ToUpper().Contains("GET")) SetText1(data2+";");
 
                       
                         if(data2.ToUpper().Contains("GET"))
@@ -138,7 +138,7 @@ namespace WindowsFormsApplication1
             }
             else
             {
-                this.RichTextBox.Text +=(text + ";")  ;
+                this.RichTextBox.Text +=(text)  ;
             }
         }
     }

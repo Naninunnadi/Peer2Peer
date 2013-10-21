@@ -141,7 +141,7 @@ namespace WindowsFormsApplication1
                     {
                         Button button = new Button();
                         button.Left = left;
-                        button.Top = top;
+                        button.Top = top; 
                         button.Text = item.Name;
                         button.Click += new System.EventHandler(GetFile);
                         this.Controls.Add(button);
