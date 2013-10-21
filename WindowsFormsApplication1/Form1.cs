@@ -160,8 +160,10 @@ namespace WindowsFormsApplication1
         {
             Button btn = (Button)sender;
             var ipandPort = btn.Tag.ToString().Split(':');
-            DownloadManager.ListenForFile(@"c:\wazaa\"+btn.Text);
             DownloadManager.doRequestForGetFile(ipandPort[0], ipandPort[1], btn.Text);
+            DownloadManager.ListenForFile(@"c:\wazaa\"+btn.Text);
+
+            
         }
 
         

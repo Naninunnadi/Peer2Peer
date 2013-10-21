@@ -101,10 +101,13 @@ namespace WindowsFormsApplication1
 
                         if (data2.ToUpper().Contains("GET") && data2.ToUpper().Contains("fullfilename"))
                         {
+
+                            Console.WriteLine("Server: GOT DOWNLOAD REQUEST FROM ASKER");
                             if (Directory.Exists(@"C:\"))
                             {
                                 //DownloadManager.SendFile(@"C:\wazaa\");
                                 //TCP listener saab get query ja stardib /getfile=fname ja IP kuhu saata ja saadab wazaa kaustast faili
+                                Console.WriteLine("Server: GOT DOWNLOAD REQUEST FROM ASKER");
                             }
                             else if (Directory.Exists(@"D:\"))
                             {

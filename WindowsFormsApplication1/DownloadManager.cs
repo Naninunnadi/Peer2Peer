@@ -76,7 +76,7 @@ namespace WindowsFormsApplication1
            Uri targetUri = new Uri(getVars);
            Console.WriteLine("Client : " + targetUri.ToString());
            HttpWebRequest WebReq = (HttpWebRequest)WebRequest.Create(targetUri);
-           WebReq.Timeout = 6000;
+           WebReq.Timeout = 10000;
            WebReq.Method = "GET";
 
            Console.WriteLine("Client : Request DONE");

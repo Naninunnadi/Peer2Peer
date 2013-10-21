@@ -27,7 +27,7 @@ namespace WindowsFormsApplication1
 
         public void doRequest()
         {
-           SetText1("jama");
+           //SetText1("jama");
             //Our getVars, to test the get of our php. 
             //We can get a page without any of these vars too though.
             var getVars = "http://" + SendIp + ":" + SendPort + "/searchfile?name=" + RequestModel.Name + "&sendip=" + RequestModel.Sendip + "&sendport=" + RequestModel.Sendport + "&ttl=" + RequestModel.TimeToLive + "&id=wqeqwe23&noask=" + string.Join("_", RequestModel.Noask);
@@ -38,7 +38,7 @@ namespace WindowsFormsApplication1
             Uri targetUri = new Uri(getVars);
             Console.WriteLine("Client : " +targetUri.ToString());
             HttpWebRequest WebReq = (HttpWebRequest)WebRequest.Create(targetUri);
-            WebReq.Timeout = 6000;
+            WebReq.Timeout = 10000;
             //This time, our method is GET.
             WebReq.Method = "GET";
 

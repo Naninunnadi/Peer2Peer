@@ -55,7 +55,7 @@ namespace WindowsFormsApplication1
                 // this is important - make sure you specify type this way
                 request.ContentType = "application/json"; //pm yolo application/json voib ka
                 request.ContentLength = postBytes.Length;
-                request.Timeout = 7500;
+                request.Timeout = 10000;
                 try
                 {
                     Stream requestStream = request.GetRequestStream();
