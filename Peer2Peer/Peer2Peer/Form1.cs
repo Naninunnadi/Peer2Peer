@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Peer2Peer.utilities;
 
 namespace Peer2Peer
 {
@@ -15,6 +16,19 @@ namespace Peer2Peer
         public Form_main()
         {
             InitializeComponent();
+            var IpsSnfPorts = Factory.getIpsAndPorts();
+            listView1.View = View.Details;
+            listView1.Columns.Add("IP", 100, HorizontalAlignment.Left);
+            listView1.Columns.Add("Port", 100, HorizontalAlignment.Left);
+            foreach (var keyValuePair in IpsSnfPorts)
+            {
+                ListViewItem item = new ListViewItem();
+                item.Text = keyValuePair.Key.ToString();
+                item.SubItems.Add(keyValuePair.Value);
+                listView1.Items.Add(item);
+            }
+            label3.Text = Factory.LocalIPAddress();
+            label5.Text = Factory.LocalPort();
         }
 
         private void button1_Click(object sender, EventArgs e)
