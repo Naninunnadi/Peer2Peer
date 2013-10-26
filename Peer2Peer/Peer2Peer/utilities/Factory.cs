@@ -6,7 +6,9 @@ using System.Net;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Web;
 using System.Windows.Forms;
+using Newtonsoft.Json;
 
 namespace Peer2Peer.utilities
 {
@@ -109,13 +111,13 @@ namespace Peer2Peer.utilities
 
         public static void filterAndDistributeQuery(string data, RichTextBox textbox)
         {
-            var startParsing = Utilities.ParseRequest(FilterQuery.getAllParametersFromGetRequest(data));
+            var startParsing = ParseRequest(FilterQuery.getAllParametersFromGetRequest(data));
             var ttl = Int32.Parse(startParsing.TimeToLive) - 1;
-            var foundFiles = Utilities.FindFile(startParsing.Name);
+            var foundFiles = FindFile(startParsing.Name);
             var fileList = new List<FileModel>();
             if (!foundFiles.Any() && ttl > 0)
             {
-                var places = Utilities.getIpsAndPorts();
+                var places = getIpsAndPorts();
                 foreach (var keyValuePair in places)
                 {
                     if (startParsing.Noask.Contains(keyValuePair.Key.ToString()))

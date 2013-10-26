@@ -25,6 +25,6 @@ Global
 		VSTextShadow = True
 		VSToolStripStyle = Mixed
 		VSTargetControls = FormsAndControls
-		VSStyle = Windows Metro (White).vssf
+		VSStyle = Windows Metro (Blue).vssf
 	EndGlobalSection
 EndGlobal
