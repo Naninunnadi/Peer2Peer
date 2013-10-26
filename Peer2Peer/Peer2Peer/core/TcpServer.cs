@@ -32,8 +32,6 @@ namespace Peer2Peer.core
                 String getport = utilities.Factory.LocalPort();
                 Int32 port = Int32.Parse(getport);
                 IPAddress localAddr = IPAddress.Parse(getip); 
-
-                // TcpListener server = new TcpListener(port);
                 Console.WriteLine("Server: Starting now to listen to: " + getip + ":" + getport);
                 server = new TcpListener(localAddr, port);
 
