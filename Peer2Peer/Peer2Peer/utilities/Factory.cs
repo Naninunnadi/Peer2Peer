@@ -124,18 +124,21 @@ namespace Peer2Peer.utilities
                 var places = getIpsAndPorts();
                 foreach (var keyValuePair in places)
                 {
-                    if (startParsing.Noask != null && startParsing.Noask.Contains(keyValuePair.Key.ToString()))
-                        return;
-                    var requestModel = startParsing;
-                    requestModel.TimeToLive = ttl.ToString();
-                    requestModel.Noask.Add(LocalIPAddress());
-                    var request = new GetRequestHandler(requestModel, keyValuePair.Key.ToString(), keyValuePair.Value.ToString());
-                    Thread worker = new Thread(request.doRequest);
-                    worker.IsBackground = true;
-                    worker.SetApartmentState(System.Threading.ApartmentState.STA);
-                    worker.Name = "ParseRequestsAndSendRequestsTTL";
-                    worker.Start();
-                 
+                    if (!startParsing.Noask.Contains(keyValuePair.Key.ToString()))
+                    {
+
+                        var requestModel = startParsing;
+                        requestModel.TimeToLive = ttl.ToString();
+                        requestModel.Noask.Add(LocalIPAddress());
+                        var request = new GetRequestHandler(requestModel, keyValuePair.Key.ToString(),
+                                                            keyValuePair.Value.ToString());
+                        Thread worker = new Thread(request.doRequest);
+                        worker.IsBackground = true;
+                        worker.SetApartmentState(System.Threading.ApartmentState.STA);
+                        worker.Name = "ParseRequestsAndSendRequestsTTL";
+                        worker.Start();
+                    }
+
                 }
             }
             else if (foundFiles.Any() && ttl > 0)
