@@ -81,7 +81,7 @@ namespace Peer2Peer.core
 
                         if (!data2.ToUpper().Contains("GET"))
                         {SetText1(data2, ((IPEndPoint)client.Client.LocalEndPoint).Address.ToString());}
-                        if (data2.ToUpper().Contains("GET") && data2.ToUpper().Contains("fullname"))
+                        if (data2.ToUpper().Contains("GET") && data2.Contains("fullname"))
                         {
 
                             Console.WriteLine("Server: GOT DOWNLOAD REQUEST FROM ASKER");
@@ -96,7 +96,7 @@ namespace Peer2Peer.core
                             }
                         }
 
-                        if (data2.ToUpper().Contains("GET") && !data2.ToUpper().Contains("fullname"))
+                        if (data2.ToUpper().Contains("GET") && !data2.Contains("fullname"))
                         {
                             utilities.Factory.filterAndDistributeQuery(data2);
                         }
