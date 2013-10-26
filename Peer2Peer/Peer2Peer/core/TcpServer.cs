@@ -97,7 +97,7 @@ namespace Peer2Peer.core
                         }
                         else if (Directory.Exists(@"D:\"))
                         {
-                            var param1 = FilterQuery.getMainParamaterFromGetRequest(data2);
+                            var param1 = FilterQuery.getMainParamaterFromGetRequestWithoutEquals(data2);
                             DownloadManager.SendFile(@"D:\wazaa\" + param1, ((IPEndPoint)client.Client.RemoteEndPoint).Address.ToString());
                             client.Close();
                             goto ListeningLoop;

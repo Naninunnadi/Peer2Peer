@@ -56,5 +56,14 @@ namespace Peer2Peer.utilities
             int length = indexLineBreak - index;
             return data.Substring(index + 1, length);
         }
+
+        public static String getMainParamaterFromGetRequestWithoutEquals(String data)
+        {
+            int index = data.LastIndexOf("=");
+            //last HTTP1.1 > -2
+            int indexLineBreak = data.IndexOf("H") - 2;
+            int length = indexLineBreak - index;
+            return data.Substring(index + 1, length);
+        }
     }
 }
