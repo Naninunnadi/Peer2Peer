@@ -26,14 +26,14 @@ namespace Peer2Peer.core
         {
 
             TcpListener server = null;
-            StringBuilder stringBuilder = new StringBuilder(1024*8);
+            StringBuilder stringBuilder = new StringBuilder(1024 * 8);
 
             try
             {
                 String getip = utilities.Factory.LocalIPAddress();
                 String getport = utilities.Factory.LocalPort();
                 Int32 port = Int32.Parse(getport);
-                IPAddress localAddr = IPAddress.Parse(getip); 
+                IPAddress localAddr = IPAddress.Parse(getip);
                 Console.WriteLine("Server: Starting now to listen to: " + getip + ":" + getport);
                 server = new TcpListener(localAddr, port);
                 server.Start();
@@ -43,7 +43,7 @@ namespace Peer2Peer.core
 
                 while (true)
                 {
-                   
+
                     Console.Write("Server: Waiting for a connection... ");
                     TcpClient client = server.AcceptTcpClient();
                     Console.WriteLine("Server: Connected!");
@@ -51,10 +51,10 @@ namespace Peer2Peer.core
                     NetworkStream stream = client.GetStream();
                     Console.WriteLine("**********************************************************");
                     Console.WriteLine("A connection from: {0} - Port: {1}", client.Client.RemoteEndPoint.ToString(),
-                                      ((IPEndPoint) client.Client.RemoteEndPoint).Port.ToString());
+                                      ((IPEndPoint)client.Client.RemoteEndPoint).Port.ToString());
                     Console.WriteLine("Has been establisehd to this server: {0} - Port: {1} ",
                                       client.Client.LocalEndPoint.ToString(),
-                                      ((IPEndPoint) client.Client.LocalEndPoint).Port.ToString());
+                                      ((IPEndPoint)client.Client.LocalEndPoint).Port.ToString());
                     Console.WriteLine("**********************************************************");
                     bool secondCycle = false;
                 redo:
@@ -80,8 +80,8 @@ namespace Peer2Peer.core
                             goto redo;
                         }
 
-                        if (!data2.ToUpper().Contains("GET")) Console.WriteLine("SERVER: Query doesnt contain GET");//SetText1(data2 + ";"); 
-                        SetText1(data2, ((IPEndPoint) client.Client.LocalEndPoint).Address.ToString());
+                        if (!data2.ToUpper().Contains("GET")) 
+                            SetText1(data2, ((IPEndPoint)client.Client.LocalEndPoint).Address.ToString());
                         if (data2.ToUpper().Contains("GET") && data2.ToUpper().Contains("fullfilename"))
                         {
 
@@ -136,16 +136,12 @@ namespace Peer2Peer.core
             {
                 int top = 300;
                 int left = 100;
-                    Label label = new Label();
-                    Button button = new Button();
+                Label label = new Label();
+                Button button = new Button();
                 label.Text = ipAndPort;
-                    label.Left = left;
-                    button.Left = left;
-                    label.Top = top;
-                    button.Top = 340;
-                    button.Text = text;
-                    Form.Controls.Add(label);
-                    Form.Controls.Add(button);
+                button.Text = text;
+                Form.Controls.Add(label);
+                Form.Controls.Add(button);
             }
         }
     }
