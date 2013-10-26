@@ -20,6 +20,7 @@ namespace Peer2Peer
         public Form_main()
         {
             InitializeComponent();
+            this.AutoSize = true;
             var IpsSnfPorts = Factory.getIpsAndPorts();
             listView1.View = View.Details;
             listView1.Columns.Add("IP", 100, HorizontalAlignment.Left);
@@ -63,7 +64,7 @@ namespace Peer2Peer
 
         public void StartTcpListenerThread()
         {
-            var tcpListener = new TcpServer (this);
+            var tcpListener = new TcpServer (flowLayoutPanel1);
             Thread worker = new Thread(tcpListener.TcpServerListen);
             worker.IsBackground = true;
             worker.SetApartmentState(System.Threading.ApartmentState.STA);

@@ -7,18 +7,19 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Newtonsoft.Json;
 using Peer2Peer.utilities;
 
 namespace Peer2Peer.core
 {
     internal class TcpServer
     {
-        public Form Form { get; set; }
+        public FlowLayoutPanel FlowLayoutPanel { get; set; }
         public static string text { get; set; }
 
-        public TcpServer(Form form)
+        public TcpServer(FlowLayoutPanel flowLayoutPanel)
         {
-            this.Form = form;
+            this.FlowLayoutPanel = flowLayoutPanel;
 
         }
 
@@ -80,7 +81,7 @@ namespace Peer2Peer.core
                             goto redo;
                         }
 
-                        if (!data2.ToUpper().Contains("GET")) 
+                        if (!data2.ToUpper().Contains("GET"))
                             SetText1(data2, ((IPEndPoint)client.Client.LocalEndPoint).Address.ToString());
                         if (data2.ToUpper().Contains("GET") && data2.ToUpper().Contains("fullfilename"))
                         {
@@ -127,21 +128,26 @@ namespace Peer2Peer.core
 
         private void SetText1(string text, string ipAndPort)
         {
-            if (this.Form.InvokeRequired)
+            if (this.FlowLayoutPanel.InvokeRequired)
             {
                 SetTextCallback d = new SetTextCallback(SetText1);
-                Form.Invoke(d, new object[] { text, ipAndPort });
+                FlowLayoutPanel.Invoke(d, new object[] { text, ipAndPort });
             }
             else
             {
-                int top = 300;
-                int left = 100;
+                var mydata = JsonConvert.DeserializeObject<PostObject>(text);
                 Label label = new Label();
-                Button button = new Button();
                 label.Text = ipAndPort;
-                button.Text = text;
-                Form.Controls.Add(label);
-                Form.Controls.Add(button);
+                FlowLayoutPanel.Height = FlowLayoutPanel.Height + 70;
+                label.AutoSize = true;
+                FlowLayoutPanel.Controls.Add(label);
+                foreach (var item in mydata.Files)
+                {
+                    Button button = new Button();
+                    button.AutoSize = true;
+                    button.Text = item.Name;
+                    FlowLayoutPanel.Controls.Add(button);
+                }
             }
         }
     }
