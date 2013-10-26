@@ -27,8 +27,6 @@ namespace Peer2Peer.core
         {
 
             TcpListener server = null;
-            StringBuilder stringBuilder = new StringBuilder(1024 * 8);
-
             try
             {
                 String getip = utilities.Factory.LocalIPAddress();
@@ -38,8 +36,8 @@ namespace Peer2Peer.core
                 Console.WriteLine("Server: Starting now to listen to: " + getip + ":" + getport);
                 server = new TcpListener(localAddr, port);
                 server.Start();
+                Byte[] bytes = new Byte[1024];
             ListeningLoop:
-                Byte[] bytes = new Byte[10000];
                 String data = null;
 
                 while (true)
@@ -48,7 +46,6 @@ namespace Peer2Peer.core
                     Console.Write("Server: Waiting for a connection... ");
                     TcpClient client = server.AcceptTcpClient();
                     Console.WriteLine("Server: Connected!");
-                    data = null;
                     NetworkStream stream = client.GetStream();
                     Console.WriteLine("**********************************************************");
                     Console.WriteLine("A connection from: {0} - Port: {1}", client.Client.RemoteEndPoint.ToString(),
@@ -82,7 +79,7 @@ namespace Peer2Peer.core
                         }
 
                         if (!data2.ToUpper().Contains("GET"))
-                            SetText1(data2, ((IPEndPoint)client.Client.LocalEndPoint).Address.ToString());
+                        {SetText1(data2, ((IPEndPoint)client.Client.LocalEndPoint).Address.ToString());}
                         if (data2.ToUpper().Contains("GET") && data2.ToUpper().Contains("fullfilename"))
                         {
 
@@ -108,7 +105,7 @@ namespace Peer2Peer.core
                     Console.WriteLine("Server: Shutdown and end connection");
                     client.Close();
                     Console.WriteLine("Server: Initalizing for new incoming requests........");
-
+                    bytes = null;
                     goto ListeningLoop;
                 }
             }
