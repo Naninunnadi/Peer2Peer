@@ -33,9 +33,6 @@ namespace Peer2Peer.core
         public void postRequest()
         {
 
-
-            while (true)
-            {
                 //int testPort = Int32.Parse(SendPort)+1;
                 //string replace = testPort.ToString();
                 // this is where we will send it
@@ -54,7 +51,7 @@ namespace Peer2Peer.core
                 // this is important - make sure you specify type this way
                 request.ContentType = "application/json"; //pm yolo application/json voib ka
                 request.ContentLength = postBytes.Length;
-                //request.Timeout = 10000;
+                request.Timeout = 2500;
                 try
                 {
                     Stream requestStream = request.GetRequestStream();
@@ -70,7 +67,7 @@ namespace Peer2Peer.core
                 {
                     Console.WriteLine(e);
                     Console.WriteLine("Post Request Client: PostQuery failed, unable to connecto to SERVER");
-                    break;
+                   
                 }
                 // grab te response and print it out to the console along with the status code
                 try
@@ -87,8 +84,8 @@ namespace Peer2Peer.core
                     Console.WriteLine("Post Request Client: Request sent, but NO OK RESPONSE FROM SERVER");
 
                 }
-                break;
-            }
+                
+            
         }
     }
 }
