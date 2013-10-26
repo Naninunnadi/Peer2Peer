@@ -40,6 +40,7 @@ namespace Peer2Peer
 
         private void button1_Click(object sender, EventArgs e)
         {
+           
             StartRequest(4);
         }
 
@@ -55,25 +56,25 @@ namespace Peer2Peer
                 worker.SetApartmentState(System.Threading.ApartmentState.STA);
                 worker.Name = "STARTERParseRequestsAndSendRequestsTTL";
                 worker.Start();
-                
+
             }
 
         }
 
         private void Form_main_Load(object sender, EventArgs e)
         {
-            
+
         }
 
         public void StartTcpListenerThread()
         {
-            var tcpListener = new TcpServer (flowLayoutPanel1);
+            var tcpListener = new TcpServer(flowLayoutPanel1);
             Thread worker = new Thread(tcpListener.TcpServerListen);
             worker.IsBackground = true;
             worker.SetApartmentState(System.Threading.ApartmentState.STA);
             worker.Name = "TCPLISTENERTHREAD";
             worker.Start();
-           
+
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -109,11 +110,11 @@ namespace Peer2Peer
             worker.SetApartmentState(System.Threading.ApartmentState.STA);
             worker.Name = "REQUESTFILETHREAD";
             worker.Start();
-          
 
-            DownloadManager.ListenForFile(@"c:\wazaa\"+btn.Text);
 
-            
+            DownloadManager.ListenForFile(@"c:\wazaa\" + btn.Text);
+
+
         }
     }
 }
