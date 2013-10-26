@@ -104,7 +104,7 @@ namespace Peer2Peer
             Thread worker = new Thread(new DownloadManager(ipandPort[0], ipandPort[1], btn.Text).doRequestForGetFile);
             worker.IsBackground = true;
             worker.SetApartmentState(System.Threading.ApartmentState.STA);
-            worker.Name = "TCPLISTENERTHREAD";
+            worker.Name = "REQUESTFILETHREAD";
             worker.Start();
 
             DownloadManager.ListenForFile(@"c:\wazaa\"+btn.Text);
