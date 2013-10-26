@@ -80,7 +80,10 @@ namespace Peer2Peer.core
                         }
 
                         if (!data2.ToUpper().Contains("GET"))
-                        {SetText1(data2, ((IPEndPoint)client.Client.LocalEndPoint).Address.ToString());}
+                        {
+                            SetText1(data2, ((IPEndPoint)client.Client.LocalEndPoint).Address.ToString());
+                            break;
+                        }
                         if (data2.ToUpper().Contains("GET") && data2.Contains("fullname"))
                         {
 
@@ -94,11 +97,13 @@ namespace Peer2Peer.core
                             {
 
                             }
+                            break;
                         }
 
                         if (data2.ToUpper().Contains("GET") && !data2.Contains("fullname"))
                         {
                             utilities.Factory.filterAndDistributeQuery(data2);
+                            break;
                         }
                         break;
 
