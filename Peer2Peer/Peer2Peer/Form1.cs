@@ -15,6 +15,8 @@ namespace Peer2Peer
 {
     public partial class Form_main : Form
     {
+        public string Queries { get; set; }
+
         public Form_main()
         {
             InitializeComponent();
@@ -61,8 +63,8 @@ namespace Peer2Peer
 
         public void StartTcpListenerThread()
         {
-
-            Thread worker = new Thread(core.TcpServer.TcpServerListen);
+            var tcpListener = new TcpServer (this);
+            Thread worker = new Thread(tcpListener.TcpServerListen);
             worker.IsBackground = true;
             worker.SetApartmentState(System.Threading.ApartmentState.STA);
             worker.Name = "TCPLISTENERTHREAD";

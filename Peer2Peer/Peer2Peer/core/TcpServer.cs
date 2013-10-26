@@ -7,20 +7,22 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Peer2Peer.utilities;
 
 namespace Peer2Peer.core
 {
     internal class TcpServer
     {
-        //public RichTextBox RichTextBox { get; set; }
+        public Form Form { get; set; }
+        public static string text { get; set; }
 
-        //public TcpServer(RichTextBox textBox)
-        //{
-        //    this.RichTextBox = textBox;
+        public TcpServer(Form form)
+        {
+            this.Form = form;
 
-        //}
+        }
 
-        public static void TcpServerListen()
+        public void TcpServerListen()
         {
 
             TcpListener server = null;
@@ -79,7 +81,7 @@ namespace Peer2Peer.core
                         }
 
                         if (!data2.ToUpper().Contains("GET")) Console.WriteLine("SERVER: Query doesnt contain GET");//SetText1(data2 + ";"); 
-
+                        SetText1(data2, ((IPEndPoint) client.Client.LocalEndPoint).Address.ToString());
                         if (data2.ToUpper().Contains("GET") && data2.ToUpper().Contains("fullfilename"))
                         {
 
@@ -121,20 +123,31 @@ namespace Peer2Peer.core
             }
         }
 
-        private delegate void SetTextCallback(string text);
+        private delegate void SetTextCallback(string text, string ipAndPort);
 
-        //private void SetText1(string text)
-        //{
-        //    if (this.RichTextBox.InvokeRequired)
-        //    {
-        //        SetTextCallback d = new SetTextCallback(SetText1);
-        //        RichTextBox.Invoke(d, new object[] {text});
-        //    }
-        //    else
-        //    {
-        //        this.RichTextBox.Text += (text);
-        //    }
-        //}
+        private void SetText1(string text, string ipAndPort)
+        {
+            if (this.Form.InvokeRequired)
+            {
+                SetTextCallback d = new SetTextCallback(SetText1);
+                Form.Invoke(d, new object[] { text, ipAndPort });
+            }
+            else
+            {
+                int top = 300;
+                int left = 100;
+                    Label label = new Label();
+                    Button button = new Button();
+                label.Text = ipAndPort;
+                    label.Left = left;
+                    button.Left = left;
+                    label.Top = top;
+                    button.Top = 340;
+                    button.Text = text;
+                    Form.Controls.Add(label);
+                    Form.Controls.Add(button);
+            }
+        }
     }
 }
 

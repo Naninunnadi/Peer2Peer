@@ -17,6 +17,8 @@ namespace Peer2Peer.utilities
     public class Factory
     {
         public string PostJson { get; set; }
+        public static string AllTheQues { get; set; }
+        public RichTextBox RichTextBox {get; set; }
 
         public static string LocalIPAddress()
         {
@@ -162,7 +164,6 @@ namespace Peer2Peer.utilities
             return !FilterQuery.getAllParametersFromGetRequest(data).Contains("GET");
         }
 
-
-
+        
     }
 }
