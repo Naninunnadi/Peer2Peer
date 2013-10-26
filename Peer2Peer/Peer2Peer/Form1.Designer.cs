@@ -30,8 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_main));
-            this.visualStyler1 = new SkinSoft.VisualStyler.VisualStyler(this.components);
-            this.visualStyler2 = new SkinSoft.VisualStyler.VisualStyler(this.components);
+			//this.visualStyler1 = new SkinSoft.VisualStyler.VisualStyler(this.components);
+			//this.visualStyler2 = new SkinSoft.VisualStyler.VisualStyler(this.components);
             this.button1 = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.eventLog1 = new System.Diagnostics.EventLog();
@@ -43,25 +43,25 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            ((System.ComponentModel.ISupportInitialize)(this.visualStyler1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.visualStyler2)).BeginInit();
+			this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+			//((System.ComponentModel.ISupportInitialize)(this.visualStyler1)).BeginInit();
+			//((System.ComponentModel.ISupportInitialize)(this.visualStyler2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.eventLog1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // visualStyler1
             // 
-            this.visualStyler1.HostForm = this;
-            this.visualStyler1.License = ((SkinSoft.VisualStyler.Licensing.VisualStylerLicense)(resources.GetObject("visualStyler1.License")));
-            this.visualStyler1.ShadowStyle = SkinSoft.VisualStyler.ShadowStyle.None;
-            this.visualStyler1.LoadVisualStyle(null, "Windows Metro (Blue).vssf");
-            // 
-            // visualStyler2
-            // 
-            this.visualStyler2.HostForm = this;
-            this.visualStyler2.License = ((SkinSoft.VisualStyler.Licensing.VisualStylerLicense)(resources.GetObject("visualStyler2.License")));
-            this.visualStyler2.LoadVisualStyle(null, "Aero (Black).vssf");
+			//this.visualStyler1.HostForm = this;
+			//this.visualStyler1.License = ((SkinSoft.VisualStyler.Licensing.VisualStylerLicense)(resources.GetObject("visualStyler1.License")));
+			//this.visualStyler1.ShadowStyle = SkinSoft.VisualStyler.ShadowStyle.None;
+			//this.visualStyler1.LoadVisualStyle(null, "Windows Metro (Blue).vssf");
+			//// 
+			//// visualStyler2
+			//// 
+			//this.visualStyler2.HostForm = this;
+			//this.visualStyler2.License = ((SkinSoft.VisualStyler.Licensing.VisualStylerLicense)(resources.GetObject("visualStyler2.License")));
+			//this.visualStyler2.LoadVisualStyle(null, "Aero (Black).vssf");
             // 
             // button1
             // 
@@ -189,8 +189,8 @@
             this.Name = "Form_main";
             this.Text = "Peer2Peer";
             this.Load += new System.EventHandler(this.Form_main_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.visualStyler1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.visualStyler2)).EndInit();
+			//((System.ComponentModel.ISupportInitialize)(this.visualStyler1)).EndInit();
+			//((System.ComponentModel.ISupportInitialize)(this.visualStyler2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.eventLog1)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -201,8 +201,8 @@
 
         #endregion
 
-        private SkinSoft.VisualStyler.VisualStyler visualStyler1;
-        private SkinSoft.VisualStyler.VisualStyler visualStyler2;
+		//private SkinSoft.VisualStyler.VisualStyler visualStyler1;
+		//private SkinSoft.VisualStyler.VisualStyler visualStyler2;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TextBox textBox1;
         private System.Diagnostics.EventLog eventLog1;

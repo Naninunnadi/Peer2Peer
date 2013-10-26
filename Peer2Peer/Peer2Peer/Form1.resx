@@ -117,7 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="visualStyler1.VisualStyle" xml:space="preserve">
+  <!--<metadata name="visualStyler1.VisualStyle" xml:space="preserve">
     <value>Windows Metro (Blue).vssf</value>
   </metadata>
   <metadata name="visualStyler1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
@@ -128,7 +128,7 @@
   </metadata>
   <metadata name="menuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>364, 17</value>
-  </metadata>
+  </metadata>-->
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -154,7 +154,7 @@
         AAD/+wAA//8AAA==
 </value>
   </data>
-  <data name="visualStyler1.License" mimetype="application/x-microsoft.net.object.binary.base64">
+  <!--<data name="visualStyler1.License" mimetype="application/x-microsoft.net.object.binary.base64">
     <value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAFhTa2luU29mdC5WaXN1YWxTdHlsZXIsIFZlcnNpb249Mi40LjAu
         MCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj0wZmRhOWY0MjNlMWQ5ODMwBQEAAAAzU2tp
@@ -162,8 +162,8 @@
         ZXkBAgAAAAYDAAAAYHc2c1RxVVNmbENOMjhzQk13ZUhiSDQ0SEpKQmhnc2lnNlpxMWFpdUhJcUtQRzgy
         OC90a0pnMnA3S2ovNUtUczdUKzBibFpEaWtwS2s0aU01UC9kaUZuajJzRHV6STZLZAs=
 </value>
-  </data>
-  <data name="Windows Metro (Blue).vssf" mimetype="application/x-microsoft.net.object.binary.base64">
+  </data>-->
+  <!--<data name="Windows Metro (Blue).vssf" mimetype="application/x-microsoft.net.object.binary.base64">
     <value>
         AAEAAAD/////AQAAAAAAAAAEAQAAABZTeXN0ZW0uSU8uTWVtb3J5U3RyZWFtCgAAAAdfYnVmZmVyB19v
         cmlnaW4JX3Bvc2l0aW9uB19sZW5ndGgJX2NhcGFjaXR5C19leHBhbmRhYmxlCV93cml0YWJsZQpfZXhw
@@ -4503,8 +4503,8 @@
         MkpxbHVGL04yajJ0ZW9lVFNvZmJhbzczbzA5QU1hWHlPYTNoT2FwL21IMWkrWnliaVRlN2xSaFNhWHp4
         THRJdkhYNWpyNEFwYUNiWmlDWWtUb0FBQUFBRWxGVGtTdVFtQ0M8L0RhdGE+DQogIDwvSW1hZ2U+DQo8
         L1NraW4+Cw==
-</value>
-  </data>
+</value>-->
+  <!--</data>-->
   <metadata name="eventLog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>255, 17</value>
   </metadata>
