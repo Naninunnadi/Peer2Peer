@@ -97,5 +97,19 @@ namespace Peer2Peer
         {
 
         }
+        private void GetFile(object sender, EventArgs e)
+        {
+            Button btn = (Button)sender;
+            var ipandPort = btn.Tag.ToString().Split(':');
+            Thread worker = new Thread(new DownloadManager(ipandPort[0], ipandPort[1], btn.Text).doRequestForGetFile);
+            worker.IsBackground = true;
+            worker.SetApartmentState(System.Threading.ApartmentState.STA);
+            worker.Name = "TCPLISTENERTHREAD";
+            worker.Start();
+
+            DownloadManager.ListenForFile(@"c:\wazaa\"+btn.Text);
+
+            
+        }
     }
 }

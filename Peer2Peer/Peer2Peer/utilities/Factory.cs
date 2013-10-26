@@ -124,7 +124,7 @@ namespace Peer2Peer.utilities
                 var places = getIpsAndPorts();
                 foreach (var keyValuePair in places)
                 {
-                    if (startParsing.Noask.Contains(keyValuePair.Key.ToString()))
+                    if (startParsing.Noask != null && startParsing.Noask.Contains(keyValuePair.Key.ToString()))
                         return;
                     var requestModel = startParsing;
                     requestModel.TimeToLive = ttl.ToString();
