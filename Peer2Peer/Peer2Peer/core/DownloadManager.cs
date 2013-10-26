@@ -31,7 +31,7 @@ namespace Peer2Peer.core
             try
             {
                 client.Connect(IP, 1095);
-
+                Console.WriteLine("DLMGR: Sending file to > {0}", IP);
                 using (NetworkStream networkStream = client.GetStream())
                 using (FileStream fileStream = File.OpenRead(path))
                 {
@@ -86,20 +86,20 @@ namespace Peer2Peer.core
 
             var getVars = "http://" + Ip + ":" + Port + "/getfile?fullname=" + Filename;
             Uri targetUri = new Uri(getVars);
-            Console.WriteLine("Client >>> File Request : " + targetUri.ToString());
+            Console.WriteLine("DL Client >>> File Request : " + targetUri.ToString());
             HttpWebRequest WebReq = (HttpWebRequest)WebRequest.Create(targetUri);
-            WebReq.Timeout = 10000;
+            WebReq.Timeout = 1000;
             WebReq.Method = "GET";
 
-            Console.WriteLine("Client : File Request DONE");
+            Console.WriteLine("DL Client : File Request DONE");
             try
             {
                 HttpWebResponse WebResp = (HttpWebResponse)WebReq.GetResponse();
 
                 //Let's show some information about the response
-                Console.WriteLine("Client : Response from server >>> ");
-                Console.WriteLine("Client: From Server: " + WebResp.StatusCode + " >GOT IT< ");
-                Console.WriteLine("Client: From Server(what i sent to server (for debugging)): " + WebResp.ResponseUri);
+                Console.WriteLine("DL Client : Response from server >>> ");
+                Console.WriteLine("DL Client: From Server: " + WebResp.StatusCode + " >GOT IT< ");
+                Console.WriteLine("DL Client: From Server(what i sent to server (for debugging)): " + WebResp.ResponseUri);
             }
             catch (Exception e)
             {

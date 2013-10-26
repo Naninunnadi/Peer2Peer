@@ -89,8 +89,8 @@ namespace Peer2Peer.core
                         Console.WriteLine("Server: GOT DOWNLOAD REQUEST FROM ASKER");
                         if (Directory.Exists(@"C:\"))
                         {
-                            DownloadManager.SendFile(@"C:\wazaa\" + HttpUtility.ParseQueryString(data2.Substring(new[] { 0, data2.IndexOf('?') }.Max()))
-                .Get("fullname"), ((IPEndPoint)client.Client.LocalEndPoint).Address.ToString());
+                            var param1 = FilterQuery.getMainParamaterFromGetRequestWithoutEquals(data2);
+                            DownloadManager.SendFile(@"C:\wazaa\" + param1, ((IPEndPoint)client.Client.RemoteEndPoint).Address.ToString());
                             client.Close();
                             goto ListeningLoop;
                             //TCP listener saab get query ja stardib /getfile=fname ja IP kuhu saata ja saadab wazaa kaustast faili
