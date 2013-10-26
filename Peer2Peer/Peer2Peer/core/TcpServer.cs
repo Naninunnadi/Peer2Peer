@@ -7,6 +7,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Web;
 using System.Windows.Forms;
 using Newtonsoft.Json;
 using Peer2Peer.utilities;
@@ -88,13 +89,16 @@ namespace Peer2Peer.core
                             Console.WriteLine("Server: GOT DOWNLOAD REQUEST FROM ASKER");
                             if (Directory.Exists(@"C:\"))
                             {
-                                //DownloadManager.SendFile(@"C:\wazaa\");
+                                DownloadManager.SendFile(@"C:\wazaa\" + HttpUtility.ParseQueryString(data2.Substring(new[] { 0, data2.IndexOf('?') }.Max()))
+                    .Get("fullname"), ((IPEndPoint)client.Client.LocalEndPoint).Address.ToString());
                                 client.Close();
                                 goto ListeningLoop;
                                 //TCP listener saab get query ja stardib /getfile=fname ja IP kuhu saata ja saadab wazaa kaustast faili
                             }
                             else if (Directory.Exists(@"D:\"))
                             {
+                                DownloadManager.SendFile(@"D:\wazaa\" + HttpUtility.ParseQueryString(data2.Substring(new[] { 0, data2.IndexOf('?') }.Max()))
+                     .Get("fullname"), ((IPEndPoint)client.Client.LocalEndPoint).Address.ToString());
                                 client.Close();
                                 goto ListeningLoop;
                             }
