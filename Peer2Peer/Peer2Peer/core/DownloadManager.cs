@@ -85,12 +85,12 @@ namespace Peer2Peer.core
 
             var getVars = "http://" + Ip + ":" + Port + "/getfile?fullname=" + Filename;
             Uri targetUri = new Uri(getVars);
-            Console.WriteLine("Client : " + targetUri.ToString());
+            Console.WriteLine("Client >>> File Request : " + targetUri.ToString());
             HttpWebRequest WebReq = (HttpWebRequest)WebRequest.Create(targetUri);
             WebReq.Timeout = 10000;
             WebReq.Method = "GET";
 
-            Console.WriteLine("Client : Request DONE");
+            Console.WriteLine("Client : File Request DONE");
             try
             {
                 HttpWebResponse WebResp = (HttpWebResponse)WebReq.GetResponse();
@@ -103,12 +103,10 @@ namespace Peer2Peer.core
             catch (Exception e)
             {
 
-                Console.WriteLine("Client: Request failed (Time-Out > Peer appears to be offline)");
+                Console.WriteLine("Client: File Request failed (Time-Out > Peer appears to be offline)");
             }
 
-            Console.WriteLine("Request: I will quit. (QUERY SUCCEEDED");
-
-            //Now, we read the response (the string), and output it.
+            Console.WriteLine("File Request: I will quit. (QUERY SUCCEEDED");
 
         }
     }

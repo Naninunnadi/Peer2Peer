@@ -27,27 +27,18 @@ namespace Peer2Peer.core
 
         public void doRequest()
         {
-           //SetText1("jama");
-            //Our getVars, to test the get of our php. 
-            //We can get a page without any of these vars too though.
+           
             var getVars = "http://" + SendIp + ":" + SendPort + "/searchfile?name=" + RequestModel.Name + "&sendip=" + RequestModel.Sendip + "&sendport=" + RequestModel.Sendport + "&ttl=" + RequestModel.TimeToLive + "&id=wqeqwe23&noask=" + string.Join("_", RequestModel.Noask);
-            //String operation = "searchfile";
-            //String IP = @"192.168.1.77:2234/?";
-            //IP = @IO.readFile("IP.txt");
-            //Initialization, we use localhost, change if applicable
             Uri targetUri = new Uri(getVars);
             Console.WriteLine("Client : " +targetUri.ToString());
             HttpWebRequest WebReq = (HttpWebRequest)WebRequest.Create(targetUri);
             WebReq.Timeout = 10000;
-            //This time, our method is GET.
             WebReq.Method = "GET";
-
             Console.WriteLine("Client : Request DONE");
             try
             {
                 HttpWebResponse WebResp = (HttpWebResponse)WebReq.GetResponse();
-                
-                //Let's show some information about the response
+               
                 Console.WriteLine("Client : Response from server >>> ");
                 Console.WriteLine("Client: From Server: "+WebResp.StatusCode+" >GOT IT< ");
                 Console.WriteLine("Client: From Server(what i sent to server (for debugging)): "+WebResp.ResponseUri);
@@ -59,9 +50,6 @@ namespace Peer2Peer.core
             }
             
             Console.WriteLine("Request: I will quit. (QUERY SUCCEEDED");
-
-            //Now, we read the response (the string), and output it.
-
         }
         delegate void SetTextCallback(string text);
         private void SetText1(string text)
