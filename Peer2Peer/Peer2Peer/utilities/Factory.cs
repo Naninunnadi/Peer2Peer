@@ -115,7 +115,7 @@ namespace Peer2Peer.utilities
 
         public static void filterAndDistributeQuery(string data)
         {
-            var startParsing = ParseRequest(FilterQuery.getAllParametersFromGetRequest(data));
+            var startParsing = ParseRequest(FilterQuery.getMainParamaterFromGetRequest(data));
             var ttl = Int32.Parse(startParsing.TimeToLive) - 1;
             var foundFiles = FindFile(startParsing.Name);
             var fileList = new List<FileModel>();
@@ -163,7 +163,7 @@ namespace Peer2Peer.utilities
 
         public bool IsThisGetOrPost(string data)
         {
-            return !FilterQuery.getAllParametersFromGetRequest(data).Contains("GET");
+            return !FilterQuery.getMainParamaterFromGetRequest(data).Contains("GET");
         }
 
         

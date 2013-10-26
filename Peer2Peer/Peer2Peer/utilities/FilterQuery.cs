@@ -13,7 +13,7 @@ namespace Peer2Peer.utilities
         public static String getUrlParameterValues(String url)
         {
 
-            url = getAllParametersFromGetRequest(url);
+            //url = getAllParametersFromGetRequest(url);
             Console.WriteLine("VAATAN URI" + url);
 
             var query = HttpUtility.ParseQueryString(url);
@@ -48,7 +48,7 @@ namespace Peer2Peer.utilities
             return data.Substring(index + 1, length);
         }
 
-        public static String getAllParametersFromGetRequest(String data)
+        public static String getMainParamaterFromGetRequest(String data)
         {
             int index = data.LastIndexOf("?");
             //last HTTP1.1 > -2
