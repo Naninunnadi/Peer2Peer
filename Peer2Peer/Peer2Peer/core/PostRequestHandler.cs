@@ -62,14 +62,14 @@ namespace Peer2Peer.core
                     // now send it
                     requestStream.Write(postBytes, 0, postBytes.Length);
                     requestStream.Close();
-                    Console.WriteLine("Client: Sending to server: " + Jsonlist);
+                    Console.WriteLine("Post Request Client: Sending to server: " + Jsonlist);
 
 
                 }
                 catch (Exception e)
                 {
                     Console.WriteLine(e);
-                    Console.WriteLine("Client: PostQuery failed, unable to connecto to SERVER");
+                    Console.WriteLine("Post Request Client: PostQuery failed, unable to connecto to SERVER");
                     break;
                 }
                 // grab te response and print it out to the console along with the status code
@@ -77,14 +77,14 @@ namespace Peer2Peer.core
                 {
                     HttpWebResponse response = (HttpWebResponse)request.GetResponse();
                     Console.WriteLine(new StreamReader(response.GetResponseStream()).ReadToEnd());
-                    Console.Write("Server Sent Statuscode: ");
+                    Console.Write("Post Request Client: Server Sent Statuscode: ");
                     Console.WriteLine(response.StatusCode);
 
                 }
                 catch (Exception e)
                 {
                     Console.WriteLine(e);
-                    Console.WriteLine("Client: Request sent, but NO OK RESPONSE FROM SERVER");
+                    Console.WriteLine("Post Request Client: Request sent, but NO OK RESPONSE FROM SERVER");
 
                 }
                 break;
