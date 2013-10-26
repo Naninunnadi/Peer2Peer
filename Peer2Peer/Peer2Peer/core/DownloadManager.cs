@@ -50,14 +50,14 @@ namespace Peer2Peer.core
         }
 
 
-        public static void ListenForFile(string pathAndFname)// c:/wazaa/nimi.txt
+        public static void ListenForFile(string pathAndFname) // c:/wazaa/nimi.txt
         {
 
 
             TcpListener listener = new TcpListener(IPAddress.Any, 1095);
             listener.Start();
             Console.WriteLine("DLMGR: Listening....");
-            while (true)
+
             {
                 try
                 {
@@ -66,18 +66,19 @@ namespace Peer2Peer.core
                     using (FileStream fileStream = File.OpenWrite(pathAndFname))
                     {
                         networkStream.CopyTo(fileStream);
-                        break; //järgmise faili jaoks
+
                     }
                 }
                 catch (Exception)
                 {
                     Console.WriteLine("DLMGR: Error saving file");
-                    break;
-                }
-            }
-            listener.Stop();
-            Console.WriteLine("DLMGR: Download mngr stopped listening for incoming connections");
 
+                }
+
+                listener.Stop();
+                Console.WriteLine("DLMGR: Download mngr stopped listening for incoming connections");
+
+            }
         }
 
         public void doRequestForGetFile()
