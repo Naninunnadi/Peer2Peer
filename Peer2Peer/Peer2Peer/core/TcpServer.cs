@@ -79,7 +79,8 @@ namespace Peer2Peer.core
                         if (!data2.ToUpper().Contains("GET"))
                         {
                             SetText1(data2, ((IPEndPoint)client.Client.LocalEndPoint).Address.ToString());
-                            
+                            client.Close();
+                            goto ListeningLoop;
                         }
                         if (data2.ToUpper().Contains("GET") && data2.Contains("fullname"))
                         {
@@ -88,12 +89,17 @@ namespace Peer2Peer.core
                             if (Directory.Exists(@"C:\"))
                             {
                                 //DownloadManager.SendFile(@"C:\wazaa\");
+                                client.Close();
+                                goto ListeningLoop;
                                 //TCP listener saab get query ja stardib /getfile=fname ja IP kuhu saata ja saadab wazaa kaustast faili
                             }
                             else if (Directory.Exists(@"D:\"))
                             {
-
+                                client.Close();
+                                goto ListeningLoop;
                             }
+                            client.Close();
+                            goto ListeningLoop;
                             
                         }
 
@@ -101,16 +107,17 @@ namespace Peer2Peer.core
                         {
                             
                             utilities.Factory.filterAndDistributeQuery(data2);
-                            
+                            client.Close();
+                            goto ListeningLoop;
                         }
                         
 
                     }
                     Console.WriteLine("Server: Shutdown and end connection");
-                    client.Close();
+                    
                     Console.WriteLine("Server: Initalizing for new incoming requests........");
 
-
+                    client.Close();
                     goto ListeningLoop;
             }
             catch (SocketException e)
