@@ -135,7 +135,7 @@ namespace Peer2Peer.utilities
                     worker.SetApartmentState(System.Threading.ApartmentState.STA);
                     worker.Name = "ParseRequestsAndSendRequestsTTL";
                     worker.Start();
-                    Thread.Sleep(1);
+                 
                 }
             }
             else if (foundFiles.Any() && ttl > 0)
@@ -152,7 +152,7 @@ namespace Peer2Peer.utilities
                 worker.SetApartmentState(System.Threading.ApartmentState.STA);
                 worker.Name = "PostRequestThreadHE";
                 worker.Start();
-                Thread.Sleep(1);
+                
 
             }
             else

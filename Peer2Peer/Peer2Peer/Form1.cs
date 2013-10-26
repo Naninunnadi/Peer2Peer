@@ -20,7 +20,7 @@ namespace Peer2Peer
         public Form_main()
         {
             InitializeComponent();
-            System.Net.ServicePointManager.MaxServicePointIdleTime = 10000;
+            //System.Net.ServicePointManager.MaxServicePointIdleTime = 10000;
             this.AutoSize = true;
             var IpsSnfPorts = Factory.getIpsAndPorts();
             listView1.View = View.Details;
@@ -55,7 +55,7 @@ namespace Peer2Peer
                 worker.SetApartmentState(System.Threading.ApartmentState.STA);
                 worker.Name = "STARTERParseRequestsAndSendRequestsTTL";
                 worker.Start();
-                Thread.Sleep(1);
+                
             }
 
         }
@@ -73,7 +73,7 @@ namespace Peer2Peer
             worker.SetApartmentState(System.Threading.ApartmentState.STA);
             worker.Name = "TCPLISTENERTHREAD";
             worker.Start();
-            Thread.Sleep(1);
+           
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -109,7 +109,7 @@ namespace Peer2Peer
             worker.SetApartmentState(System.Threading.ApartmentState.STA);
             worker.Name = "REQUESTFILETHREAD";
             worker.Start();
-            Thread.Sleep(1);
+          
 
             DownloadManager.ListenForFile(@"c:\wazaa\"+btn.Text);
 
