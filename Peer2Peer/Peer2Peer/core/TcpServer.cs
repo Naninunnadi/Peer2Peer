@@ -126,7 +126,7 @@ namespace Peer2Peer.core
             {
                 // Stop listening for new clients.
 
-                
+                server.Stop();
                 //Console.WriteLine("server: FINAL SERVER STOP (E X C P E C T E D)");
                 
                 Console.WriteLine("server: FINAL SERVER STOP (unexpected)");
