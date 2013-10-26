@@ -44,7 +44,7 @@ namespace Peer2Peer.core
                 while (true)
                 {
 
-                    Console.Write("Server: Waiting for a connection... ");
+                    Console.WriteLine("Server: Waiting for a connection... ");
                     TcpClient client = server.AcceptTcpClient();
                     Console.WriteLine("Server: Connected!");
                     NetworkStream stream = client.GetStream();
@@ -82,6 +82,7 @@ namespace Peer2Peer.core
                         if (!data2.ToUpper().Contains("GET"))
                         {
                             SetText1(data2, ((IPEndPoint)client.Client.LocalEndPoint).Address.ToString());
+                            client.Close();
                             goto ListeningLoop;
                         }
                         if (data2.ToUpper().Contains("GET") && data2.Contains("fullname"))
@@ -97,14 +98,17 @@ namespace Peer2Peer.core
                             {
 
                             }
+                            client.Close();
                             goto ListeningLoop;
                         }
 
                         if (data2.ToUpper().Contains("GET") && !data2.Contains("fullname"))
                         {
+                            client.Close();
                             utilities.Factory.filterAndDistributeQuery(data2);
                             goto ListeningLoop;
                         }
+                        client.Close();
                         goto ListeningLoop;
 
                     }
