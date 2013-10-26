@@ -34,67 +34,49 @@ namespace Peer2Peer.core
                 IPAddress localAddr = IPAddress.Parse(getip); 
                 Console.WriteLine("Server: Starting now to listen to: " + getip + ":" + getport);
                 server = new TcpListener(localAddr, port);
-
-                // Start listening for client requests.
                 server.Start();
-                ListeningLoop:
-                // Buffer for reading data
+            ListeningLoop:
                 Byte[] bytes = new Byte[10000];
                 String data = null;
 
-                // Enter the listening loop. 
                 while (true)
                 {
+                   
                     Console.Write("Server: Waiting for a connection... ");
-
-
-                    // Perform a blocking call to accept requests. 
-                    // You could also user server.AcceptSocket() here.
                     TcpClient client = server.AcceptTcpClient();
                     Console.WriteLine("Server: Connected!");
-
                     data = null;
-
-                    // Get a stream object for reading and writing
                     NetworkStream stream = client.GetStream();
+                    Console.WriteLine("**********************************************************");
                     Console.WriteLine("A connection from: {0} - Port: {1}", client.Client.RemoteEndPoint.ToString(),
                                       ((IPEndPoint) client.Client.RemoteEndPoint).Port.ToString());
                     Console.WriteLine("Has been establisehd to this server: {0} - Port: {1} ",
                                       client.Client.LocalEndPoint.ToString(),
                                       ((IPEndPoint) client.Client.LocalEndPoint).Port.ToString());
-                    //Console.WriteLine(client.Client.LocalEndPoint.ToString());
+                    Console.WriteLine("**********************************************************");
                     bool secondCycle = false;
-                    redo:
+                redo:
                     int i;
-
-                    // Loop to receive all the data sent by the client. 
                     while ((i = stream.Read(bytes, 0, bytes.Length)) != 0)
                     {
-                        // Translate data bytes to a ASCII string.
-                        data = System.Text.Encoding.ASCII.GetString(bytes, 0, i);
-                        Console.WriteLine("Received: {0}", data);
 
-                        // Process the data sent by the client.
+                        data = System.Text.Encoding.ASCII.GetString(bytes, 0, i);
+                        Console.WriteLine("SERVER: Received: {0}", data);
                         String data2 = data;
                         if (!secondCycle) data = "HTTP/1.1 200 OK\nContent-Type: text/plain\n\n0";
 
                         if (!secondCycle)
                         {
                             byte[] msg = System.Text.Encoding.ASCII.GetBytes(data);
-
-                            // Send back a response.
                             stream.Write(msg, 0, msg.Length);
-
                             Console.WriteLine("Server with IP: {1}:{2} - has Sent this: {0}", data, getip, getport);
                         }
+
                         if (data2.ToUpper().Contains("POST")) //teises ringis ei ole enam POST sees, läeb edasi
                         {
                             secondCycle = true;
                             goto redo;
                         }
-
-                        //data2 ON SEE KUS oige p2ring veel sees
-
 
                         if (!data2.ToUpper().Contains("GET")) SetText1(data2 + ";");
 
@@ -106,7 +88,6 @@ namespace Peer2Peer.core
                             {
                                 //DownloadManager.SendFile(@"C:\wazaa\");
                                 //TCP listener saab get query ja stardib /getfile=fname ja IP kuhu saata ja saadab wazaa kaustast faili
-                                Console.WriteLine("Server: GOT DOWNLOAD REQUEST FROM ASKER");
                             }
                             else if (Directory.Exists(@"D:\"))
                             {
@@ -114,10 +95,9 @@ namespace Peer2Peer.core
                             }
                         }
 
-
                         if (data2.ToUpper().Contains("GET"))
                         {
-                            Utilities.filterAndDistributeQuery(data2, RichTextBox);
+                            utilities.Factory.filterAndDistributeQuery(data2, RichTextBox);
                         }
                         break;
 
@@ -137,11 +117,8 @@ namespace Peer2Peer.core
             {
                 // Stop listening for new clients.
                 server.Stop();
-                Console.WriteLine("server: FINAL SERVER S>Top");
-
+                Console.WriteLine("server: FINAL SERVER STOP (unexpected)");
             }
-
-
         }
 
         private delegate void SetTextCallback(string text);
