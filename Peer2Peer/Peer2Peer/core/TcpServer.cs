@@ -26,7 +26,7 @@ namespace Peer2Peer.core
 
         public void TcpServerListen()
         {
-        ListeningLoop:
+        
             TcpListener server = null;
             try
             {
@@ -37,7 +37,7 @@ namespace Peer2Peer.core
                 Console.WriteLine("Server: Starting now to listen to: " + getip + ":" + getport);
                 server = new TcpListener(localAddr, port);
                 server.Start();
-            
+            ListeningLoop:
                 Byte[] bytes = new Byte[1024 * 256];
                 String data = null;
 
@@ -109,9 +109,9 @@ namespace Peer2Peer.core
                     Console.WriteLine("Server: Shutdown and end connection");
                     client.Close();
                     Console.WriteLine("Server: Initalizing for new incoming requests........");
-                    
-                    
-                
+
+
+                    goto ListeningLoop;
             }
             catch (SocketException e)
             {
@@ -122,11 +122,11 @@ namespace Peer2Peer.core
                 // Stop listening for new clients.
                 
                 server.Stop();
-                Console.WriteLine("server: FINAL SERVER STOP (E X C P E C T E D)");
+                //Console.WriteLine("server: FINAL SERVER STOP (E X C P E C T E D)");
                 
-                //Console.WriteLine("server: FINAL SERVER STOP (unexpected)");
+                Console.WriteLine("server: FINAL SERVER STOP (unexpected)");
             }
-            goto ListeningLoop;
+            
         }
 
         private delegate void SetTextCallback(string text, string ipAndPort);
