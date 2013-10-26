@@ -90,6 +90,7 @@ namespace Peer2Peer.core
             HttpWebRequest WebReq = (HttpWebRequest)WebRequest.Create(targetUri);
             WebReq.Timeout = 1000;
             WebReq.Method = "GET";
+            WebReq.KeepAlive = false;
 
             Console.WriteLine("DL Client : File Request DONE");
             try

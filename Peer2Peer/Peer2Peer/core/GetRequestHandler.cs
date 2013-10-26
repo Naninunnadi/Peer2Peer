@@ -34,6 +34,7 @@ namespace Peer2Peer.core
             HttpWebRequest WebReq = (HttpWebRequest)WebRequest.Create(targetUri);
             WebReq.Timeout = 1000;
             WebReq.Method = "GET";
+            WebReq.KeepAlive = false;
             Console.WriteLine("Client : Request DONE");
             try
             {

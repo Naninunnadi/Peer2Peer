@@ -52,6 +52,7 @@ namespace Peer2Peer.core
                 request.ContentType = "application/json"; //pm yolo application/json voib ka
                 request.ContentLength = postBytes.Length;
                 request.Timeout = 1000;
+                request.KeepAlive = false;
                 try
                 {
                     Stream requestStream = request.GetRequestStream();
