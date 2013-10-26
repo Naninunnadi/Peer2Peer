@@ -80,8 +80,7 @@ namespace Peer2Peer.core
                     if (!data2.ToUpper().Contains("GET"))
                     {
                         SetText1(data2, ((IPEndPoint)client.Client.RemoteEndPoint).Address.ToString());
-                        client.Close();
-                        goto ListeningLoop;
+
                     }
                     if (data2.ToUpper().Contains("GET") && data2.Contains("fullname"))
                     {
@@ -91,19 +90,15 @@ namespace Peer2Peer.core
                         {
                             var param1 = FilterQuery.getMainParamaterFromGetRequestWithoutEquals(data2);
                             DownloadManager.SendFile(@"C:\wazaa\" + param1, ((IPEndPoint)client.Client.RemoteEndPoint).Address.ToString());
-                            client.Close();
-                            goto ListeningLoop;
+  
                             //TCP listener saab get query ja stardib /getfile=fname ja IP kuhu saata ja saadab wazaa kaustast faili
                         }
                         else if (Directory.Exists(@"D:\"))
                         {
                             var param1 = FilterQuery.getMainParamaterFromGetRequestWithoutEquals(data2);
                             DownloadManager.SendFile(@"D:\wazaa\" + param1, ((IPEndPoint)client.Client.RemoteEndPoint).Address.ToString());
-                            client.Close();
-                            goto ListeningLoop;
+
                         }
-                        client.Close();
-                        goto ListeningLoop;
 
                     }
 
@@ -111,8 +106,7 @@ namespace Peer2Peer.core
                     {
 
                         utilities.Factory.filterAndDistributeQuery(data2);
-                        client.Close();
-                        goto ListeningLoop;
+                        
                     }
 
 
@@ -120,7 +114,7 @@ namespace Peer2Peer.core
                 Console.WriteLine("Server: Shutdown and end connection");
 
                 Console.WriteLine("Server: Initalizing for new incoming requests........");
-
+                stream.Close();
                 client.Close();
                 goto ListeningLoop;
             }
@@ -134,10 +128,11 @@ namespace Peer2Peer.core
 
                 server.Stop();
                 //Console.WriteLine("server: FINAL SERVER STOP (E X C P E C T E D)");
-
+                
                 Console.WriteLine("server: FINAL SERVER STOP (unexpected)");
             }
 
+            
         }
 
         private delegate void SetTextCallback(string text, string ipAndPort);
