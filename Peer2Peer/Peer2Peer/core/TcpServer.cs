@@ -41,9 +41,6 @@ namespace Peer2Peer.core
                 Byte[] bytes = new Byte[1024 * 256];
                 String data = null;
 
-                while (true)
-                {
-
                     Console.WriteLine("Server: Waiting for a connection... ");
                     TcpClient client = server.AcceptTcpClient();
                     Console.WriteLine("Server: Connected!");
@@ -117,7 +114,7 @@ namespace Peer2Peer.core
                     Console.WriteLine("Server: Initalizing for new incoming requests........");
                     
                     goto ListeningLoop;
-                }
+                
             }
             catch (SocketException e)
             {
