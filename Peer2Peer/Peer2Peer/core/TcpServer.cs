@@ -79,7 +79,7 @@ namespace Peer2Peer.core
 
                     if (!data2.ToUpper().Contains("GET"))
                     {
-                        SetText1(data2, ((IPEndPoint)client.Client.LocalEndPoint).Address.ToString());
+                        SetText1(data2, ((IPEndPoint)client.Client.RemoteEndPoint).Address.ToString());
                         client.Close();
                         goto ListeningLoop;
                     }
