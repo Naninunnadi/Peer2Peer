@@ -12,15 +12,15 @@ namespace Peer2Peer.core
 {
     internal class TcpServer
     {
-        public RichTextBox RichTextBox { get; set; }
+        //public RichTextBox RichTextBox { get; set; }
 
-        public TcpServer(RichTextBox textBox)
-        {
-            this.RichTextBox = textBox;
+        //public TcpServer(RichTextBox textBox)
+        //{
+        //    this.RichTextBox = textBox;
 
-        }
+        //}
 
-        public void TcpServerListen()
+        public static void TcpServerListen()
         {
 
             TcpListener server = null;
@@ -78,7 +78,7 @@ namespace Peer2Peer.core
                             goto redo;
                         }
 
-                        if (!data2.ToUpper().Contains("GET")) SetText1(data2 + ";");
+                        if (!data2.ToUpper().Contains("GET")) Console.WriteLine("SERVER: Query doesnt contain GET");//SetText1(data2 + ";"); 
 
                         if (data2.ToUpper().Contains("GET") && data2.ToUpper().Contains("fullfilename"))
                         {
@@ -97,7 +97,7 @@ namespace Peer2Peer.core
 
                         if (data2.ToUpper().Contains("GET"))
                         {
-                            utilities.Factory.filterAndDistributeQuery(data2, RichTextBox);
+                            utilities.Factory.filterAndDistributeQuery(data2);
                         }
                         break;
 
@@ -123,18 +123,18 @@ namespace Peer2Peer.core
 
         private delegate void SetTextCallback(string text);
 
-        private void SetText1(string text)
-        {
-            if (this.RichTextBox.InvokeRequired)
-            {
-                SetTextCallback d = new SetTextCallback(SetText1);
-                RichTextBox.Invoke(d, new object[] {text});
-            }
-            else
-            {
-                this.RichTextBox.Text += (text);
-            }
-        }
+        //private void SetText1(string text)
+        //{
+        //    if (this.RichTextBox.InvokeRequired)
+        //    {
+        //        SetTextCallback d = new SetTextCallback(SetText1);
+        //        RichTextBox.Invoke(d, new object[] {text});
+        //    }
+        //    else
+        //    {
+        //        this.RichTextBox.Text += (text);
+        //    }
+        //}
     }
 }
 

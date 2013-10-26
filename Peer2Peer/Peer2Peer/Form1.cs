@@ -5,8 +5,10 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Peer2Peer.core;
 using Peer2Peer.utilities;
 
 namespace Peer2Peer
@@ -33,12 +35,38 @@ namespace Peer2Peer
 
         private void button1_Click(object sender, EventArgs e)
         {
+            StartRequest(4);
+        }
+
+        public void StartRequest(int ttl)
+        {
+            var places = utilities.Factory.getIpsAndPorts();
+            foreach (var keyValuePair in places)
+            {
+                var requestModel = utilities.Factory.ParseRequest("/searchfile?name=" + textBox1.Text + "&sendip=" + utilities.Factory.LocalIPAddress() + "&sendport=" + utilities.Factory.LocalPort() + "&ttl=" + ttl + "&id=wqeqwe23&noask=" + utilities.Factory.LocalIPAddress());
+                var request = new GetRequestHandler(requestModel, keyValuePair.Key.ToString(), keyValuePair.Value.ToString());
+                Thread worker = new Thread(request.doRequest);
+                worker.IsBackground = true;
+                worker.SetApartmentState(System.Threading.ApartmentState.STA);
+                worker.Name = "STARTERParseRequestsAndSendRequestsTTL";
+                worker.Start();
+            }
 
         }
 
         private void Form_main_Load(object sender, EventArgs e)
         {
+            StartTcpListenerThread();
+        }
 
+        public void StartTcpListenerThread()
+        {
+
+            Thread worker = new Thread(core.TcpServer.TcpServerListen);
+            worker.IsBackground = true;
+            worker.SetApartmentState(System.Threading.ApartmentState.STA);
+            worker.Name = "TCPLISTENERTHREAD";
+            worker.Start();
         }
 
         private void label1_Click(object sender, EventArgs e)

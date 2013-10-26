@@ -17,12 +17,12 @@ namespace Peer2Peer.core
         public string SendPort { get; set; }
         public RichTextBox RichTextBox { get; set; }
 
-        public GetRequestHandler(RequestModel request, string ip, string port, RichTextBox textBox)
+        public GetRequestHandler(RequestModel request, string ip, string port) //, RichTextBox textBox
         {
             this.RequestModel = request;
             this.SendIp = ip;
             this.SendPort = port;
-            this.RichTextBox = textBox;
+            //this.RichTextBox = textBox;
         }
 
         public void doRequest()
