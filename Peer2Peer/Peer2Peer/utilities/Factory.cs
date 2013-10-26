@@ -10,6 +10,7 @@ using System.Web;
 using System.Windows.Forms;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Peer2Peer.core;
 
 namespace Peer2Peer.utilities
 {
@@ -93,8 +94,8 @@ namespace Peer2Peer.utilities
         public static List<KeyValuePair<IPAddress, string>> getIpsAndPorts()
         {
             List<KeyValuePair<IPAddress, string>> clientList = new List<KeyValuePair<IPAddress, string>>();
-            string[] clients = System.IO.File.ReadAllLines("IP&Port.txt");
-            var sth = JArray.Parse(File.ReadAllText("IP&Port.txt"));
+            string[] clients = System.IO.File.ReadAllLines("Machines.txt");
+            var sth = JArray.Parse(File.ReadAllText("Machines.txt"));
 
             foreach (var client in sth.ToList())
             {
@@ -126,7 +127,7 @@ namespace Peer2Peer.utilities
                     var requestModel = startParsing;
                     requestModel.TimeToLive = ttl.ToString();
                     requestModel.Noask.Add(LocalIPAddress());
-                    var request = new Request(requestModel, keyValuePair.Key.ToString(), keyValuePair.Value.ToString(), textbox);
+                    var request = new GetRequestHandler(requestModel, keyValuePair.Key.ToString(), keyValuePair.Value.ToString(), textbox);
                     Thread worker = new Thread(request.doRequest);
                     worker.IsBackground = true;
                     worker.SetApartmentState(System.Threading.ApartmentState.STA);
