@@ -46,7 +46,8 @@ namespace Peer2Peer.core
             catch (Exception e)
             {
                 
-                Console.WriteLine("Client: Request failed (Time-Out > Peer appears to be offline)");
+                Console.WriteLine("Client: Request failed (Time-Out > Peer appears to be offline)" + e);
+                
             }
             
             Console.WriteLine("Request: I will quit. (QUERY SUCCEEDED");
