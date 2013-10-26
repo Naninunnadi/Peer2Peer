@@ -20,6 +20,7 @@ namespace Peer2Peer
         public Form_main()
         {
             InitializeComponent();
+            System.Net.ServicePointManager.MaxServicePointIdleTime = 10000;
             this.AutoSize = true;
             var IpsSnfPorts = Factory.getIpsAndPorts();
             listView1.View = View.Details;
