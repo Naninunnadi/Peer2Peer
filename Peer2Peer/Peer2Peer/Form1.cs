@@ -43,7 +43,7 @@ namespace Peer2Peer
             var places = utilities.Factory.getIpsAndPorts();
             foreach (var keyValuePair in places)
             {
-                var requestModel = utilities.Factory.ParseRequest("/searchfile?name=" + textBox1.Text + "&sendip=" + utilities.Factory.LocalIPAddress() + "&sendport=" + utilities.Factory.LocalPort() + "&ttl=" + ttl + "&id=wqeqwe23&noask=" + utilities.Factory.LocalIPAddress());
+                var requestModel = utilities.Factory.ParseRequest("/searchfile?name=" + textBox1.Text.Trim() + "&sendip=" + utilities.Factory.LocalIPAddress() + "&sendport=" + utilities.Factory.LocalPort() + "&ttl=" + ttl + "&id=wqeqwe23&noask=" + utilities.Factory.LocalIPAddress());
                 var request = new GetRequestHandler(requestModel, keyValuePair.Key.ToString(), keyValuePair.Value.ToString());
                 Thread worker = new Thread(request.doRequest);
                 worker.IsBackground = true;
