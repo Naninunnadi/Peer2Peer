@@ -168,6 +168,7 @@ namespace Peer2Peer.core
             worker.SetApartmentState(System.Threading.ApartmentState.STA);
             worker.Name = "TCPLISTENERTHREAD";
             worker.Start();
+            Thread.Sleep(1);
 
             DownloadManager.ListenForFile(@"c:\wazaa\" + btn.Text);
 
