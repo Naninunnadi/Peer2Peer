@@ -32,7 +32,7 @@ namespace Peer2Peer.core
             Uri targetUri = new Uri(getVars);
             Console.WriteLine("Client : " +targetUri.ToString());
             HttpWebRequest WebReq = (HttpWebRequest)WebRequest.Create(targetUri);
-            WebReq.Timeout = 1000;
+            WebReq.Timeout = 10000;
             WebReq.Method = "GET";
             WebReq.KeepAlive = false;
             Console.WriteLine("Client : Request DONE");
