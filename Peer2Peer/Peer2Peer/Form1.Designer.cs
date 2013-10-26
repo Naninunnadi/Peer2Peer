@@ -28,8 +28,26 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_main));
+            this.visualStyler1 = new SkinSoft.VisualStyler.VisualStyler(this.components);
+            this.visualStyler2 = new SkinSoft.VisualStyler.VisualStyler(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.visualStyler1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.visualStyler2)).BeginInit();
             this.SuspendLayout();
+            // 
+            // visualStyler1
+            // 
+            this.visualStyler1.HostForm = this;
+            this.visualStyler1.License = ((SkinSoft.VisualStyler.Licensing.VisualStylerLicense)(resources.GetObject("visualStyler1.License")));
+            this.visualStyler1.ShadowStyle = SkinSoft.VisualStyler.ShadowStyle.None;
+            this.visualStyler1.LoadVisualStyle(null, "Windows Metro (White).vssf");
+            // 
+            // visualStyler2
+            // 
+            this.visualStyler2.HostForm = this;
+            this.visualStyler2.License = ((SkinSoft.VisualStyler.Licensing.VisualStylerLicense)(resources.GetObject("visualStyler2.License")));
+            this.visualStyler2.LoadVisualStyle(null, "Aero (Black).vssf");
             // 
             // Form_main
             // 
@@ -39,11 +57,16 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form_main";
             this.Text = "Peer2Peer";
+            ((System.ComponentModel.ISupportInitialize)(this.visualStyler1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.visualStyler2)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
+
+        private SkinSoft.VisualStyler.VisualStyler visualStyler1;
+        private SkinSoft.VisualStyler.VisualStyler visualStyler2;
     }
 }
 
