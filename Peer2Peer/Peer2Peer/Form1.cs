@@ -34,6 +34,7 @@ namespace Peer2Peer
             }
             label3.Text = Factory.LocalIPAddress();
             label5.Text = Factory.LocalPort();
+            StartTcpListenerThread();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -59,7 +60,7 @@ namespace Peer2Peer
 
         private void Form_main_Load(object sender, EventArgs e)
         {
-            StartTcpListenerThread();
+            
         }
 
         public void StartTcpListenerThread()

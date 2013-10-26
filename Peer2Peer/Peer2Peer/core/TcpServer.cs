@@ -105,7 +105,7 @@ namespace Peer2Peer.core
                     Console.WriteLine("Server: Shutdown and end connection");
                     client.Close();
                     Console.WriteLine("Server: Initalizing for new incoming requests........");
-                    bytes = null;
+                    
                     goto ListeningLoop;
                 }
             }
