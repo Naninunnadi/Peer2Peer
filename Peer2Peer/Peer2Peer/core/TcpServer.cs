@@ -36,8 +36,8 @@ namespace Peer2Peer.core
                 Console.WriteLine("Server: Starting now to listen to: " + getip + ":" + getport);
                 server = new TcpListener(localAddr, port);
                 server.Start();
-                Byte[] bytes = new Byte[1024];
             ListeningLoop:
+                Byte[] bytes = new Byte[1024 * 256];
                 String data = null;
 
                 while (true)
