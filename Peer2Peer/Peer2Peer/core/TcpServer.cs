@@ -109,7 +109,7 @@ namespace Peer2Peer.core
                         
                     }
 
-
+                    break;
                 }
                 Console.WriteLine("Server: Shutdown and end connection");
 
