@@ -101,6 +101,8 @@ namespace Peer2Peer.core
                 Console.WriteLine("DL Client : Response from server >>> ");
                 Console.WriteLine("DL Client: From Server: " + WebResp.StatusCode + " >GOT IT< ");
                 Console.WriteLine("DL Client: From Server(what i sent to server (for debugging)): " + WebResp.ResponseUri);
+
+                WebResp.Close();
             }
             catch (Exception e)
             {

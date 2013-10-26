@@ -61,7 +61,7 @@ namespace Peer2Peer.core
                     requestStream.Write(postBytes, 0, postBytes.Length);
                     requestStream.Close();
                     Console.WriteLine("Post Request Client: Sending to server: " + Jsonlist);
-
+                    
 
                 }
                 catch (Exception e)
@@ -77,6 +77,7 @@ namespace Peer2Peer.core
                     Console.WriteLine(new StreamReader(response.GetResponseStream()).ReadToEnd());
                     Console.Write("Post Request Client: Server Sent Statuscode: ");
                     Console.WriteLine(response.StatusCode);
+                    response.Close();
 
                 }
                 catch (Exception e)

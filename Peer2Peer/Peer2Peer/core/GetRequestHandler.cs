@@ -36,6 +36,7 @@ namespace Peer2Peer.core
             WebReq.Method = "GET";
             WebReq.KeepAlive = false;
             Console.WriteLine("Client : Request DONE");
+            
             try
             {
                 HttpWebResponse WebResp = (HttpWebResponse)WebReq.GetResponse();
@@ -43,6 +44,7 @@ namespace Peer2Peer.core
                 Console.WriteLine("Client : Response from server >>> ");
                 Console.WriteLine("Client: From Server: "+WebResp.StatusCode+" >GOT IT< ");
                 Console.WriteLine("Client: From Server(what i sent to server (for debugging)): "+WebResp.ResponseUri);
+                WebResp.Close();
             }
             catch (Exception e)
             {
@@ -50,6 +52,7 @@ namespace Peer2Peer.core
                 Console.WriteLine("Client: Request failed (Time-Out > Peer appears to be offline)" + e);
                 
             }
+            
             
             Console.WriteLine("Request: I will quit. (QUERY SUCCEEDED");
         }
