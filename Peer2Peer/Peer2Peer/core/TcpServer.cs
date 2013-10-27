@@ -74,13 +74,14 @@ namespace Peer2Peer.core
                     if (data2.ToUpper().Contains("POST")) //teises ringis ei ole enam POST sees, läeb edasi
                     {
                         secondCycle = true;
+                        stream.Flush();
                         goto redo;
                     }
 
                     if (!data2.ToUpper().Contains("GET"))
                     {
                         SetText1(data2, ((IPEndPoint)client.Client.RemoteEndPoint).Address.ToString());
-                        break;
+                       
 
                     }
                     if (data2.ToUpper().Contains("GET") && data2.Contains("fullname"))
