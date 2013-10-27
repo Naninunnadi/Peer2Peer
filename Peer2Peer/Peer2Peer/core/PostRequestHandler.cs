@@ -33,34 +33,24 @@ namespace Peer2Peer.core
         public void postRequest()
         {
 
-                //int testPort = Int32.Parse(SendPort)+1;
-                //string replace = testPort.ToString();
-                // this is where we will send it
+                
                 string uri = "http://" + SendIp + ":" + SendPort + "/foundfile?";
-
-                // create a request
                 HttpWebRequest request = (HttpWebRequest)
                                          WebRequest.Create(uri);
                 request.ProtocolVersion = HttpVersion.Version10;
                 request.Method = "POST";
                 request.KeepAlive = false;
-                // turn our request string into a byte stream
                 byte[] postBytes = Encoding.ASCII.GetBytes(Jsonlist);
-
-                // this is important - make sure you specify type this way
-                request.ContentType = "application/json"; //pm yolo application/json voib ka
+                request.ContentType = "application/json"; 
                 request.ContentLength = postBytes.Length;
                 
                 try
                 {
                     Stream requestStream = request.GetRequestStream();
-
-                    // now send it
                     requestStream.Write(postBytes, 0, postBytes.Length);
                     requestStream.Close();
-                    Console.WriteLine("Post Request Client: Sending to server: " + Jsonlist);
-                    
-
+                    Console.WriteLine("Post Request Client: Sending to peer ({1}:{2}): {0}",Jsonlist,SendIp,SendPort);
+         
                 }
                 catch (Exception e)
                 {
@@ -68,7 +58,7 @@ namespace Peer2Peer.core
                     Console.WriteLine("Post Request Client: PostQuery failed, unable to connecto to SERVER");
                    
                 }
-                // grab te response and print it out to the console along with the status code
+        
                 try
                 {
                     HttpWebResponse response = (HttpWebResponse)request.GetResponse();

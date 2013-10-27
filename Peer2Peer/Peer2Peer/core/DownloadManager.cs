@@ -94,17 +94,13 @@ namespace Peer2Peer.core
             WebReq.Timeout = 10000;
             WebReq.Method = "GET";
             WebReq.KeepAlive = false;
-
             Console.WriteLine("DL Client : File Request DONE");
             try
             {
                 HttpWebResponse WebResp = (HttpWebResponse)WebReq.GetResponse();
-
-                //Let's show some information about the response
-                Console.WriteLine("DL Client : Response from server >>> ");
-                Console.WriteLine("DL Client: From Server: " + WebResp.StatusCode + " >GOT IT< ");
-                Console.WriteLine("DL Client: From Server(what i sent to server (for debugging)): " + WebResp.ResponseUri);
-
+                Console.WriteLine("DL Client : Response from peer >>> ");
+                Console.WriteLine("DL Client: From Peer: " + WebResp.StatusCode + " >GOT Your GET request File< ");
+                //Console.WriteLine("DL Client: From Server(what i sent to server (for debugging)): " + WebResp.ResponseUri);
                 WebResp.Close();
             }
             catch (Exception e)
@@ -113,7 +109,7 @@ namespace Peer2Peer.core
                 Console.WriteLine("Client: File Request failed (Time-Out > Peer appears to be offline)");
             }
 
-            Console.WriteLine("File Request: I will quit. (QUERY SUCCEEDED");
+            Console.WriteLine("File Request: I will quit. (QUERY OK!!)");
 
         }
     }
