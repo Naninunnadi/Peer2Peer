@@ -119,7 +119,24 @@ namespace Peer2Peer.utilities
             var ttl = Int32.Parse(startParsing.TimeToLive) - 1;
             var foundFiles = FindFile(startParsing.Name);
             var fileList = new List<FileModel>();
-            if (!foundFiles.Any() && ttl > 0)
+            if (foundFiles.Any() && ttl > 0)
+            {
+                foreach (var file in foundFiles)
+                {
+                    fileList.Add(new FileModel { Ip = LocalIPAddress(), Port = LocalPort(), Name = file });
+                }
+                var json = JsonConvert.SerializeObject(new PostObject { Id = String.Empty, Files = fileList });
+                var postreq = new PostRequestHandler(json, startParsing.Sendip, startParsing.Sendport);
+                Thread worker = new Thread(postreq.postRequest);
+                worker.IsBackground = true;
+                worker.SetApartmentState(System.Threading.ApartmentState.STA);
+                worker.Name = "PostRequestThreadHE";
+                worker.Priority = ThreadPriority.Highest;
+                worker.Start();
+                
+
+            }
+            if (ttl > 0)
             {
                 var places = getIpsAndPorts();
                 foreach (var keyValuePair in places)
@@ -140,27 +157,6 @@ namespace Peer2Peer.utilities
                     }
 
                 }
-            }
-            else if (foundFiles.Any() && ttl > 0)
-            {
-                foreach (var file in foundFiles)
-                {
-                    fileList.Add(new FileModel { Ip = LocalIPAddress(), Port = LocalPort(), Name = file });
-                }
-                var json = JsonConvert.SerializeObject(new PostObject { Id = String.Empty, Files = fileList });
-                var postreq = new PostRequestHandler(json, startParsing.Sendip, startParsing.Sendport);
-                Thread worker = new Thread(postreq.postRequest);
-                worker.IsBackground = true;
-                worker.SetApartmentState(System.Threading.ApartmentState.STA);
-                worker.Name = "PostRequestThreadHE";
-                worker.Priority = ThreadPriority.Highest;
-                worker.Start();
-                
-
-            }
-            else
-            {
-                //TODO:send error sest ttl on l'bi
             }
         }
 
