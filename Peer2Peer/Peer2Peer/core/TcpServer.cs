@@ -38,6 +38,7 @@ namespace Peer2Peer.core
             Console.WriteLine("Server: Starting now to listen to: " + localAddr.ToString() + ":" + port);
             server = new TcpListener(localAddr, port);
             server.Start();
+            Console.WriteLine("Server: Waiting for a connection... ");
             while (true)
             {
                 client = server.AcceptTcpClient();
@@ -104,9 +105,6 @@ namespace Peer2Peer.core
             {
                 Byte[] bytes = new Byte[1024 * 256];
                 String data = null;
-
-                Console.WriteLine("Server: Waiting for a connection... ");
-
                 Console.WriteLine("Server: Connected!");
                 NetworkStream stream = client.GetStream();
                 Console.WriteLine("**********************************************************");
