@@ -32,22 +32,109 @@ namespace Peer2Peer.core
         {
 
             TcpListener server = null;
-
-            Int32 port = Int32.Parse(Factory.LocalPort());
-            IPAddress localAddr = IPAddress.Parse(Factory.LocalIPAddress());
-            Console.WriteLine("Server: Starting now to listen to: " + localAddr.ToString() + ":" + port);
-            server = new TcpListener(localAddr, port);
-            server.Start();
-            Console.WriteLine("Server: Waiting for a connection... ");
-            while (true)
+            try
             {
-                client = server.AcceptTcpClient();
-                Thread worker = new Thread(new ThreadStart(doSth));
-                worker.IsBackground = true;
-                worker.SetApartmentState(System.Threading.ApartmentState.STA);
-                worker.Name = "TCPLISTENERTHREAD";
-                worker.Priority = ThreadPriority.Highest;
-                worker.Start();
+                String getip = utilities.Factory.LocalIPAddress();
+                String getport = utilities.Factory.LocalPort();
+                Int32 port = Int32.Parse(getport);
+                IPAddress localAddr = IPAddress.Parse(getip);
+                Console.WriteLine("Server: Starting now to listen to: " + getip + ":" + getport);
+                server = new TcpListener(localAddr, port);
+                server.Start();
+            ListeningLoop:
+                Byte[] bytes = new Byte[1024 * 1024];
+                String data = null;
+
+                Console.WriteLine("Server: Waiting for a connection... ");
+                TcpClient client = server.AcceptTcpClient();
+                Console.WriteLine("Server: Connected!");
+                NetworkStream stream = client.GetStream();
+                Console.WriteLine("**********************************************************");
+                Console.WriteLine("A connection from: {0} - Port: {1}", client.Client.RemoteEndPoint.ToString(),
+                                  ((IPEndPoint)client.Client.RemoteEndPoint).Port.ToString());
+                Console.WriteLine("Has been establisehd to this server: {0} - Port: {1} ",
+                                  client.Client.LocalEndPoint.ToString(),
+                                  ((IPEndPoint)client.Client.LocalEndPoint).Port.ToString());
+                Console.WriteLine("**********************************************************");
+                bool secondCycle = false;
+            redo:
+                int i;
+                while ((i = stream.Read(bytes, 0, bytes.Length)) != 0)
+                {
+
+                    data = System.Text.Encoding.ASCII.GetString(bytes, 0, i);
+                    Console.WriteLine("SERVER: Received: {0}", data);
+                    String data2 = data;
+                    if (!secondCycle) data = "HTTP/1.1 200 OK\nContent-Type: text/plain\n\n0";
+
+                    if (!secondCycle)
+                    {
+                        byte[] msg = System.Text.Encoding.ASCII.GetBytes(data);
+                        stream.Write(msg, 0, msg.Length);
+                        Console.WriteLine("Server with IP: {1}:{2} - has Sent this: {0}", data, getip, getport);
+                    }
+
+                    if (data2.ToUpper().Contains("POST")) //teises ringis ei ole enam POST sees, läeb edasi
+                    {
+                        secondCycle = true;
+                        stream.Flush();
+                        goto redo;
+                    }
+
+                    if (!data2.ToUpper().Contains("GET"))
+                    {
+                        SetText1(data2, ((IPEndPoint)client.Client.RemoteEndPoint).Address.ToString());
+
+
+                    }
+                    if (data2.ToUpper().Contains("GET") && data2.Contains("fullname"))
+                    {
+
+                        Console.WriteLine("Server: GOT DOWNLOAD REQUEST FROM ASKER");
+                        if (Directory.Exists(@"C:\"))
+                        {
+                            var param1 = FilterQuery.getMainParamaterFromGetRequestWithoutEquals(data2);
+                            DownloadManager.SendFile(@"C:\wazaa\" + param1, ((IPEndPoint)client.Client.RemoteEndPoint).Address.ToString());
+
+                            //TCP listener saab get query ja stardib /getfile=fname ja IP kuhu saata ja saadab wazaa kaustast faili
+                        }
+                        else if (Directory.Exists(@"D:\"))
+                        {
+                            var param1 = FilterQuery.getMainParamaterFromGetRequestWithoutEquals(data2);
+                            DownloadManager.SendFile(@"D:\wazaa\" + param1, ((IPEndPoint)client.Client.RemoteEndPoint).Address.ToString());
+
+                        }
+
+                    }
+
+                    if (data2.ToUpper().Contains("GET") && !data2.Contains("fullname"))
+                    {
+
+                        utilities.Factory.filterAndDistributeQuery(data2);
+
+                    }
+
+                    break;
+                }
+                Console.WriteLine("Server: Shutdown and end connection");
+
+                Console.WriteLine("Server: Initalizing for new incoming requests........");
+                stream.Close();
+                client.Close();
+                goto ListeningLoop;
+            }
+            catch (SocketException e)
+            {
+                Console.WriteLine("Server: SocketException: {0}", e);
+            }
+            finally
+            {
+                // Stop listening for new clients.
+
+                server.Stop();
+                //Console.WriteLine("server: FINAL SERVER STOP (E X C P E C T E D)");
+
+                Console.WriteLine("server: FINAL SERVER STOP (unexpected)");
             }
 
 
@@ -88,107 +175,23 @@ namespace Peer2Peer.core
             Thread worker = new Thread(new DownloadManager(ipandPort[0], ipandPort[1], btn.Text).doRequestForGetFile);
             worker.IsBackground = true;
             worker.SetApartmentState(System.Threading.ApartmentState.STA);
-            worker.Name = "TCPLISTENERTHREAD";
+            worker.Name = "RequestFileTHREAD";
             worker.Start();
 
 
-            DownloadManager.ListenForFile(@"c:\wazaa\" + btn.Text);
-
+            
+            if (Directory.Exists(@"C:\"))
+            {
+                DownloadManager.ListenForFile(@"c:\wazaa\" + btn.Text);
+            }
+            else if (Directory.Exists(@"D:\"))
+            {
+                DownloadManager.ListenForFile(@"D:\wazaa\" + btn.Text);
+            }
 
         }
 
-        public void doSth()
-        {
-            String getip = utilities.Factory.LocalIPAddress();
-            String getport = utilities.Factory.LocalPort();
-            try
-            {
-                Byte[] bytes = new Byte[1024 * 256];
-                String data = null;
-                Console.WriteLine("Server: Connected!");
-                NetworkStream stream = client.GetStream();
-                Console.WriteLine("**********************************************************");
-                Console.WriteLine("A connection from: {0} - Port: {1}", client.Client.RemoteEndPoint.ToString(),
-                                  ((IPEndPoint)client.Client.RemoteEndPoint).Port.ToString());
-                Console.WriteLine("Has been establisehd to this server: {0} - Port: {1} ",
-                                  client.Client.LocalEndPoint.ToString(),
-                                  ((IPEndPoint)client.Client.LocalEndPoint).Port.ToString());
-                Console.WriteLine("**********************************************************");
-                bool secondCycle = false;
-            redo:
-                int i;
-                while ((i = stream.Read(bytes, 0, bytes.Length)) != 0)
-                {
-
-                    data = System.Text.Encoding.ASCII.GetString(bytes, 0, i);
-                    Console.WriteLine("SERVER: Received: {0}", data);
-                    String data2 = data;
-                    if (!secondCycle) data = "HTTP/1.1 200 OK\nContent-Type: text/plain\n\n0";
-
-                    if (!secondCycle)
-                    {
-                        byte[] msg = System.Text.Encoding.ASCII.GetBytes(data);
-                        stream.Write(msg, 0, msg.Length);
-
-                        Console.WriteLine("Server with IP: {1}:{2} - has Sent this: {0}", data, getip, getport);
-                    }
-
-                    if (data2.ToUpper().Contains("POST")) //teises ringis ei ole enam POST sees, läeb edasi
-                    {
-                        secondCycle = true;
-                        goto redo;
-                    }
-
-                    if (!data2.ToUpper().Contains("GET"))
-                    {
-                        SetText1(data2, ((IPEndPoint)client.Client.RemoteEndPoint).Address.ToString());
-                        break;
-
-                    }
-                    if (data2.ToUpper().Contains("GET") && data2.Contains("fullname"))
-                    {
-
-                        Console.WriteLine("Server: GOT DOWNLOAD REQUEST FROM ASKER");
-                        if (Directory.Exists(@"C:\"))
-                        {
-                            var param1 = FilterQuery.getMainParamaterFromGetRequestWithoutEquals(data2);
-                            DownloadManager.SendFile(@"C:\wazaa\" + param1, ((IPEndPoint)client.Client.RemoteEndPoint).Address.ToString());
-
-                            //TCP listener saab get query ja stardib /getfile=fname ja IP kuhu saata ja saadab wazaa kaustast faili
-                        }
-                        else if (Directory.Exists(@"D:\"))
-                        {
-                            var param1 = FilterQuery.getMainParamaterFromGetRequestWithoutEquals(data2);
-                            DownloadManager.SendFile(@"D:\wazaa\" + param1, ((IPEndPoint)client.Client.RemoteEndPoint).Address.ToString());
-
-                        }
-
-                    }
-
-                    if (data2.ToUpper().Contains("GET") && !data2.Contains("fullname"))
-                    {
-
-                        utilities.Factory.filterAndDistributeQuery(data2);
-
-                    }
-                    
-                    client.Close();
-                    break;
-
-                }
-                Console.WriteLine("Server: Shutdown and end connection");
-
-                Console.WriteLine("Server: Initalizing for new incoming requests........");
-                stream.Close();
-                client.Close();
-            }
-            catch (SocketException e)
-            {
-                client.Close();
-                Console.WriteLine("Server: SocketException: {0}", e);
-            }
-           
-        }
+      
     }
 }
 

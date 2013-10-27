@@ -154,6 +154,7 @@ namespace Peer2Peer.utilities
                 worker.IsBackground = true;
                 worker.SetApartmentState(System.Threading.ApartmentState.STA);
                 worker.Name = "PostRequestThreadHE";
+                worker.Priority = ThreadPriority.Highest;
                 worker.Start();
                 
 

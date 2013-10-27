@@ -35,7 +35,7 @@ namespace Peer2Peer
             }
             label3.Text = Factory.LocalIPAddress();
             label5.Text = Factory.LocalPort();
-            StartTcpListenerThread();
+            
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -63,17 +63,18 @@ namespace Peer2Peer
 
         private void Form_main_Load(object sender, EventArgs e)
         {
-
+            StartTcpListenerThread();
         }
 
         public void StartTcpListenerThread()
         {
             var tcpListener = new TcpServer(flowLayoutPanel1);
+            
             Thread worker = new Thread(tcpListener.TcpServerListen);
             worker.IsBackground = true;
             worker.SetApartmentState(System.Threading.ApartmentState.STA);
             worker.Name = "TCPLISTENERTHREAD";
-            worker.Priority = ThreadPriority.Highest;
+            
             worker.Start();
 
         }
@@ -102,20 +103,20 @@ namespace Peer2Peer
         {
 
         }
-        private void GetFile(object sender, EventArgs e)
-        {
-            Button btn = (Button)sender;
-            var ipandPort = btn.Tag.ToString().Split(':');
-            Thread worker = new Thread(new DownloadManager(ipandPort[0], ipandPort[1], btn.Text).doRequestForGetFile);
-            worker.IsBackground = true;
-            worker.SetApartmentState(System.Threading.ApartmentState.STA);
-            worker.Name = "REQUESTFILETHREAD";
-            worker.Start();
+        //private void GetFile(object sender, EventArgs e)
+        //{
+        //    Button btn = (Button)sender;
+        //    var ipandPort = btn.Tag.ToString().Split(':');
+        //    Thread worker = new Thread(new DownloadManager(ipandPort[0], ipandPort[1], btn.Text).doRequestForGetFile);
+        //    worker.IsBackground = true;
+        //    worker.SetApartmentState(System.Threading.ApartmentState.STA);
+        //    worker.Name = "REQUESTFILETHREAD";
+        //    worker.Start();
 
 
-            DownloadManager.ListenForFile(@"c:\wazaa\" + btn.Text);
+        //    DownloadManager.ListenForFile(@"c:\wazaa\" + btn.Text);
 
 
-        }
+        //}
     }
 }

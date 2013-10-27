@@ -43,14 +43,14 @@ namespace Peer2Peer.core
                                          WebRequest.Create(uri);
                 request.ProtocolVersion = HttpVersion.Version10;
                 request.Method = "POST";
-
+                request.KeepAlive = false;
                 // turn our request string into a byte stream
                 byte[] postBytes = Encoding.ASCII.GetBytes(Jsonlist);
 
                 // this is important - make sure you specify type this way
                 request.ContentType = "application/json"; //pm yolo application/json voib ka
                 request.ContentLength = postBytes.Length;
-                //request.KeepAlive = false;
+                
                 try
                 {
                     Stream requestStream = request.GetRequestStream();
