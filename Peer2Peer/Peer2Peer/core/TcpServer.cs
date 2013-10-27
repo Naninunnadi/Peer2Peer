@@ -74,7 +74,7 @@ namespace Peer2Peer.core
                         Console.WriteLine("Server with IP: {1}:{2} - has Sent this: {0}", data, getip, getport);
                     }
 
-                    if (data2.ToUpper().Contains("POST")) //teises ringis ei ole enam POST sees, läeb edasi
+                    if (data2.ToUpper().Contains("POST")) 
                     {
                         secondCycle = true;
                         stream.Flush();
@@ -96,7 +96,6 @@ namespace Peer2Peer.core
                             var param1 = FilterQuery.getMainParamaterFromGetRequestWithoutEquals(data2);
                             DownloadManager.SendFile(@"C:\wazaa\" + param1, ((IPEndPoint)client.Client.RemoteEndPoint).Address.ToString());
 
-                            //TCP listener saab get query ja stardib /getfile=fname ja IP kuhu saata ja saadab wazaa kaustast faili
                         }
                         else if (Directory.Exists(@"D:\"))
                         {
@@ -129,11 +128,8 @@ namespace Peer2Peer.core
             }
             finally
             {
-                // Stop listening for new clients.
-
+                
                 server.Stop();
-                //Console.WriteLine("server: FINAL SERVER STOP (E X C P E C T E D)");
-
                 Console.WriteLine("server: FINAL SERVER STOP (unexpected)");
             }
 

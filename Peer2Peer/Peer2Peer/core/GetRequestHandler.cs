@@ -17,12 +17,11 @@ namespace Peer2Peer.core
         public string SendPort { get; set; }
         public RichTextBox RichTextBox { get; set; }
 
-        public GetRequestHandler(RequestModel request, string ip, string port) //, RichTextBox textBox
+        public GetRequestHandler(RequestModel request, string ip, string port) 
         {
             this.RequestModel = request;
             this.SendIp = ip;
             this.SendPort = port;
-            //this.RichTextBox = textBox;
         }
 
         public void doRequest()
@@ -35,15 +34,15 @@ namespace Peer2Peer.core
             WebReq.Timeout = 10000;
             WebReq.Method = "GET";
             WebReq.KeepAlive = false;
-            Console.WriteLine("Client : Request DONE");
+            Console.WriteLine("Client : GET Request DONE");
             
             try
             {
                 HttpWebResponse WebResp = (HttpWebResponse)WebReq.GetResponse();
                
-                Console.WriteLine("Client : Response from server >>> ");
-                Console.WriteLine("Client: From Server: "+WebResp.StatusCode+" >GOT IT< ");
-                Console.WriteLine("Client: From Server(what i sent to server (for debugging)): "+WebResp.ResponseUri);
+                Console.WriteLine("Client: For Get req > Response from peer >>> ");
+                Console.WriteLine("Client: From Peer: "+WebResp.StatusCode+" >GOT your GET query< ");
+                //Console.WriteLine("Client: From PEER(what i sent to server (for debugging)): "+WebResp.ResponseUri);
                 WebResp.Close();
             }
             catch (Exception e)
@@ -51,9 +50,7 @@ namespace Peer2Peer.core
                 
                 Console.WriteLine("Client: Request failed (Time-Out > Peer appears to be offline)" + e);
                 
-            }
-            
-            
+            }        
             Console.WriteLine("Request: I will quit. (QUERY SUCCEEDED");
         }
         delegate void SetTextCallback(string text);
