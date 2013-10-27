@@ -41,7 +41,7 @@ namespace Peer2Peer.core
                 // create a request
                 HttpWebRequest request = (HttpWebRequest)
                                          WebRequest.Create(uri);
-                request.KeepAlive = false;
+                //request.KeepAlive = false;
                 request.ProtocolVersion = HttpVersion.Version10;
                 request.Method = "POST";
 
@@ -51,8 +51,8 @@ namespace Peer2Peer.core
                 // this is important - make sure you specify type this way
                 request.ContentType = "application/json"; //pm yolo application/json voib ka
                 request.ContentLength = postBytes.Length;
-                request.Timeout = 10000;
-                request.KeepAlive = false;
+                //request.Timeout = 10000;
+                //request.KeepAlive = false;
                 try
                 {
                     Stream requestStream = request.GetRequestStream();
