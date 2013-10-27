@@ -28,10 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_main));
-			//this.visualStyler1 = new SkinSoft.VisualStyler.VisualStyler(this.components);
-			//this.visualStyler2 = new SkinSoft.VisualStyler.VisualStyler(this.components);
             this.button1 = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.eventLog1 = new System.Diagnostics.EventLog();
@@ -43,25 +40,11 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-			this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-			//((System.ComponentModel.ISupportInitialize)(this.visualStyler1)).BeginInit();
-			//((System.ComponentModel.ISupportInitialize)(this.visualStyler2)).BeginInit();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.label6 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.eventLog1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // visualStyler1
-            // 
-			//this.visualStyler1.HostForm = this;
-			//this.visualStyler1.License = ((SkinSoft.VisualStyler.Licensing.VisualStylerLicense)(resources.GetObject("visualStyler1.License")));
-			//this.visualStyler1.ShadowStyle = SkinSoft.VisualStyler.ShadowStyle.None;
-			//this.visualStyler1.LoadVisualStyle(null, "Windows Metro (Blue).vssf");
-			//// 
-			//// visualStyler2
-			//// 
-			//this.visualStyler2.HostForm = this;
-			//this.visualStyler2.License = ((SkinSoft.VisualStyler.Licensing.VisualStylerLicense)(resources.GetObject("visualStyler2.License")));
-			//this.visualStyler2.LoadVisualStyle(null, "Aero (Black).vssf");
             // 
             // button1
             // 
@@ -165,16 +148,26 @@
             // 
             // flowLayoutPanel1
             // 
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(12, 166);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(12, 187);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(111, 100);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(144, 181);
             this.flowLayoutPanel1.TabIndex = 12;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(12, 148);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(66, 13);
+            this.label6.TabIndex = 13;
+            this.label6.Text = "Leitud Failid:";
             // 
             // Form_main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(831, 367);
+            this.ClientSize = new System.Drawing.Size(831, 409);
+            this.Controls.Add(this.label6);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
@@ -189,8 +182,6 @@
             this.Name = "Form_main";
             this.Text = "Peer2Peer";
             this.Load += new System.EventHandler(this.Form_main_Load);
-			//((System.ComponentModel.ISupportInitialize)(this.visualStyler1)).EndInit();
-			//((System.ComponentModel.ISupportInitialize)(this.visualStyler2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.eventLog1)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -215,6 +206,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.Label label6;
     }
 }
 

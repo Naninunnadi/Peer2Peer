@@ -35,12 +35,18 @@ namespace Peer2Peer
             }
             label3.Text = Factory.LocalIPAddress();
             label5.Text = Factory.LocalPort();
-            
+            flowLayoutPanel1.AutoScroll = true;
+
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-           
+            while (flowLayoutPanel1.Controls.Count > 0)
+            {
+                var controltoremove = flowLayoutPanel1.Controls[0];
+                flowLayoutPanel1.Controls.Remove(controltoremove);
+                controltoremove.Dispose();
+            }
             StartRequest(4);
         }
 

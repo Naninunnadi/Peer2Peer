@@ -154,7 +154,6 @@ namespace Peer2Peer.core
                 var mydata = JsonConvert.DeserializeObject<PostObject>(text);
                 Label label = new Label();
                 label.Text = ipAndPort;
-                FlowLayoutPanel.Height = FlowLayoutPanel.Height + 70;
                 label.AutoSize = true;
                 FlowLayoutPanel.Controls.Add(label);
                 foreach (var item in mydata.Files)
