@@ -73,6 +73,7 @@ namespace Peer2Peer
             worker.IsBackground = true;
             worker.SetApartmentState(System.Threading.ApartmentState.STA);
             worker.Name = "TCPLISTENERTHREAD";
+            worker.Priority = ThreadPriority.Highest;
             worker.Start();
 
         }
