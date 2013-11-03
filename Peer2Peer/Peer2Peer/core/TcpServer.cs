@@ -177,7 +177,7 @@ namespace Peer2Peer.core
             
             if (Directory.Exists(@"C:\"))
             {
-                DownloadManager.ListenForFile(@"c:\wazaa\" + btn.Text);
+                DownloadManager.ListenForFile(@"C:\wazaa\" + btn.Text);
             }
             else if (Directory.Exists(@"D:\"))
             {

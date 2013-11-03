@@ -42,7 +42,7 @@ namespace Peer2Peer.core
                
                 Console.WriteLine("Client: For Get req > Response from peer >>> ");
                 Console.WriteLine("Client: From Peer: "+WebResp.StatusCode+" >GOT your GET query< ");
-                //Console.WriteLine("Client: From PEER(what i sent to server (for debugging)): "+WebResp.ResponseUri);
+                Console.WriteLine("Client: From PEER(what i sent to server (for debugging)): "+WebResp.ResponseUri);
                 WebResp.Close();
             }
             catch (Exception e)
