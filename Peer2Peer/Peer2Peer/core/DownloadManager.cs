@@ -16,6 +16,7 @@ namespace Peer2Peer.core
         public string Ip { get; set; }
         public string Port { get; set; }
         public string Filename { get; set; }
+        public string Path { get; set; }
 
         public DownloadManager(string ip, string port, string fileName)
         {
@@ -23,7 +24,11 @@ namespace Peer2Peer.core
             this.Port = port;
             this.Filename = fileName;
 
+        }
 
+        public DownloadManager(string path)
+        {
+            this.Path = path;
         }
 
         //1095 jääb igal pool Download ja Upload static pordiks
@@ -75,7 +80,6 @@ namespace Peer2Peer.core
             myns.Close();
             myclient.Close();
         }
-
 
         public static void ListenForFile(string pathAndFname)
         {

@@ -65,7 +65,7 @@ namespace Peer2Peer.core
                     data = System.Text.Encoding.ASCII.GetString(bytes, 0, i);
                     Console.WriteLine("SERVER: Received: {0}", data);
                     String data2 = data;
-                    if (!secondCycle) data = "HTTP/1.1 200 OK\nContent-Type: text/plain\n\n0";
+                    if (!secondCycle) data = "HTTP/1.1 200 OK\nContent-Type: text/plain\nConnection: Close\n\n0";
 
                     if (!secondCycle)
                     {
@@ -87,7 +87,7 @@ namespace Peer2Peer.core
 
 
                     }
-                    if (data2.ToUpper().Contains("GET") && data2.Contains("fullname"))
+                    if (data2.ToUpper().Contains("GET") && data2.Contains("fullname") && !data2.Contains("keep-alive"))
                     {
 
                         Console.WriteLine("Server: GOT DOWNLOAD REQUEST FROM ASKER");
