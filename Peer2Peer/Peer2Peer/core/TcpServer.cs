@@ -87,7 +87,10 @@ namespace Peer2Peer.core
 
 
                     }
-                    if (data2.ToUpper().Contains("GET") && data2.Contains("fullname") && !data2.Contains("keep-alive"))
+
+                    if (data2.ToUpper().Contains("GET") && data2.ToUpper().Contains("ALIVE")) { goto ShutDown; }
+
+                    if (data2.ToUpper().Contains("GET") && data2.Contains("fullname"))
                     {
 
                         Console.WriteLine("Server: GOT DOWNLOAD REQUEST FROM ASKER");
@@ -106,26 +109,7 @@ namespace Peer2Peer.core
 
                     }
 
-                    if (data2.ToUpper().Contains("GET") && data2.Contains("fullname") && data2.Contains("keep-alive")) //BROWSER REQ jaoks kui contains on keep alive, tuleb browserilt
-                    {
-
-                        Console.WriteLine("Server: GOT DOWNLOAD REQUEST FROM ASKER");
-                        if (Directory.Exists(@"C:\"))
-                        {
-                            var param1 = FilterQuery.getMainParamaterFromGetRequestWithoutEquals(data2);
-                            DownloadManager.ListenForFile(@"C:\wazaa\" + param1);
-                            DownloadManager.SendFile(@"C:\wazaa\" + param1, ((IPEndPoint)client.Client.RemoteEndPoint).Address.ToString());
-
-                        }
-                        else if (Directory.Exists(@"D:\"))
-                        {
-                            var param1 = FilterQuery.getMainParamaterFromGetRequestWithoutEquals(data2);
-                            DownloadManager.ListenForFile(@"C:\wazaa\" + param1);
-                            DownloadManager.SendFile(@"D:\wazaa\" + param1, ((IPEndPoint)client.Client.RemoteEndPoint).Address.ToString());
-
-                        }
-
-                    }
+                    
 
                     if (data2.ToUpper().Contains("GET") && !data2.Contains("fullname"))
                     {
@@ -136,6 +120,7 @@ namespace Peer2Peer.core
 
                     break;
                 }
+            ShutDown:
                 Console.WriteLine("Server: Shutdown and end connection");
 
                 Console.WriteLine("Server: Initalizing for new incoming requests........");
