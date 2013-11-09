@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
+using System.Web.Hosting;
 using System.Windows.Forms;
 using Newtonsoft.Json;
 using Peer2Peer.utilities;
@@ -65,6 +66,15 @@ namespace Peer2Peer.core
                     data = System.Text.Encoding.ASCII.GetString(bytes, 0, i);
                     Console.WriteLine("SERVER: Received: {0}", data);
                     String data2 = data;
+
+                    if (data2.ToUpper().Contains("GET") && data2.ToUpper().Contains("ALIVE"))
+                    {
+                        var fName = FilterQuery.getMainParamaterFromGetRequestWithoutEquals(data2);
+                        Console.WriteLine("Server: Got from browser file request > {0}", fName);
+                        DownloadManager.aHttpResponse(fName); //saadame failinime, et seal ehitada response
+                        goto ShutDown;
+                    }
+
                     if (!secondCycle) data = "HTTP/1.1 200 OK\nContent-Type: text/plain\nConnection: Close\n\n0";
 
                     if (!secondCycle)
@@ -88,7 +98,7 @@ namespace Peer2Peer.core
 
                     }
 
-                    if (data2.ToUpper().Contains("GET") && data2.ToUpper().Contains("ALIVE")) { goto ShutDown; }
+                    
 
                     if (data2.ToUpper().Contains("GET") && data2.Contains("fullname"))
                     {

@@ -8,6 +8,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace Peer2Peer.core
 {
@@ -31,32 +32,16 @@ namespace Peer2Peer.core
             this.Path = path;
         }
 
-        //1095 jääb igal pool Download ja Upload static pordiks
-        //public static void SendFile(string path, string IP)
-        //{
-        //    TcpClient client = new TcpClient();
-        //    try
-        //    {
-        //        client.Connect(IP, 1095);
-        //        Console.WriteLine("DLMGR: Sending file to > {0}", IP);
-        //        NetworkStream networkStream = client.GetStream();
-        //        FileStream fileStream = File.OpenRead(path);
-        //        {
-        //            ASCIIEncoding asci = new ASCIIEncoding();
-        //            byte[] b = asci.GetBytes(path);
-        //            networkStream.Write(b, 0, b.Length);
-        //            //networkStream.Flush();
-                    
-        //            fileStream.CopyTo(networkStream);
-                    
-        //        }
-        //    }
-        //    catch (Exception)
-        //    {
-        //        Console.WriteLine("DLMGR: Error sending file");
-        //    }
-        //    client.Close();
-        //}
+        public static void aHttpResponse (String fname)
+        {
+
+
+            
+
+        }
+
+
+
         public static void SendFile(string path, string IP)
         {
             FileStream fs = new FileStream(path, FileMode.Open);
@@ -112,42 +97,8 @@ namespace Peer2Peer.core
             {
                 Console.WriteLine(ioException);
             }
-            //listBox1.Items.Add("Successfully Saved to: " + textBox1.Text + (string)op);
+            
         }
-
-        //public static void ListenForFile(string pathAndFname) // c:/wazaa/nimi.txt
-        //{
-
-        //    TcpListener listener = new TcpListener(IPAddress.Any, 1095);
-        //    try
-        //    {
-        //        String data = string.Empty;
-        //        listener.Start();
-        //        Console.WriteLine("DLMGR: Listening....");
-        //        TcpClient incoming = listener.AcceptTcpClient();
-        //        NetworkStream networkStream = incoming.GetStream();
-        //        int i;
-        //        Byte[] bytes = new Byte[1024 * 1024];
-        //        while((i = networkStream.Read(bytes, 0, bytes.Length)) != 0)
-        //        {
-                    
-        //            FileStream fileStream = File.OpenWrite(pathAndFname);
-        //            networkStream.CopyTo(fileStream);
-                    
-        //        }
-        //        networkStream.Close();
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        Console.WriteLine("DLMGR: Error saving file");
-        //        Console.WriteLine("*********************************");
-        //        Console.WriteLine(e);
-        //    }
-        //    listener.Stop();
-        //    Console.WriteLine("DLMGR: Download mngr stopped listening for incoming connections");
-        //}
-
-
         
         public void doRequestForGetFile()
         {
