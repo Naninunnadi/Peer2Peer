@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -32,11 +33,45 @@ namespace Peer2Peer.core
             this.Path = path;
         }
 
-        public static void aHttpResponse (String fname)
+        public static string convertToHttpResponse (String fname)
         {
 
+            String mime = "Content-Type: text/html";
+            if (fname.ToUpper().Contains("JPG")) mime = "Content-Type: image/jpeg";
+            if (fname.ToUpper().Contains("GIF")) mime = "Content-Type: image/gif";
 
-            
+            int iTotBytes = 0;
+            string sResponse = "";
+            FileStream fs = new FileStream(fname,
+                            FileMode.Open, FileAccess.Read,
+              FileShare.Read);
+            BinaryReader reader = new BinaryReader(fs);
+            byte[] bytes = new byte[fs.Length];
+            int read;
+            while ((read = reader.Read(bytes, 0, bytes.Length)) != 0)
+            {
+                sResponse = sResponse + Encoding.ASCII.GetString(bytes, 0, read);
+                iTotBytes = iTotBytes + read;
+            }
+            reader.Close();
+            fs.Close();
+            //Image image = Image.FromFile(fname);
+            //MemoryStream ms = new MemoryStream();
+            //image.Save(ms, image.RawFormat);
+            //ms.Close();
+            //string responseContent = Encoding.Default.GetString(ms.ToArray());
+                string responseheader = "HTTP/1.1 200 OK\r\n" +
+                                 "Server: peertopeer\r\n" +
+                                 "Content-Length: " + iTotBytes.ToString() + "\r\n" +
+                                 mime + "\r\n" +
+                                 "Content-Language: en\r\n" +
+                                 "Connection: close\r\n\r\n";
+
+
+            string finalResponse = responseheader;
+            Console.WriteLine("Server: Answering browser: " + responseheader);
+            return finalResponse;
+            //Encoding.ASCII.GetBytes(finalResponse);
 
         }
 

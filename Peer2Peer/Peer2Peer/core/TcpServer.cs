@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -67,13 +68,45 @@ namespace Peer2Peer.core
                     Console.WriteLine("SERVER: Received: {0}", data);
                     String data2 = data;
 
-                    if (data2.ToUpper().Contains("GET") && data2.ToUpper().Contains("ALIVE"))
+                    if (data2.ToUpper().Contains("GET") && data2.ToUpper().Contains("ALIVE") && !data2.ToUpper().Contains("ICO"))
                     {
                         var fName = FilterQuery.getMainParamaterFromGetRequestWithoutEquals(data2);
-                        Console.WriteLine("Server: Got from browser file request > {0}", fName);
-                        DownloadManager.aHttpResponse(fName); //saadame failinime, et seal ehitada response
+                        var fNameAndPath = @"D:\wazaa\" + fName;
+                        if (Directory.Exists(@"C:\"))
+                        {
+                            fNameAndPath = @"C:\wazaa\" + fName;
+                        }
+                        Console.WriteLine("Server: Got from browser file request. Name: {0} -- AndPath: {1}", fName, fNameAndPath);
+                        var response = DownloadManager.convertToHttpResponse(fNameAndPath); //saadame failinime, et seal ehitada response
+                        byte[] msg = System.Text.Encoding.ASCII.GetBytes(response);
+                        stream.Write(msg, 0, msg.Length);
+                        //Image image = Image.FromFile(fNameAndPath);
+                        //MemoryStream ms = new MemoryStream();
+                        //image.Save(ms, image.RawFormat);
+                        //ms.Close();
+                        //byte[] responseContent = ms.ToArray();
+                        //stream.Write(responseContent, 0, responseContent.Length);
+                        int iTotBytes = 0;
+                        string sResponse = "";
+                        FileStream fs = new FileStream(fNameAndPath,
+                                        FileMode.Open, FileAccess.Read,
+                          FileShare.Read);
+                        BinaryReader reader = new BinaryReader(fs);
+                        byte[] bytes2 = new byte[fs.Length];
+                        int read;
+                        while ((read = reader.Read(bytes2, 0, bytes2.Length)) != 0)
+                        {
+                            sResponse = sResponse + Encoding.ASCII.GetString(bytes2, 0, read);
+                            iTotBytes = iTotBytes + read;
+
+                        }
+                        reader.Close();
+                        fs.Close();
+                        stream.Write(bytes2, 0, bytes2.Length);
                         goto ShutDown;
                     }
+
+                    if (data2.ToUpper().Contains("FAVICON")) { goto ShutDown; }
 
                     if (!secondCycle) data = "HTTP/1.1 200 OK\nContent-Type: text/plain\nConnection: Close\n\n0";
 
